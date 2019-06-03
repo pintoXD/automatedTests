@@ -20,6 +20,7 @@
 */
 
 byte inByte[4];
+byte outByte[tam*2];
 
 void setup() {
   // initialize both serial ports:
