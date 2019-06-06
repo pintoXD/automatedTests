@@ -1,5 +1,5 @@
 import serial
-
+import time
 
 def set_config(command='', param='', option=''):
     #Para o cabeçalho dessa função:
@@ -59,7 +59,8 @@ def get_value(option=''):
     return_get = ser.write((msgToSent)) #Pega o numero de bytes enviado
     print("Bytes sent: ", return_get) #Exibe o numero de bytes enviado
 
-
+    time.sleep(0.5)
+    
     # msgReceived = ''
     # msgReceived = ser.readline()
 
