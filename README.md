@@ -4,14 +4,14 @@
 
 ### Some considerations are given below:
 
-* There is a python script, that contains the core of the tests and an Arduino skecth, to test the script.
+* There is a python script which contains the tests cores and an Arduino skecth, to test the script.
 
-* The data exchange beteween PC and board is done with pyserial lib, and just raw bytes is used.
+* The data flow beteween PC and board is done via serial communication, using pySerial lib, and just raw bytes are used.
 
-* The PC must sent something like: 99A5FF, in wich each pair represents a byte.
-And the board must reply with something similiar
+* The PC must sent something like: 99A5FF, in which each pair represents a byte.
+And the board must reply with something similiar.
 
-* Both of messages could be read as an array of bytes.
+* Both of messages can be read as an array of bytes.
 
 
 
