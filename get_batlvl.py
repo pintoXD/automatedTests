@@ -3,7 +3,7 @@ from serialTestes import *
 def getBatLvl():
     batlvl = get_value('04')
 
-    if(batlvl[0:2] == '99')
+    if(batlvl[0:2] == '99'):
         batlvl = batlvl[2:]
     else:
         return 'error: message has no ACK'

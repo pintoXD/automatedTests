@@ -3,7 +3,7 @@ from serialTeste import *
 def getBuzzer():
     buz = get_value('03')
     
-    if(buz[0:2] == '99')
+    if(buz[0:2] == '99'):
         buz = buz[2:]
     else:
         return 'error: message has no ACK'
