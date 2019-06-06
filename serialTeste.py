@@ -33,7 +33,7 @@ def set_config(command='', param='', option=''):
     msgReceived=''
     msgReceived = ser.read_until(bytes.fromhex(token_FIN))
     ser.close()
-    msgReceived = msgReceived.decode('ISO-8859-1')
+    msgReceived = msgReceived.hex()
 
     print("Mensagem recebida: ", msgReceived)
     # print(ser.read_until(bytes.fromhex(token)))
@@ -69,10 +69,10 @@ def get_value(option=''):
 
     #Amostra o que foi recebido no terminal
     #Tem que usar esse codec aí porque o UTF-8 num aguenta não
-    # msgReceived = msgReceived.decode('ISO-8859-1')
+    return msgReceived.hex()
     
     #Mensagem recebida em bytes
-    print("Mensagem recebida: ", msgReceived)
+    #print("Mensagem recebida: ", msgReceived)
     # print(ser.read_until(bytes.fromhex(token)))
 
 
