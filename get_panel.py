@@ -1,7 +1,7 @@
 from serialTeste import *
 
 def switchCase(var):
-    switcher{
+    switcher = {
         '01': [0,0,0,1],
         '02': [0,0,1,0],
         '03': [0,0,1,1],
@@ -15,7 +15,7 @@ def switchCase(var):
 def getPanel():
     panel_value = get_value('02')
     
-    if(panel_value[0:2] == '99')
+    if(panel_value[0:2] == '99'):
         panel_value = panel_value[2:]
     else:
         return 'error: message has no ACK'

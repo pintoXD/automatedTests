@@ -20,7 +20,7 @@ def getBuzzer():
     buz_info = []
 
     for x in range(len(buz)-1):
-        buz_info = buz_info + (int(buz[i], 16), int(buz[i+1], 16))
+        buz_info = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
     
     return buz_info
     
