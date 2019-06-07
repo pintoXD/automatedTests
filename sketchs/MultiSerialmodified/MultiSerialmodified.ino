@@ -14,9 +14,9 @@ void setup() {
 //  Serial1.begin(9600);
 
  outByte[0] = 0x99;
- outByte[1] = 0x01;
+ outByte[1] = 0xB1;
  outByte[2] = 0x7F;
- outByte[3] = 0x54;
+ outByte[3] = 0x6C;
  outByte[4] = 0x85;
  outByte[5] = 0xFF;
 
@@ -32,12 +32,15 @@ void loop() {
    //Lê os bytes enviados e amrazena no vetor de bytes de tamanho 'tam'
    Serial.readBytes(inByte, tam); 
 
-   //Caraceter especial terminador que deve tá na mensagem recebida    
+   //Caractere especial terminador que deve tá na mensagem recebida    
    char teste = 0xff;
   
        if((char)inByte[tam - 1] == teste){
+        Serial.flush();
         
         Serial.write(outByte, tam*2);
+        
+        Serial.println("IEEEEEEEEEEEEI");
        
        }
 
