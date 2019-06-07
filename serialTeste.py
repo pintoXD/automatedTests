@@ -11,7 +11,11 @@ def set_config(command='', param='', option=''):
     # Primeiro parametro: Porta onde tá a placa que vai ser lida
     # Segundo parâmetro: Velocidade de transferência de dados (em bits/s)
     # Terceiro parâmetro: Tempo de timeout em segundos
-    ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
+
+  #### Escolher qual a porta serial que placa tá ##########
+
+  # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
+    ser = serial.Serial('COM11', 9600, timeout=1)  # WINDOWS ##
 
     token_ACK='99' #Token para inicio de comunicação
     token_FIN='ff' #Token para fim de comunicação
@@ -44,7 +48,13 @@ def get_value(option=''):
     # Primeiro parametro: Porta onde tá a placa que vai ser lida
     # Segundo parâmetro: Velocidade de transferência de dados (em bits/s)
     # Terceiro parâmetro: Tempo de timeout em segundos
-    ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
+
+
+
+    #### Escolher qual a porta serial que placa tá ##########
+
+    # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
+    ser = serial.Serial('COM11', 9600, timeout=3)  # WINDOWS ##
 
     token_ACK = '99'  # Token para inicio de comunicação
     token_FIN = 'ff'  # Token para fim de comunicação
@@ -59,21 +69,30 @@ def get_value(option=''):
     return_get = ser.write((msgToSent)) #Pega o numero de bytes enviado
     print("Bytes sent: ", return_get) #Exibe o numero de bytes enviado
 
-    time.sleep(0.5)
+    time.sleep(1)
     
     # msgReceived = ''
     # msgReceived = ser.readline()
 
     msgReceived = ser.read_until(bytes.fromhex(token_FIN))
+    # msgReceived = ser.read(7)
     ser.close()
 
     #Amostra o que foi recebido no terminal
     #Tem que usar esse codec aí porque o UTF-8 num aguenta não
-    return msgReceived.hex()
     
     #Mensagem recebida em bytes
-    #print("Mensagem recebida: ", msgReceived)
+
+    if isinstance(msgReceived, bytes):
+        print("é byte mesmo")
     # print(ser.read_until(bytes.fromhex(token)))
+    
+    print("Mensagem recebida: ", str(msgReceived))
+    print("Tamanho mensagem : ", len(msgReceived))
+
+
+    # return msgReceived.hex()
+    
 
 
 def main():

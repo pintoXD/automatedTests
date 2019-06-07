@@ -40,7 +40,14 @@ void loop() {
         Serial.write(outByte, tam*2);
        
        }
-    
-   }
+
+//
+//       Serial.print("Valore recebido");
+//       for(int i = 0; i < tam; i++){
+//        Serial.print(inByte[i]);
+//       }
+//    
+//      Serial.println();
+   }  
 
 }
