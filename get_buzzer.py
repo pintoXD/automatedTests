@@ -19,17 +19,33 @@ def getBuzzer():
     
     buz_info = []
 
-    for x in range(len(buz)-1):
-        #Sugestão de correção se necessário
-        # if (x < 3):
-        #     buz_infoA = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
+    '''
+
+            Retorna um conjunto de tuplas para cada perfil de cura.
+            10s-> retorna uma tupla
+            20s - > Retorna duas tuplas
+             
+            E assim por diante
+
+            As tuplas são da forma (a ,b), onde a e b significam:
+            a -> Tempo de duração do bipe
+            b - > Tempo em que o bipe tocou (se 10, 20, 40 ou 60s após o início
+                                             do perfil de cura)
+
+
+    '''
+    while(len(buz) != 0):
+
+     buz_info = buz_info + (int(buz[:1], 16), int(buz[2:5], 16))
+     buz = buz[6:]
+     #Sugestão de correção se necessário
+     # if (x < 3):
+     #     buz_infoA = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
         # else:
         #     buz_infoB = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
-       
-        buz_info = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
-
-
-  
+ 
+        
+ 
     
     return buz_info
     
