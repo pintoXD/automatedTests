@@ -23,7 +23,7 @@ def set_config(command, param, option):
 
 
     #Mensagem em hex, sem o prefixo 0x, para se enviar
-    msgToSent = token_ACK+command+option+param+token_FIN 
+    msgToSent = command+option+param+token_FIN
 
     #Codificação da mensagem em bytes
     msgToSent = bytes.fromhex(msgToSent) 
@@ -61,7 +61,7 @@ def get_value(option):
     token_FIN = 'ff'  # Token para fim de comunicação
     # Comando que se deseja enviar
 
-    msgToSent = token_ACK+option+token_FIN  # Mensagem em hex, sem o prefixo 0x, para se enviar
+    msgToSent = option+token_FIN  # Mensagem em hex, sem o prefixo 0x, para se enviar
     msgToSent = bytes.fromhex(msgToSent)  # Codificação da mensagem em bytes
 
 
@@ -101,7 +101,7 @@ def get_value(option):
 def main():
   print("Hello World!")
   print("Comando set_config: ") 	
-  set_config('01', '11', '0A')
+  set_config('01', '0A', '11')
   print("")
   print("---------------------------")
   print("Comando 0x05")			
