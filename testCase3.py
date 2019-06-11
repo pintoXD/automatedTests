@@ -162,18 +162,27 @@ def sceneTwo():
     command = '01'
     buttonArrow = '11'
     buttonPower = '12'
-    buzzerInfo = []
-    ledInfo = []
+    
     
 
     #Configurar qual botão vai ser apertado
-    #######################   Cenario 1   ############################# 
+    ###########################################   Cenario 2   ##################################################
 
-    ####################### Perfil de 10s #############################
+    ####################### Checar comportamento botão SETA #############################
+
+    '''
+            Pra esse caso do cenário, deve ser analisado se algum LED
+            de perfil de cura foi acendido.
+
+    '''
     
-    timeUp = '0A' # Valor inteiro '10'    
-    ### Inicia o perfil de cura. 
-    returnSet = set_config(command, buttonPower, timeUp)    
+    timeUp = '0A' # Valor inteiro '10'   
+    ledInfoBefore = '' 
+    ledInfoAfter = ''
+    
+    ledInfoBefore = getPanel()
+
+    returnSet = set_config(command, buttonArrow, timeUp)  #Pressiona o botão por 10 * 100ms 
     
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
@@ -184,9 +193,10 @@ def sceneTwo():
         print("Button configured")
 
         time.sleep(0.2)  # Dorme por X segundos
-        ledInfo = ledInfo + getPanel()
 
-        buzzerInfo = buzzerInfo + getBuzzer()
+        ledInfoAfter = getPanel()
+
+        
 
 
     else: 
@@ -194,7 +204,54 @@ def sceneTwo():
     
 
 
+    '''
+
+        Precisa verificar qual o perfil de cura que vai ser iniciado. 
+        Então precisa pegar o estado dos leds antes de apertar o botão seta.
+
+
+
+    '''
+    indexBefore = ''
+    indexAfter = ''
+
+
+
+    for i in range(len(ledInfoAfter)):
+        
+        if ledInfoBefore[i] == '1':
+        
+            indexBefore = i
+        
+        if ledInfoAfter[i] == '1':
+        
+            indexAfter = i
+ 
+    if(indexAfter - indexBefore == 1) or (indexBefore - indexAfter == 3):
+        print("Teste ok")
+        
+
 
 
       
-      
+ ####################### Botão Power Pressionado < ON_OFF_TIME segundos #############################     
+
+    timeUp = '0A'  # Valor inteiro '10'
+
+    # Pressiona o botão por 10 * 100ms
+    returnSet = set_config(command, buttonPower, timeUp)
+
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+        ### Momento de captar as respostas da placa
+        #tratar o vetor de tuplas do buzzer
+        ##Nesse caso, só vai ter uma tupla por ser o primeiro perfil
+
+        print("Button configured")
+
+        time.sleep(0.2)  # Dorme por X segundos
+
+        ledInfo = ledInfo + getPanel()
+
+    else:
+        print("Error on buttonPower configuration")
