@@ -61,11 +61,12 @@ def subcen2():
 
     seta = set_config('01', '11', rtime)
     print('Seta: ',seta)
-
+    
     panel_after = getPanel()
     
     i, j = getIndex(panel_before, panel_after)
-
+    #este subcenário ainda não foi concluído. falta ainda checar se o led azul
+    #fica aceso pelo tempo esperado após a troca de perfil
     if((j - i) == 1 or (i - j) == 3):
         print("teste ok")
         print(j , i)
