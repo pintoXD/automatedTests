@@ -14,16 +14,18 @@ def set_config(command, param, option):
 
   #### Escolher qual a porta serial que placa tá ##########
 
-  # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
-    ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # WINDOWS ##
 
-    token_ACK='99' #Token para inicio de comunicação
+  # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
+    # ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # WINDOWS ##
+    ser = serial.Serial('COM12', 115200, timeout=3)  # WINDOWS ##
+
+    #token_ACK='99' #Token para inicio de comunicação
     token_FIN='ff' #Token para fim de comunicação
     # command = 'a1b2c3' #Comando que se deseja enviar
 
 
     #Mensagem em hex, sem o prefixo 0x, para se enviar
-    msgToSent = command+option+param+token_FIN
+    msgToSent = command + param + option + token_FIN
 
     #Codificação da mensagem em bytes
     msgToSent = bytes.fromhex(msgToSent) 
@@ -32,13 +34,15 @@ def set_config(command, param, option):
     return_set = ser.write((msgToSent))  # Pega o numero de bytes enviado
     print("Bytes sent: ", return_set)  # Exibe o numero de bytes enviado
 
-
+    time.sleep(0.2)
     msgReceived = ser.read_until(bytes.fromhex(token_FIN))
     ser.close()
     #msgReceived = msgReceived.hex()
 
     print("Mensagem recebida: ", msgReceived)
     # print(ser.read_until(bytes.fromhex(token)))
+
+    return msgReceived
 
 
 def get_value(option):
@@ -52,12 +56,12 @@ def get_value(option):
     #### Escolher qual a porta serial que placa tá ##########
 
     #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
-    #ser = serial.Serial('COM11', 9600, timeout=3)  # WINDOWS ##
+    ser = serial.Serial('COM12', 115200, timeout=3)  # WINDOWS ##
     
-    ser = serial.Serial('/dev/ttyACM0', 115200, timeout=2) ## LINUX ##
+    # ser = serial.Serial('/dev/ttyACM0', 115200, timeout=2) ## LINUX ##
     
 
-    token_ACK = '99'  # Token para inicio de comunicação
+    # token_ACK = '99'  # Token para inicio de comunicação
     token_FIN = 'ff'  # Token para fim de comunicação
     # Comando que se deseja enviar
 
@@ -75,8 +79,9 @@ def get_value(option):
     # msgReceived = ''
     #msgReceived = ser.readline()
     
-   # msgReceived = ser.read_until(bytes.fromhex(token_FIN))
-    msgReceived = ser.read(30)
+    msgReceived = ser.read_until(bytes.fromhex(token_FIN))
+    time.sleep(0.2)
+    # msgReceived = ser.read(30)
 
     ser.close()
     
@@ -90,11 +95,11 @@ def get_value(option):
         print("é byte mesmo")
     # print(ser.read_until(bytes.fromhex(token)))
     
-    print("Mensagem recebida: ", (msgReceived))
+    print("Mensagem recebida: ", (msgReceived.hex()))
     print("Tamanho mensagem : ", len(msgReceived))
 
 
-    # return msgReceived.hex()
+    return msgReceived.hex()
     
 
 
