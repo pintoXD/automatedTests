@@ -1,4 +1,5 @@
 from serialTeste import *
+import time
 
 def switchCase(var):
     switcher = {
@@ -13,6 +14,7 @@ def switchCase(var):
     return switcher.get(var, 'invalid configuration')
     
 def getPanel():
+    
     panel_value = get_value('02')
     
     if(panel_value[0:2] == '99'):
@@ -28,5 +30,9 @@ def getPanel():
         panel_value = panel_value[:len(panel_value)-2]
     else:
         return 'error: message has no FIN'
+    if(panel_value == '4552524fa'):
+        print("Requisition not properly sent. Will try again in 5 seconds")
+        time.sleep(5)
+        return getPanel()
 
     return switchCase(panel_value)

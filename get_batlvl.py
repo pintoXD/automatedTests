@@ -1,4 +1,4 @@
-from serialTeste import *
+from serialTeste import set_config, get_value
 
 def getBatLvl():
     batlvl = get_value('04')
