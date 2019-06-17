@@ -123,6 +123,42 @@ def sceneOne():
    
 
 
+def sceneTwo():
+    '''    
+       Verificar se, depois de o processo de análise da carga de bateria, os LEDs
+       todos irão se apagar depois de 3s.
+
+    '''    
+    command = '01'
+    buttonPower = '12'
+    ON_OFF_TIME = '40'
+   
+
+     #Aperta o botão power por ON_OFF_TIME * 100 milissegundos
+
+
+    returnSet = set_config(command, buttonPower, ON_OFF_TIME)
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+        
+        print("Button configured")
+        
+        time.sleep(4)
+
+        buzzerInfo = getBuzzer()
+        ledInfo = getPanel()
+
+        validateLED(ledInfo, '00')
+        validateBuzzer(buzzerInfo)
+
+        
+    else: 
+        print("Error on buttonArrow configuration")
+
+
+
+
+
+
    
  
  
