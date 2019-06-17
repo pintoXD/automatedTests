@@ -99,12 +99,12 @@ def sceneOne():
         print("Button configured")
 
         '''
-           O requisito diz que o após 3 segundos em espera,
+           O requisito diz que o após 5 segundos em espera,
            o sistema deve entrar em modo de baixo consumo. 
-           Configurei então uma espera de 4 segundos por segurança
+           Configurei então uma espera de 6 segundos por segurança
         '''    
         
-        time.sleep(4)
+        time.sleep(6)
 
         buzzerInfo = getBuzzer()
         ledInfo = getPanel()

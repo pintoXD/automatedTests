@@ -14,3 +14,7 @@
 * Foi notado que a função get_panel() não trata os casos em que
 os leds estejam todos desligados. Uma atualização para cobrir esse caso é necessária.
 
+
+### Teste de Caso 5 ###
+#### Cenário 1 ###
+* Falta validar o teste do cenário 1

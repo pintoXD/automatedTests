@@ -80,7 +80,7 @@ def get_value(option):
     #msgReceived = ser.readline()
     
     msgReceived = ser.read_until(bytes.fromhex(token_FIN))
-    time.sleep(0.2)
+    time.sleep(0.005)
     # msgReceived = ser.read(30)
 
     ser.close()
