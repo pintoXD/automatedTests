@@ -1,4 +1,5 @@
 import time
+from get_led_voltage import getPotLum
 
 def mask10(data, time):
     if(0 < time and time < 3):
@@ -99,3 +100,35 @@ def mask60(data, time):
             return False
     if(time >= 60 and data != 0):
         return False
+
+def maskSelect(profile):
+    now = time.time()
+    future = now + profile
+    if(profile == 10):
+        while(now < future):
+            if(mask10(getPotLum(), (time.time() - now))):
+                pass
+            else:
+                return 'falha. requisito de potencia nao foi cumprido'
+        return True
+    elif(profile == 20):
+        while(now < future):
+            if(mask20(getPotLum(), (time.time() - now))):
+                pass
+            else:
+                return 'falha. requisito de potencia nao foi cumprido'
+        return True
+    elif(profile == 40):
+        while(now < future):
+            if(mask40(getPotLum(), (time.time() - now))):
+                pass
+            else:
+                return 'falha. requisito de potencia nao foi cumprido'
+        return True
+    elif(profile == 60):
+        while(now < future):
+            if(mask60(getPotLum(), (time.time() - now))):
+                pass
+            else:
+                return 'falha. requisito de potencia nao foi cumprido'
+        return True

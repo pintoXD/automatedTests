@@ -1,4 +1,4 @@
-from serialTeste import *
+from serialTeste import get_value, set_config
 import time
 
 def switchCase(var):
