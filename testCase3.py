@@ -1,6 +1,7 @@
 from serialTeste import *
 from get_buzzer import *
 from get_panel import *
+from get_led_voltage import *
 
 
 
@@ -246,7 +247,7 @@ def sceneTwo():
 
     '''
     
-    ON_OFF_TIME = '01' # Valor inteiro '10'   
+    ON_OFF_TIME = '02' # Valor inteiro '10'   
     ledInfoBefore = '' 
     ledInfoAfter = ''
     
@@ -307,22 +308,44 @@ def sceneTwo():
  ####################### Botão Power Pressionado < ON_OFF_TIME segundos #############################     
  # Falta implementar
    #
+    ON_OFF_TIME_LOCAL = '01'
+
+    returnSet = set_config(command, buttonPower, ON_OFF_TIME_LOCAL)
+
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+        ### Momento de captar as respostas da placa
+        #tratar o vetor de tuplas do buzzer
+        # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
+
+        print("Button configured")
+
+        ledInfo = getPanel()
+
+    else:
+        print("Error on buttonPower configuration")
+
+    if(getPotLum() > 0):
+        print("Battery level test ok.")
+        print("Current Level: ", ledInfo)
+    else:
+        print("Battery level test find an error")
 
 
 
 
 ####################### Botão Power Pressionado > ON_OFF_TIME segundos #############################
   
-    ON_OFF_TIME = '05'  # Valor inteiro '5'
+    ON_OFF_TIME_LOCAL = '05'  # Valor inteiro '5'
 
     # Pressiona o botão por 10 * 100ms
-    returnSet = set_config(command, buttonPower, ON_OFF_TIME)
+    returnSet = set_config(command, buttonPower, ON_OFF_TIME_LOCAL)
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
         ### Momento de captar as respostas da placa
         #tratar o vetor de tuplas do buzzer
-        ##Nesse caso, só vai ter uma tupla por ser o primeiro perfil
+        # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
 
         print("Button configured")
 
