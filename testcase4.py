@@ -4,6 +4,7 @@ from potMask import maskSelect
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
+from potMask import maskSelect
 from get_batlvl import getBatLvl
 import random
 import time
@@ -19,9 +20,15 @@ def switchCase(var):
 
 def cen1():
 
-    profile_on = switchCase(get_Panel())
+    profile_on = switchCase(getPanel())
     
     on_off = set_config('01', '12', '0a')
     print(on_off)
+    result = maskSelect(profile_on)
+    if(result != 'ok'):
+        print(result)
+    else:
+        return 'teste passou'
+
 
     

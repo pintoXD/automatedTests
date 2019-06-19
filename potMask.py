@@ -131,4 +131,4 @@ def maskSelect(profile):
                 pass
             else:
                 return 'falha. requisito de potencia nao foi cumprido'
-        return True
+    return 'ok'
