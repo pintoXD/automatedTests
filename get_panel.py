@@ -3,6 +3,7 @@ import time
 
 def switchCase(var):
     switcher = {
+        '00': [0,0,0,0],
         '01': [0,0,0,1],
         '02': [0,0,1,0],
         '03': [0,0,1,1],
