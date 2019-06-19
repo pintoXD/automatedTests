@@ -1,6 +1,8 @@
 from serialTeste import *
 from get_buzzer import *
 from get_panel import *
+import random
+import time
 
 '''
 def validateLED(ledInfo, ledToken):
@@ -52,13 +54,15 @@ def sceneOne():
        todos irão se apagar depois de 3s.
 
     '''
+    ##ON_OFF_TIME_GLOBAL é de 2 segundos
+
     command = '01'
     buttonPower = '12'
-    ON_OFF_TIME = '30'
+    ON_OFF_TIME_LOCAL = '1E' #30 Em decimal
 
-    #Aperta o botão power por ON_OFF_TIME * 100 milissegundos
+    ##ON_OFF_TIME global é de 0x14 * 100 milssegundos.
 
-    returnSet = set_config(command, buttonPower, ON_OFF_TIME)
+    returnSet = set_config(command, buttonPower, ON_OFF_TIME_LOCAL)
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
 
@@ -92,6 +96,149 @@ def sceneOne():
             
             time.sleep(0.25)    
 
-
-    ########### TO DO #############
+     ########### TO DO #############
     #### Validate the test
+
+
+        if  cont >= 5:
+            print("Battery level read is runnning ok")
+            return True
+        else:
+            print("Battery level reading is not running ok")
+            return False
+
+
+
+def sceneTwo():
+
+    '''
+        Caso que testa o acionamento do botão ON/OFF durante o processo
+        de leitura do nível da bateria.
+
+    '''
+
+    checker = sceneOne()
+
+    if(checker == True):
+        
+        ##ON_OFF_TIME global é de 0x14 * 100 milssegundos.
+
+        command = '01'
+        buttonPower = '12'
+        ON_OFF_TIME_LOCAL = '0A'    #10em hexadecimal
+                                    #Precisa ser em hexadeciaml o número
+
+        #Aperta o botão power por ON_OFF_TIME * 100 milissegundos
+
+        returnSet = set_config(command, buttonPower, ON_OFF_TIME_LOCAL)
+
+        if(returnSet == bytes.fromhex('99' + command + 'FF')):
+            
+            print("Button configured")
+
+            ledInfo = getPanel()
+
+
+            if(ledInfo == '00'):
+                print("Test ok. Scenario 2 from case 6 was complied")
+
+            else:
+                print("Test is not ok. Scenario 2 from case 6 wasn't complied")    
+
+
+
+        
+        else:
+
+             print("Button unconfigured")
+
+
+
+
+
+
+def sceneThree():
+
+
+        '''
+
+            Esse cenário é realizado durante a leitura da tensão da bateria.
+            Durante o processo, o botão seta deve ser acionado aleatoriamente,
+            e nada deve acontecer.
+
+        '''
+
+        startTime = time.time()
+
+        checker = sceneOne()
+
+
+       ##ON_OFF_TIME global é de 0x14 * 100 milssegundos.
+
+        command = '01'
+        buttonPower = '12'
+        buttonArrow = '11'
+        ON_OFF_TIME_LOCAL = '0A'  # 10 em hexadecimal
+        #Precisa ser em hexadeciaml o número
+
+        ##Espera um tempo aleatório antes de apertar o botão seta de vera.
+        waitTime = random.uniform(0,4)
+        time.sleep(waitTime)
+
+        returnSet = set_config(command, buttonArrow, ON_OFF_TIME_LOCAL)
+
+        if(returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            print("Button SETA configured")
+
+            # ledInfo = getPanel()
+
+            ##Depois que o botão seta for pressionado, verificar 
+            ##se o painel continua a mostrar a leitura da bateria.
+            sceneOne()
+            if(sceneOne()):
+
+                print("PS 1 Scenario 3 from case 6 was complied")
+
+            else:
+                
+                print("PS 1 is not ok. Scenario 3 from case 6 wasn't complied")
+
+
+            ##Momento de verificar se a leitura da bateria se manteve 
+            # pelos 5 segundos necessários.    
+
+            elapsedTime = 0
+
+            while(elapsedTime < 5):  
+
+                elapsedTime = startTime - time.time()
+
+            auxGetPanel = getPanel()
+
+            if(elapsedTime >= 5 ) and (auxGetPanel == '00'):
+               print("PS 2 Scenario 3 from case 6 was complied")
+
+            else:
+                print("PS 2 Scenario 3 from case 6 was not complied")
+
+            
+
+
+        else:
+
+             print("Button SETA unconfigured")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
