@@ -23,9 +23,6 @@ def validateLED(ledInfo, ledToken):
     else:
         print("Test failed. Incorrect LED turned on")
 
-    
-
-
 def validateBuzzer(buzzerInfo):
     ## Validação do buzzer ##
 
@@ -44,7 +41,6 @@ def validateBuzzer(buzzerInfo):
             print("Buzzer high time complies the specification for this case.")
     else:
             print("Buzzer high time does not comply the specification")
-
 
 def sceneOne():
     '''    
@@ -65,31 +61,15 @@ def sceneOne():
         necessárias, esse loop não irá parar, contanto que não atinja
         um número limite de repetições.
     '''
-    cont = 0
-    limit = 0
-    
-    while cont < 2:
 
+    times = 3
+    limit = 15
+    pressTime = '0A'
+
+    returnSetRepeat = setRepeat(buttonArrow, times, limit, pressTime)
         
-
-        returnSet = set_config(command, buttonArrow, ARROW_TIME)
-        if (returnSet == bytes.fromhex('99' + command + 'FF')):
-            print("Button configured")
-            cont = cont + 1
-        else: 
-            print("Error on buttonArrow configuration")
-
-        
-        limit = limit + 1
-
-        if limit > 15:
-            print("Maximum iterations number reached. Button cannot be configured. Breaking loop")
-            break
-
-    
-
     #IF para saber se
-    if (cont == 2):
+    if (returnSetRepeat):
 
        ### Momento de começar a validação do cenário, procurando ver
        # se os LEDs acesos irão se apagar no tempo determinado, bem como
@@ -117,11 +97,6 @@ def sceneOne():
 
     else: 
         print("Error on buttonArrow configuration")
-
-
-    
-   
-
 
 def sceneTwo():
     '''    
