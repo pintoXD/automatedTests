@@ -164,7 +164,59 @@ def sceneThree():
 
 def sceneFour():
 
-    
+    '''
+        Para esse cenário, é pedido que o sistema esteja ligado, 
+        mas não esteja realizando nenhum perfil de cura.
+        Também é pedido que a bateria esteja abaixo de 25%
+        de carga relativa.
+
+        Tendo sido isso atendido, a bateria deve tentar 
+        ser medida, mas 3 bipes devem ser acionados.
+
+    '''
+
+    MAX_BAT_LEVEL = 5 ##Esse valor deve mudar. Favor conferir o valor total da tensão da bateria
+    CURRENT_BAT_LEVEL = getBatLvl()
+
+    batteryPercentage = (CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100
+
+
+    #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
+    if(batteryPercentage < 25):
+        command = '01'
+        buttonPower = '12'
+        pressTimePower = '0A'  # 10 em hexadecimal
+        ##Botão passará 10 * 100 milissegundos pressionado
+
+        #Acionar o botão por exatamente menos que ON_OFF_TIME segundos (menos que 2 segundos)
+        returnSet = set_config(command, buttonPower, pressTimePower)
+
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+                #Se o botão for corretamente acionado
+                # verifica se a potência do LED caiu a 0 e trata caso não haja.
+                #
+
+            print("Power pressed successfully")
+
+            buzzerInfo = getBuzzer()
+
+            if(len(buzzerInfo) == 3 and getPotLum() == 0):
+                print("Test succesffully done.")
+                print("Insufficient batery charge to start a cure profile.")
+            else:
+                print("Test unsuccesfully. Some error occured.")
+                print("Buzzer beeps or main LED tension doesn't comply the specifications")
+
+
+        else:
+            print("Error on buttonPower configuration")
+
+
+
+
+
+
 
 
 
