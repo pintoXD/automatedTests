@@ -45,6 +45,41 @@ def set_config(command, param, option):
     return msgReceived
 
 
+def setRepeat(buttonType, times, limit, pressTime):
+    #buttonType -> Código do comando, em hexa, a ser enviado. Se buttonPower ou buttonArrow
+    #times -> Número de vezes a se repetir o comando
+    #limit -> Número máximo de tentativas para enviar os comandos.
+    #pressTime -> Valor do tempo que o botão deve ser pressionado.
+                #Lembrar que esse valor, em hexa, será multiplicado por 100 milissegundos
+
+    times = 0
+    auxLimit = 0
+    counter = 0
+
+    while counter < times:
+
+        returnSet = set_config('01', buttonType, pressTime)
+        if (returnSet == bytes.fromhex('99' + '01' + 'FF')):
+            print("Button configured")
+            counter = counter + 1
+        else:
+            print("Error on buttonArrow configuration")
+
+        auxLimit = auxLimit + 1
+
+        if auxLimit > limit:
+            print(
+                "Maximum iterations number reached. Button cannot be configured. Breaking loop")
+            break
+
+    if counter >= times:
+        print("Cure profile configured")
+        return True
+    else:
+        print("Cure profile cannot be configured")
+        return False
+
+
 def get_value(option):
 
     # Primeiro parametro: Porta onde tá a placa que vai ser lida
@@ -80,7 +115,7 @@ def get_value(option):
     #msgReceived = ser.readline()
     
     msgReceived = ser.read_until(bytes.fromhex(token_FIN))
-    time.sleep(0.2)
+    time.sleep(0.005)
     # msgReceived = ser.read(30)
 
     ser.close()

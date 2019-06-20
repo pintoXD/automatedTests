@@ -22,8 +22,8 @@ def getBuzzer():
     '''
 
             Retorna um conjunto de tuplas para cada perfil de cura.
-            10s-> retorna uma tupla
-            20s - > Retorna duas tuplas
+            Perfil de cura 10s -> retorna uma tupla
+            Perifil de cura 20s -> Retorna duas tuplas
              
             E assim por diante
 
