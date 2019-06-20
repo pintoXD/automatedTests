@@ -1,3 +1,7 @@
+### Para geral ###
+* Falta corrigir a sintaxe da função __*get_led_voltage*__
+
+
 ### Teste de Caso 3 ###
 #### Cenário 2 ####
 * Falta implementar a validação dos tempos do buzzer em cada situação;
@@ -15,6 +19,6 @@
 os leds estejam todos desligados. Uma atualização para cobrir esse caso é necessária.
 
 
-### Teste de Caso 5 ###
+### Teste de Caso 6 ###
 #### Cenário 1 ###
 * Falta validar o teste do cenário 1
