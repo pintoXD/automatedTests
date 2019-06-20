@@ -1,4 +1,4 @@
-from serialTeste import *
+from serialTeste import get_value, set_config
 
 def getBuzzer():
     buz = get_value('03')

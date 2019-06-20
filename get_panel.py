@@ -1,4 +1,4 @@
-from serialTeste import *
+from serialTeste import get_value, set_config
 import time
 
 def switchCase(var):
@@ -10,7 +10,8 @@ def switchCase(var):
         '04': [0,1,0,0],
         '07': [0,1,1,1],
         '08': [1,0,0,0],
-        '0f': [1,1,1,1]
+        '0f': [1,1,1,1],
+        '00': [0,0,0,0]
     }
     return switcher.get(var, 'invalid configuration')
     
