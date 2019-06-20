@@ -180,7 +180,8 @@ def sceneOne():
                 print("Error on buttonPower configuration")
 
         else:
-        print("Error on buttonArrow configuration")
+            
+            print("Error on buttonArrow configuration")
 
         
         validateLED(ledInfo[2], '04')
