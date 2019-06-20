@@ -1,5 +1,6 @@
 ### Para geral ###
 * Falta corrigir a sintaxe da função __*get_led_voltage*__
+* Como saber se o sistema está em baixo consumo ou não?
 
 
 ### Teste de Caso 3 ###
