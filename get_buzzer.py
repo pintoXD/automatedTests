@@ -36,8 +36,8 @@ def getBuzzer():
     '''
     while(len(buz) != 0):
 
-     buz_info = buz_info + [(int(buz[:1], 16), int(buz[2:5], 16))]
-     buz = buz[6:]
+     buz_info = buz_info + [(int(buz[:2], 16), int(buz[2:10], 16))]
+     buz = buz[10:]
      #Sugestão de correção se necessário
      # if (x < 3):
      #     buz_infoA = buz_info + (int(buz[x], 16), int(buz[x+1], 16))

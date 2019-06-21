@@ -62,6 +62,7 @@ def setRepeat(buttonType, times, limit, pressTime):
         if (returnSet == bytes.fromhex('99' + '01' + 'FF')):
             print("Button configured")
             counter = counter + 1
+            time.sleep(0.2)
         else:
             print("Error on buttonArrow configuration")
 

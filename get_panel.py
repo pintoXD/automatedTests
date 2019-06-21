@@ -31,6 +31,7 @@ def getPanel():
         panel_value = panel_value[:len(panel_value)-2]
     else:
         return 'error: message has no FIN'
-    
+
+    panel_value = panel_value[6:]
 
     return switchCase(panel_value)
