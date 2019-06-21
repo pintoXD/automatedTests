@@ -1,8 +1,7 @@
 ### Para geral ###
-* Falta corrigir a sintaxe da função __*get_led_voltage*__
-* Como saber se o sistema está em baixo consumo ou não?
-* REalizar conversão de valor ADC para tensão na função get_batlvl
+* Como saber se o sistema está em baixo consumo ou não? (Entra quando o painel tá apagado) 
 *  __Rever a função de aquisição do painel de leds. Está sempre mandando 4 bytes e todos são 0.__
+* De onde que tá sendo pego o valor analógico de leitura da tensão na bateria?
 
 ### Teste de Caso 3 ###
 #### Cenário 2 ####
