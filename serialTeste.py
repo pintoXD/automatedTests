@@ -52,17 +52,20 @@ def setRepeat(buttonType, times, limit, pressTime):
     #pressTime -> Valor do tempo que o botão deve ser pressionado.
                 #Lembrar que esse valor, em hexa, será multiplicado por 100 milissegundos
     
-    times = 0
+    
     auxLimit = 0
     counter = 0
 
-    while counter < times:
+    
 
+    while counter < times:
+        print(counter)
         returnSet = set_config('01', buttonType, pressTime)
+        print(returnSet)
         if (returnSet == bytes.fromhex('99' + '01' + 'FF')):
             print("Button configured")
             counter = counter + 1
-            time.sleep(0.2)
+            time.sleep(1)
         else:
             print("Error on buttonArrow configuration")
 
@@ -72,6 +75,9 @@ def setRepeat(buttonType, times, limit, pressTime):
             print(
                 "Maximum iterations number reached. Button cannot be configured. Breaking loop")
             break
+
+    print("Counter: ", counter)
+    print("Times: ", times)
 
     if counter >= times:
         print("Cure profile configured")
