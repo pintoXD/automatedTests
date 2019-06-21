@@ -12,7 +12,7 @@ def getBuzzer():
         print('responding to command 0x03')
     else:
         return 'error: response to unrequired command'
-    if(buz[len(buz)-1:len(buz)-2] == 'ff'):
+    if(buz[len(buz)-2:] == 'ff'):
         buz = buz[:len(buz)-2]
     else:
         return 'error: message has no FIN'

@@ -12,10 +12,23 @@ def getBatLvl():
         print('responding to command 0x04')
     else:
         return 'error: response to unrequired command'
-    if(batlvl[len(batlvl)-1:len(batlvl)-2] == 'ff'):
+
+
+    print("Indexes")
+
+    print(len(batlvl) - 3)
+
+
+    print(len(batlvl) - 1)
+
+
+    if(batlvl[len(batlvl)-2:] == 'ff'):
         batlvl = batlvl[:len(batlvl)-2]
+        print("ENTROU PORRA")
     else:
+        print("Bat level is: ", batlvl)
         return 'error: message has no FIN'
+        
 
     batlvl = int(batlvl, 16)
 
