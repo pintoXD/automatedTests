@@ -32,4 +32,6 @@ def getBatLvl():
 
     batlvl = int(batlvl, 16)
 
+    # batlvl = ((3.3 * batlvl)/4095) * 2
+
     return batlvl
