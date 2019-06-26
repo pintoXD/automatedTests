@@ -1,7 +1,7 @@
 from serialTeste import set_config, get_value
 
 def getPotLum():
-    voltg = get_value('05')
+    voltg = get_value('04')
 
     if(voltg[0:2] == '99'):
         voltg = voltg[2:]
@@ -12,7 +12,7 @@ def getPotLum():
         print('responding to command 0x04')
     else:
         return 'error: response to unrequired command'
-    if(voltg[len(voltg)-1:len(voltg)-2] == 'ff'):
+    if(voltg[len(voltg)-2:] == 'ff'):
         voltg = voltg[:len(voltg)-2]
     else:
         return 'error: message has no FIN'

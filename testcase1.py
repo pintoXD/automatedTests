@@ -19,6 +19,8 @@ def switchCase(var):
     return switcher.get(var, 'invalid configuration')
 
 def getIndex(var1 = [] ,var2 = []):
+    index1 = 0
+    index2 = 0
     if(var1 == None or var2 == None):
         return 'um dos vetores está vazio'
     else:    
@@ -33,15 +35,20 @@ def getIndex(var1 = [] ,var2 = []):
 def subcenseta1():
     
     rtime = random.randint(10, 30)
-    rtime = hex(rtime)[2:]
-
+    rhex = hex(rtime)[2:]
+    if(len(rhex) < 2):
+        rhex = '0' + rtime
+    
+    seta = set_config('01', '11', '0A')
+    time.sleep(1)
     panel_before = getPanel()
 
-    seta = set_config('01', '11', rtime)
-    print(seta)
+    seta = set_config('01', '11', rhex)
+    time.sleep((rtime/10))
+
+    print("CARALHO FILHO DA PUTA!!!!!!")
 
     panel_after = getPanel()
-
     i, j = getIndex(panel_before, panel_after)
 
     if((j - i) == 1 or (i - j) == 3):
