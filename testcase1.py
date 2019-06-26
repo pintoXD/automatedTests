@@ -46,7 +46,6 @@ def subcenseta1():
     seta = set_config('01', '11', rhex)
     time.sleep((rtime/10))
 
-    print("CARALHO FILHO DA PUTA!!!!!!")
 
     panel_after = getPanel()
     i, j = getIndex(panel_before, panel_after)
@@ -61,16 +60,17 @@ def subcenseta1():
 
 def subcenseta2():
     rtime = random.randint(10, 30)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
     panel_before = getPanel()
-    on_off = set_config('01', '12', '01')
+    on_off = set_config('01', '12', '0A')
+    time.sleep(1)
     print('ON/OFF: ',on_off)
 
     time.sleep(5)
 
-    seta = set_config('01', '11', rtime)
+    seta = set_config('01', '11', rhex)
     print('Seta: ',seta)
-    time.sleep(0.3)
+    time.sleep(rtime/10)
     panel_after = getPanel()
     
     i, j = getIndex(panel_before, panel_after)
@@ -94,14 +94,16 @@ def subcenseta2():
 
 def subcenseta3():
     rtime = random.randint(10, 30)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
     panel_before = getPanel()
-    on_off = set_config('01', '12', '01')
+    on_off = set_config('01', '12', '0A')
+    time.sleep(1)
     print('ON/OFF: ',on_off)
 
     time.sleep(5)
 
-    seta = set_config('01', '11', rtime)
+    seta = set_config('01', '11', rhex)
+    time.sleep(rtime/10)
     print('Seta: ',seta)
 
     buz = getBuzzer()
@@ -127,13 +129,15 @@ def censeta2():
         return 'led de cura ainda esta ativado'
     else:
         on_off = set_config('01', '12', '32')
+        time.sleep(5)
         print('ON/OFF: '+ on_off)
 
         rtime = random.randint(10, 30)
-        rtime = hex(rtime)[2:]
+        rhex = hex(rtime)[2:]
         panel_before = getPanel()
 
-        seta = set_config('01', '11', rtime)
+        seta = set_config('01', '11', rhex)
+        time.sleep(rtime/10)
         print('Seta: ', seta)
         panel_after = getPanel()
 
@@ -148,11 +152,12 @@ def subcenonoff1():
         return 'led de cura ainda esta ativado'
     else:
         rtime = random.randint(2, 27)
-        rtime = hex(rtime)[2:]
+        rhex = hex(rtime)[2:]
 
         profile = switchCase(getPanel())
         print(profile)
-        on_off = set_config('01', '12', rtime)
+        on_off = set_config('01', '12', rhex)
+        time.sleep(rtime/10)
         print('ON/OFF: ', on_off)
 
         if(maskSelect(profile)):
@@ -165,8 +170,9 @@ def subcenonoff2():
         return 'led de cura ainda esta ativado'
     else:
         rtime = random.randint(2, 27)
-        rtime = hex(rtime)[2:]
-        on_off = set_config('01', '12', rtime)
+        rhex = hex(rtime)[2:]
+        on_off = set_config('01', '12', rhex)
+        time.sleep(rtime/10)
         print('ON/OFF: ', on_off)
 
         buz, = getBuzzer()
@@ -180,9 +186,10 @@ def subcenonoff2():
 
 def subcenonoff3():
     rtime = random.randint(30, 50)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
 
-    on_off = set_config('01', '12', rtime)
+    on_off = set_config('01', '12', rhex)
+    time.sleep(rtime/10)
     print('ON/OFF: ', on_off)
 
     panel_before = getPanel()
@@ -203,13 +210,14 @@ def subcenonoff3():
 
 def subcenonoff4():
     rtime = random.randint(30, 50)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
 
     panel_before = getPanel()
     if(panel_before != [0,0,0,0]):
         return 'falha. dispositivo nao entrou em baixo consumo'
     else:
-        on_off = set_config('01', '12', rtime)
+        on_off = set_config('01', '12', rhex)
+        time.sleep(rtime/10)
         print('ON/OFF: ', on_off)
 
         panel_after = getPanel()
@@ -230,16 +238,18 @@ def subcenonoff4():
     
 def cen2subonoff1():
     rtime = random.randint(2, 29)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
     
-    on_off = set_config('01', '12', '0a')
+    on_off = set_config('01', '12', '0A')
+    time.sleep(1)
     print(on_off)
     if(getPotLum() == 0):
         return 'teste falhou. led de cura ligou'
     else:
         time.sleep(5)
 
-        on_off = set_config('01', '12', rtime)
+        on_off = set_config('01', '12', rhex)
+        time.sleep(rtime/10)
 
         if(getPotLum() != 0):
             return 'teste falhou. led de cura nao desligou'
@@ -253,15 +263,16 @@ def cen2subonoff1():
 
 def cen2subonoff3():
     rtime = random.randint(30, 60)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
 
-    on_off = set_config('01', '12', rtime)
+    on_off = set_config('01', '12', rhex)
+    time.sleep(rtime/10)
 
-    panel_before = get_value('02')
+    panel_before = getPanel()
 
     time.sleep(5)
     
-    panel_after = get_value('02')
+    panel_after = getPanel()
 
     possibilities = [[1,1,1,1], [0,1,1,1], [0,0,1,1], [0,0,0,1]]
     if(panel_before in possibilities):
@@ -276,10 +287,11 @@ def cen2subonoff3():
     
 def cen2subonoff4():
     rtime = random.randint(30, 60)
-    rtime = hex(rtime)[2:]
+    rhex = hex(rtime)[2:]
     time.sleep(3)
 
-    on_off = set_config('01', '12', rtime)
+    on_off = set_config('01', '12', rhex)
+    time.sleep(rtime/10)
 
     panel_before = get_value('02')
 
