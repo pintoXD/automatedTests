@@ -4,7 +4,7 @@
 * De onde que tá sendo pego o valor analógico de leitura da tensão na bateria?
 
 
-### Funções de base testadas ###
+### __Funções de base testadas__ ###
 
 #### get_batlvl ###
 
@@ -19,6 +19,14 @@ Por exemplo, valor lido na bateria é de 1434 quando deveria ser algo em torno d
 
 Aparentemente tá ok. Ele manda o número de tuplas que representam o número de bipes dados, mas os valores de tempo estão meio estranhos.
 O primeiro membro da tupla está assumindo um valor inteiro entre 0 e 10, enquanto o segundo assume um valor inteiro entre 0 e 1000, ou mais que isso.
+
+#### get_led_voltage ###
+
+#### get_panel ####
+
+
+
+
 
 
 
