@@ -37,7 +37,7 @@ def subcenseta1():
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
-        rhex = '0' + rtime
+        rhex = '0' + rhex
     
     seta = set_config('01', '11', '0A')
     time.sleep(1)
@@ -61,6 +61,8 @@ def subcenseta1():
 def subcenseta2():
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
     panel_before = getPanel()
     on_off = set_config('01', '12', '0A')
     time.sleep(1)
@@ -95,10 +97,12 @@ def subcenseta2():
 def subcenseta3():
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
-    panel_before = getPanel()
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
+    
     on_off = set_config('01', '12', '0A')
     time.sleep(1)
-    print('ON/OFF: ',on_off)
+    panel_before = getPanel()
 
     time.sleep(5)
 
@@ -111,7 +115,7 @@ def subcenseta3():
     if(buz[0] == 0): #mudar depois para um teste com o período correto do buzzer
         return 'erro no teste. nao houve beep'
     else:
-        if(getPotLum() != 0):
+        if(getBatLvl() < 3.8):
             return 'teste falhou. perfil de cura executado alem da restricao de bateria'
         else:
             panel_after = getPanel()
@@ -134,6 +138,8 @@ def censeta2():
 
         rtime = random.randint(10, 30)
         rhex = hex(rtime)[2:]
+        if(len(rhex) < 2):
+            rhex = '0' + rhex
         panel_before = getPanel()
 
         seta = set_config('01', '11', rhex)
@@ -153,7 +159,8 @@ def subcenonoff1():
     else:
         rtime = random.randint(2, 27)
         rhex = hex(rtime)[2:]
-
+        if(len(rhex) < 2):
+            rhex = '0' + rhex
         profile = switchCase(getPanel())
         print(profile)
         on_off = set_config('01', '12', rhex)
@@ -171,6 +178,8 @@ def subcenonoff2():
     else:
         rtime = random.randint(2, 27)
         rhex = hex(rtime)[2:]
+        if(len(rhex) < 2):
+            rhex = '0' + rhex
         on_off = set_config('01', '12', rhex)
         time.sleep(rtime/10)
         print('ON/OFF: ', on_off)
@@ -187,6 +196,8 @@ def subcenonoff2():
 def subcenonoff3():
     rtime = random.randint(30, 50)
     rhex = hex(rtime)[2:]
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
 
     on_off = set_config('01', '12', rhex)
     time.sleep(rtime/10)
@@ -211,7 +222,8 @@ def subcenonoff3():
 def subcenonoff4():
     rtime = random.randint(30, 50)
     rhex = hex(rtime)[2:]
-
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
     panel_before = getPanel()
     if(panel_before != [0,0,0,0]):
         return 'falha. dispositivo nao entrou em baixo consumo'
@@ -239,7 +251,8 @@ def subcenonoff4():
 def cen2subonoff1():
     rtime = random.randint(2, 29)
     rhex = hex(rtime)[2:]
-    
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
     on_off = set_config('01', '12', '0A')
     time.sleep(1)
     print(on_off)
@@ -264,7 +277,8 @@ def cen2subonoff1():
 def cen2subonoff3():
     rtime = random.randint(30, 60)
     rhex = hex(rtime)[2:]
-
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
     on_off = set_config('01', '12', rhex)
     time.sleep(rtime/10)
 
@@ -288,6 +302,8 @@ def cen2subonoff3():
 def cen2subonoff4():
     rtime = random.randint(30, 60)
     rhex = hex(rtime)[2:]
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
     time.sleep(3)
 
     on_off = set_config('01', '12', rhex)
