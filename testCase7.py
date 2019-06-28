@@ -18,7 +18,7 @@ def sceneOne():
     '''
 
 
-    print("PARABÈEEEEEEEENS")
+    
     # time.sleep(10)    
 
     command = '01'
@@ -47,7 +47,7 @@ def sceneOne():
         waitTime = random.uniform(0, 8)
         time.sleep(waitTime)
 
-        returnSet = set_config(command, buttonPower, pressTimePower)
+        returnSet = set_config(command, buttonPower, pressTime)
 
         if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
@@ -199,10 +199,10 @@ def sceneFour():
 
     '''
 
-    MAX_BAT_LEVEL = 5 ##Esse valor deve mudar. Favor conferir o valor total da tensão da bateria
+    MAX_BAT_LEVEL = 4.2 ##Esse valor deve mudar. Favor conferir o valor total da tensão da bateria
     CURRENT_BAT_LEVEL = getBatLvl()
 
-    batteryPercentage = (CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100
+    batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
 
 
     #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
@@ -235,16 +235,22 @@ def sceneFour():
 
         else:
             print("Error on buttonPower configuration")
+    
+
+    else:
+
+        print("Battery level over 25%")
 
 
 
 def main():
 
   print("Hello World!")
-    # sceneOne()
+    
+  sceneOne()
     # sceneTwo()
-  sceneThree()
-  sceneFour()
+#   sceneThree()
+#   sceneFour()
     #   for i in range(50):
     #     print(i)
     #     sceneTwo()
