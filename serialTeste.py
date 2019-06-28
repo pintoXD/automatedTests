@@ -145,7 +145,7 @@ def get_value(option):
     
 
 
-def main():
+'''def main():
   print("Hello World!")
   print("Comando set_config: ") 	
   set_config('01', '11', '0A')
@@ -167,7 +167,7 @@ def main():
 #   get_value('02')
 #   print("---------------------------")
   #set_config('01', '05', '11')
+'''
 
-
-if __name__ == "__main__":
-  main()
+# if __name__ == "__main__":
+#   main()

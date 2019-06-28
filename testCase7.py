@@ -16,6 +16,11 @@ def sceneOne():
           com que a cura seja imediatamente encerrada.
 
     '''
+
+
+    print("PARABÈEEEEEEEENS")
+    # time.sleep(10)    
+
     command = '01'
     buttonArrow = '11'
     buttonPower = '12'
@@ -46,6 +51,8 @@ def sceneOne():
             #     
             
             print("Power pressed successfully")
+
+            time.sleep(1)
 
             if(getPotLum() == 0):
                 print("Main LED (cure LED) successfully shutdown")
@@ -214,10 +221,13 @@ def sceneFour():
 
 
 
+def main():
+  print("Hello World!")
 
+  sceneOne()
 
-
-
+if __name__ == "__main__":
+  main()
 
 
 
