@@ -15,9 +15,9 @@ def set_config(command, param, option):
   #### Escolher qual a porta serial que placa tá ##########
 
 
-  # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
-    # ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # WINDOWS ##
-    ser = serial.Serial('COM3', 115200, timeout=3)  # WINDOWS ##
+  # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ## 
+    ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # LINUX ##
+    # ser = serial.Serial('COM3', 115200, timeout=3)  # WINDOWS ##
 
     #token_ACK='99' #Token para inicio de comunicação
     token_FIN='ff' #Token para fim de comunicação
@@ -51,17 +51,21 @@ def setRepeat(buttonType, times, limit, pressTime):
     #limit -> Número máximo de tentativas para enviar os comandos.
     #pressTime -> Valor do tempo que o botão deve ser pressionado.
                 #Lembrar que esse valor, em hexa, será multiplicado por 100 milissegundos
-
-    times = 0
+    
+    
     auxLimit = 0
     counter = 0
 
-    while counter < times:
+    
 
+    while counter < times:
+        print(counter)
         returnSet = set_config('01', buttonType, pressTime)
+        print(returnSet)
         if (returnSet == bytes.fromhex('99' + '01' + 'FF')):
             print("Button configured")
             counter = counter + 1
+            time.sleep(1)
         else:
             print("Error on buttonArrow configuration")
 
@@ -71,6 +75,9 @@ def setRepeat(buttonType, times, limit, pressTime):
             print(
                 "Maximum iterations number reached. Button cannot be configured. Breaking loop")
             break
+
+    print("Counter: ", counter)
+    print("Times: ", times)
 
     if counter >= times:
         print("Cure profile configured")
@@ -91,9 +98,9 @@ def get_value(option):
     #### Escolher qual a porta serial que placa tá ##########
 
     #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
-    ser = serial.Serial('COM3', 115200, timeout=3)  # WINDOWS ##
+    # ser = serial.Serial('COM3', 115200, timeout=3)  # WINDOWS ##
     
-    # ser = serial.Serial('/dev/ttyACM0', 115200, timeout=2) ## LINUX ##
+    ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1) ## LINUX ##
     
 
     # token_ACK = '99'  # Token para inicio de comunicação
@@ -141,24 +148,24 @@ def get_value(option):
 def main():
   print("Hello World!")
   print("Comando set_config: ") 	
-  set_config('01', '0A', '11')
-  print("")
-  print("---------------------------")
-  print("Comando 0x05")			
-  get_value('05')
-  print("")
-  print("---------------------------")
-  print("Comando 0x04")	
-  get_value('04')
-  print("")
-  print("---------------------------")
-  print("Comando 0x03")	
-  get_value('03')
-  print("")  
-  print("---------------------------")
-  print("Comando 0x02")	
-  get_value('02')
-  print("---------------------------")
+  set_config('01', '11', '0A')
+#   print("")
+#   print("---------------------------")
+#   print("Comando 0x05")			
+#   get_value('05')
+#   print("")
+#   print("---------------------------")
+#   print("Comando 0x04")	
+#   get_value('04')
+#   print("")
+#   print("---------------------------")
+#   print("Comando 0x03")	
+#   get_value('03')
+#   print("")  
+#   print("---------------------------")
+#   print("Comando 0x02")	
+#   get_value('02')
+#   print("---------------------------")
   #set_config('01', '05', '11')
 
 

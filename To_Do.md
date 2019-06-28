@@ -1,6 +1,37 @@
 ### Para geral ###
-* Falta corrigir a sintaxe da função __*get_led_voltage*__
-* Como saber se o sistema está em baixo consumo ou não?
+* Como saber se o sistema está em baixo consumo ou não? (Entra quando o painel tá apagado) 
+*  __Rever a função de aquisição do painel de leds. Está sempre mandando 4 bytes e todos são 0.__
+* De onde que tá sendo pego o valor analógico de leitura da tensão na bateria?
+
+
+### __Funções de base testadas__ ###
+
+#### get_batlvl ###
+
+Funçãon está retornando um valor de leitura do conversor A/D,
+contudo esse valor não está correspondendo a um valor aceitável. 
+Foram realizados alguns testes, tanto lendo a tensão da bateria,
+quanto lendo tensões geradas e ainda assim, a leitura não retorna 
+um valor aceitável para conversão.
+Por exemplo, valor lido na bateria é de 1434 quando deveria ser algo em torno do dobro.
+
+#### get_buzzer ###
+
+Aparentemente tá ok. Ele manda o número de tuplas que representam o número de bipes dados, mas os valores de tempo estão meio estranhos.
+O primeiro membro da tupla está assumindo um valor inteiro entre 0 e 10, enquanto o segundo assume um valor inteiro entre 0 e 1000, ou mais que isso.
+
+#### get_led_voltage ###
+
+#### get_panel ####
+
+
+
+
+
+
+
+
+
 
 
 ### Teste de Caso 3 ###

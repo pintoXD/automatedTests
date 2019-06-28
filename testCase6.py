@@ -45,7 +45,24 @@ def validateBuzzer(buzzerInfo):
             print("Buzzer high time does not comply the specification")
 '''
 
+'''
 
+Pra comparar os vetores do get_panel retornados, 
+comparar eles e dizer se tivesse uma mudança
+
+def getIndex(var1=[], var2=[]):
+    if(var1 == None or var2 == None):
+        return 'um dos vetores está vazio'
+    else:
+        for i in range(len(var1)):
+            if(var1[i] != var2[i]):
+                index1 = i
+        for j in range(len(var2)):
+            if(var2[j] == 1):
+                index2 = j
+        return index1, index2
+
+'''
 
 
 def sceneOne():
@@ -61,7 +78,7 @@ def sceneOne():
     ON_OFF_TIME_LOCAL = '1E' #30 Em decimal
 
     ##ON_OFF_TIME global é de 0x14 * 100 milssegundos.
-
+    print("Settinf button power")
     returnSet = set_config(command, buttonPower, ON_OFF_TIME_LOCAL)
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
@@ -94,7 +111,7 @@ def sceneOne():
                 ledInfoOld = ledInfo
                     
             
-            time.sleep(0.25)    
+            time.sleep(0.1)    
 
      ########### TO DO #############
     #### Validate the test
