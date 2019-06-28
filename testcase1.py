@@ -1,5 +1,5 @@
 from serialTeste import set_config, get_value
-from potMask import maskSelect
+from potMask import *
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
@@ -11,17 +11,10 @@ import time
 # Subcenário 1:
 def switchCase2(var):
     switcher = {
-<<<<<<< Updated upstream:testcase1.py
         '[0, 0, 0, 1]': 10,
         '[0, 0, 1, 0]': 20,
         '[0, 1, 0, 0]': 40,
         '[1, 0, 0, 0]': 60,
-=======
-        '[0,0,0,1]': 10,
-        '[0,0,1,0]': 20,
-        '[0,1,0,0]': 40,
-        '[1,0,0,0]': 60,
->>>>>>> Stashed changes:TC-1.py
     }
     return switcher.get(var, 'invalid configuration')
 
@@ -177,11 +170,36 @@ def subcenonoff1():
         print(profile)
         
         print('ON/OFF: ', on_off)
-        time.sleep(3)
-        if(maskSelect(profile)):
-            return 'teste passou. perfil correto acendeu'
+
+        curve = getCurve(profile)
+        if(profile == 10):
+            for c in curve:
+                if(mask10(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
+        elif(profile == 20):
+            for c in curve:
+                if(mask20(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
+        elif(profile == 40):
+            for c in curve:
+                if(mask40(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
         else:
-            return 'teste falhou. o perfil acionado nao e o correto'
+            for c in curve:
+                if(mask60(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
+        #if(maskSelect(profile)):
+        #    return 'teste passou. perfil correto acendeu'
+        #else:
+        #    return 'teste falhou. o perfil acionado nao e o correto'
 
 def subcenonoff2():
     if(getPotLum() != 0):
