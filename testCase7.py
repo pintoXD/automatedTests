@@ -199,14 +199,18 @@ def sceneFour():
 
     '''
 
-    MAX_BAT_LEVEL = 4.2 ##Esse valor deve mudar. Favor conferir o valor total da tensão da bateria
-    CURRENT_BAT_LEVEL = getBatLvl()
+    # MAX_BAT_LEVEL = 4.2 ##Esse valor deve mudar. Favor conferir o valor total da tensão da bateria
+    # CURRENT_BAT_LEVEL = getBatLvl()
 
-    batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
+    # batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
+
+    SOC_25 = 2234
+
+    adRead = getBatLvl()
 
 
     #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
-    if(batteryPercentage < 25):
+    if(adRead <= SOC_25):
         command = '01'
         buttonPower = '12'
         pressTimePower = '0A'  # 10 em hexadecimal
