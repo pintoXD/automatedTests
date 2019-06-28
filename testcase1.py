@@ -1,5 +1,5 @@
 from serialTeste import set_config, get_value
-from potMask import maskSelect
+from potMask import *
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
@@ -170,11 +170,36 @@ def subcenonoff1():
         print(profile)
         
         print('ON/OFF: ', on_off)
-        time.sleep(3)
-        if(maskSelect(profile)):
-            return 'teste passou. perfil correto acendeu'
+
+        curve = getCurve(profile)
+        if(profile == 10):
+            for c in curve:
+                if(mask10(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
+        elif(profile == 20):
+            for c in curve:
+                if(mask20(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
+        elif(profile == 40):
+            for c in curve:
+                if(mask40(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
         else:
-            return 'teste falhou. o perfil acionado nao e o correto'
+            for c in curve:
+                if(mask60(c[1], c[0])):
+                    return 'teste passou'
+                else:
+                    return 'teste falhou'
+        #if(maskSelect(profile)):
+        #    return 'teste passou. perfil correto acendeu'
+        #else:
+        #    return 'teste falhou. o perfil acionado nao e o correto'
 
 def subcenonoff2():
     if(getPotLum() != 0):
