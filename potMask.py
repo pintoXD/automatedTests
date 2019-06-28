@@ -104,9 +104,11 @@ def mask60(data, time):
     if(time >= 60 and data != 0):
         return False
 
-def maskSelect(profile):
+def getCurve(profile):
+    future = time.time() + profile
+    time.sleep(3)
     now = time.time()
-    future = now + profile
+    
     if(profile == 10):
         while(now < future):
             if(mask10(getPotLum(), (time.time() - now + 3))):
@@ -114,6 +116,7 @@ def maskSelect(profile):
             else:
                 return False
         return True
+<<<<<<< Updated upstream
     elif(profile == future):
         while(now < future):
             data = getPotLum()
@@ -122,6 +125,16 @@ def maskSelect(profile):
             else:
                 return False
         return True
+=======
+    elif(profile == 20):
+        prof20 = []
+        #É necessária uma forma de fazer o tempo inicial ser no instante 3s
+        #De forma que time.time() - now seja no máximo 3s na primeira iteração
+        while(now < future):
+            prof20.append((time.time() - now, getPotLum()))
+            time.sleep(0.5)
+            now = time.time()
+>>>>>>> Stashed changes
     elif(profile == 40):
         while(now < future):
             if(mask40(getPotLum(), (time.time() - now + 3))):

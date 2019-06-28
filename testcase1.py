@@ -11,10 +11,17 @@ import time
 # Subcenário 1:
 def switchCase2(var):
     switcher = {
+<<<<<<< Updated upstream:testcase1.py
         '[0, 0, 0, 1]': 10,
         '[0, 0, 1, 0]': 20,
         '[0, 1, 0, 0]': 40,
         '[1, 0, 0, 0]': 60,
+=======
+        '[0,0,0,1]': 10,
+        '[0,0,1,0]': 20,
+        '[0,1,0,0]': 40,
+        '[1,0,0,0]': 60,
+>>>>>>> Stashed changes:TC-1.py
     }
     return switcher.get(var, 'invalid configuration')
 
