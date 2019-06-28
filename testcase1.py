@@ -9,12 +9,12 @@ import time
 
 ## Cenário 1: SETA
 # Subcenário 1:
-def switchCase(var):
+def switchCase2(var):
     switcher = {
-        [0,0,0,1]: 10,
-        [0,0,1,0]: 20,
-        [0,1,0,0]: 40,
-        [1,0,0,0]: 60,
+        '[0, 0, 0, 1]': 10,
+        '[0, 0, 1, 0]': 20,
+        '[0, 1, 0, 0]': 40,
+        '[1, 0, 0, 0]': 60,
     }
     return switcher.get(var, 'invalid configuration')
 
@@ -77,7 +77,7 @@ def subcenseta2():
     
     i, j = getIndex(panel_before, panel_after)
     x = 0
-    case = switchCase(panel_after)
+    case = switchCase2(str(panel_after))
 
     while(x != case):
         x = x + 1
@@ -157,16 +157,20 @@ def subcenonoff1():
     if(getPotLum() != 0):
         return 'led de cura ainda esta ativado'
     else:
-        rtime = random.randint(2, 27)
+        rtime = random.randint(2, 15)
         rhex = hex(rtime)[2:]
         if(len(rhex) < 2):
             rhex = '0' + rhex
-        profile = switchCase(getPanel())
-        print(profile)
+
         on_off = set_config('01', '12', rhex)
         time.sleep(rtime/10)
+        panel = getPanel()
+        panel = str(panel)
+        profile = switchCase2(panel)
+        print(profile)
+        
         print('ON/OFF: ', on_off)
-
+        time.sleep(3)
         if(maskSelect(profile)):
             return 'teste passou. perfil correto acendeu'
         else:
@@ -324,3 +328,6 @@ def cen2subonoff4():
         return 'erro: dispositivo nao esta em baixo consumo'
     else:
         return 'teste passou'
+
+
+print(subcenonoff1())

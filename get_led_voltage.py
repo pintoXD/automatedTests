@@ -18,12 +18,14 @@ def getPotLum():
         return 'error: message has no FIN'
 
     voltg = int(voltg, 16)
-
-    if(voltg <= 300):
+    if(voltg <= 450):
+        print('0')
         return 0
     else:
-        return 1.794477785e-23*pow(voltg, 8) - 2.710712994e-19*pow(voltg, 7) + \
-        1.702597885e-15*pow(voltg, 6) - 5.762038572e-12*pow(voltg, 5) + \
-        1.14039482e-8*pow(voltg, 4) - 1.34384905e-5*pow(voltg, 3) + \
-         9.132915482e-3*pow(voltg, 2) - 2.824372903*voltg + 422.2915764
+        pot_lum = 1.794477785e-23*pow(voltg, 8) - 2.710712994e-19*pow(voltg, 7) + \
+            1.702597885e-15*pow(voltg, 6) - 5.762038572e-12*pow(voltg, 5) + \
+            1.14039482e-8*pow(voltg, 4) - 1.34384905e-5*pow(voltg, 3) + \
+            9.132915482e-3*pow(voltg, 2) - 2.824372903*voltg + 422.2915764
+        print(pot_lum)
+        return pot_lum
 

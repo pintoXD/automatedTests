@@ -22,33 +22,36 @@ def mask10(data, time):
         return False
 
 def mask20(data, time):
-    if(0 <= time and time > 7):
-        y = (1100/7)*time
-        if(data <= y+150 and y >= y-150):
+    if(0 <= time and time < 7):
+        y = (1033/7)*time
+        if(data <= (y+150) and data >= (y-150)):
+            print('entrou')
             return True
         else:
             return False
 
-    if(7 <= time and time < 10):
+    elif(7 <= time and time < 10):
         if( data <= 1250 and data >= 950):
             return True
         else:
             return False
 
-    if(10 <= time and time > 13):
-        y = (-500/3)*time + 1600
-        if(data <= y+150 and y >= y-150):
+    elif(10 <= time and time < 13):
+        y = (-320/3)*time + 1740
+        if(data <= y+150 and data >= y-150):
             return True
         else:
             return False
 
-    if(13 <= time and time > 20):
-        if(data <= 750 and data >= 450):
+    elif(13 <= time and time < 20):
+        if(data <= 850 and data >= 550):
             return True
         else:
             return False
 
-    if(time >= 20 and data != 0):
+    elif(time >= 20 and data != 0):
+        return False
+    else:
         return False
 
 def mask40(data, time):
@@ -66,7 +69,7 @@ def mask40(data, time):
             return False
 
     if(10 <= time and time > 13):
-        y = (-500/3)*time + 1600
+        y = (-320/3)*time + 1740
         if(data <= y+150 and y >= y-150):
             return True
         else:
@@ -88,7 +91,7 @@ def mask60(data, time):
         else:
             return False
     if(3 <= time and time > 6):
-        y = (-500/3)*time + 1600
+        y = (-320/3)*time + 1740
         if(data <= y+150 and y >= y-150):
             return True
         else:
@@ -106,29 +109,29 @@ def maskSelect(profile):
     future = now + profile
     if(profile == 10):
         while(now < future):
-            if(mask10(getPotLum(), (time.time() - now))):
-                pass
+            if(mask10(getPotLum(), (time.time() - now + 3))):
+                continue
             else:
-                return 'falha. requisito de potencia nao foi cumprido'
+                return False
         return True
-    elif(profile == 20):
+    elif(profile == future):
         while(now < future):
-            if(mask20(getPotLum(), (time.time() - now))):
-                pass
+            data = getPotLum()
+            if(mask20(data, (time.time() - now + 3))):
+                now = time.time()
             else:
-                return 'falha. requisito de potencia nao foi cumprido'
+                return False
         return True
     elif(profile == 40):
         while(now < future):
-            if(mask40(getPotLum(), (time.time() - now))):
-                pass
+            if(mask40(getPotLum(), (time.time() - now + 3))):
+                continue
             else:
-                return 'falha. requisito de potencia nao foi cumprido'
+                return False
         return True
     elif(profile == 60):
         while(now < future):
-            if(mask60(getPotLum(), (time.time() - now))):
-                pass
+            if(mask60(getPotLum(), (time.time() - now + 3))):
+                continue
             else:
-                return 'falha. requisito de potencia nao foi cumprido'
-    return 'ok'
+                return False
