@@ -14,17 +14,17 @@ def getBatLvl():
         return 'error: response to unrequired command'
 
 
-    print("Indexes")
+    # print("Indexes")
 
-    print(len(batlvl) - 3)
+    # print(len(batlvl) - 3)
 
 
-    print(len(batlvl) - 1)
+    # print(len(batlvl) - 1)
 
 
     if(batlvl[len(batlvl)-2:] == 'ff'):
         batlvl = batlvl[:len(batlvl)-2]
-        print("ENTROU PORRA")
+        # print("ENTROU PORRA")
     else:
         print("Bat level is: ", batlvl)
         return 'error: message has no FIN'
@@ -32,6 +32,6 @@ def getBatLvl():
 
     batlvl = int(batlvl, 16)
 
-    print("Volts: ", ((3.3 * batlvl)/4095)*2)
-
-    return batlvl
+    # print("Volts: ", ((3.3 * batlvl)/4095)*2)
+    return ((3.3 * batlvl)/4095)*2
+    # return batlvl

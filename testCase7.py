@@ -32,6 +32,9 @@ def sceneOne():
                           ##por 40 * 100 milisseegundos
 
     ##Seleciona e ativa um perfil de cura, antes de tudo
+
+    print("Times: ", times)
+
     returnSetRepeat = setRepeat(buttonArrow, times, limit, pressTime)
 
     if(returnSetRepeat):
@@ -39,7 +42,9 @@ def sceneOne():
             
         #Se o perfil for iniciado corretamente,
         # esperar por waitTime segudnos e depois pressionar o botão ON/OFF
-        waitTime = random.uniform(0, 9)
+        returnSet = set_config(command, buttonPower, pressTime)
+        
+        waitTime = random.uniform(0, 8)
         time.sleep(waitTime)
 
         returnSet = set_config(command, buttonPower, pressTimePower)
@@ -52,7 +57,7 @@ def sceneOne():
             
             print("Power pressed successfully")
 
-            time.sleep(1)
+            time.sleep(4.5)
 
             if(getPotLum() == 0):
                 print("Main LED (cure LED) successfully shutdown")
@@ -67,7 +72,7 @@ def sceneTwo():
 
     '''
         Este cenário possui estratégia semelhante ao cenário 1, contudo, 
-        ao pressionar o botão ON/OFF, por ON_OFF_TIME antes do LED de cura
+        deve-se pressionar o botão ON/OFF, por ON_OFF_TIME antes do LED de cura
         ser desativado. Pensou-se usar thread para verificar a potência
         do LED a cada instante, mas foi notado que somente pressionar
         o botão ON/OFF pelo tempo exato de ON_OFF_TIME já seria suficiente
@@ -81,17 +86,19 @@ def sceneTwo():
     buttonPower = '12'
     times = random.randint(1,4)
     limit = 15
-    pressTime = '1E'  # 20 em hexadecimal. Botão será então presssionado por
+    pressTime = '02'  # 20 em hexadecimal. Botão será então presssionado por
     ## 20 * 100 milissegundos.
     pressTimePower = '14'  # 40 em decimal. Botão power será pressionado
     ##por 40 * 100 milisseegundos
 
     ##Seleciona e ativa um perfil de cura, antes de tudo
     returnSetRepeat = setRepeat(buttonArrow, times, limit, pressTime)
+    returnSet = set_config(command, buttonPower, pressTime)
 
-    if(returnSetRepeat):
-        print("Cure profile successfully configured")
+    if(returnSetRepeat and returnSet == bytes.fromhex('99' + command + 'FF')):
+        print("Cure profile and power successfully configured")
 
+       
         #Se o perfil for iniciado corretamente,
         # esperar por waitTime segundos e depois pressionar o botão ON/OFF
         waitTime = random.uniform(0, 9) #Requisito de acionamento aleatório do botão
@@ -108,6 +115,7 @@ def sceneTwo():
             #
 
             print("Power pressed successfully")
+            time.sleep(2)
 
             if(getPotLum() == 0):
                 print("Main LED (cure LED) successfully shutdown")
@@ -134,7 +142,7 @@ def sceneThree():
 
     command = '01'
     buttonPower = '12'
-    pressTimePower = '28' #40 em hexadecimal
+    pressTimePower = '14' #40 em hexadecimal
                         ##Botão passará 40 * 100 milissegundos pressionado
 
            #Acionar o botão por exatamente ON_OFF_TIME segundos
@@ -147,13 +155,22 @@ def sceneThree():
             #
 
         print("Power pressed successfully")
+        time.sleep(2)
+        flag = False
+        ledInfo = getPanel()
+        for i in range(7):
+            ledInfo = ledInfo + getPanel()
+            time.sleep(0.3)
+            if i > 0 and ledInfo[i] != [0, 0, 0, 0]:
+                print("OK COMPUTER")
+                flag = True
+                break
 
-        ledInfo = getPanel()    
 
         ##Dorme pelo tempo que os LEDs ficarem acesos
         time.sleep(5)
 
-        if(ledInfo == '01' or ledInfo == '03' or ledInfo == '07' or ledInfo == '0f'):
+        if(flag):
         
                 print("Battery level showed in LEDs")
                 print("Real battery level is: ", getBatLvl())
@@ -222,9 +239,16 @@ def sceneFour():
 
 
 def main():
-  print("Hello World!")
 
-  sceneOne()
+  print("Hello World!")
+    # sceneOne()
+    # sceneTwo()
+  sceneThree()
+  sceneFour()
+    #   for i in range(50):
+    #     print(i)
+    #     sceneTwo()
+    #     time.sleep(1)
 
 if __name__ == "__main__":
   main()

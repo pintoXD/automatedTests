@@ -32,14 +32,14 @@ def set_config(command, param, option):
 
     print(msgToSent)  # Pequena prévia da mensagem a ser enviada
     return_set = ser.write((msgToSent))  # Pega o numero de bytes enviado
-    print("Bytes sent: ", return_set)  # Exibe o numero de bytes enviado
+    # print("Bytes sent: ", return_set)  # Exibe o numero de bytes enviado
 
     time.sleep(0.2)
     msgReceived = ser.read_until(bytes.fromhex(token_FIN))
     ser.close()
     #msgReceived = msgReceived.hex()
 
-    print("Mensagem recebida: ", msgReceived)
+    # print("Mensagem recebida: ", msgReceived)
     # print(ser.read_until(bytes.fromhex(token)))
 
     return msgReceived
@@ -72,8 +72,7 @@ def setRepeat(buttonType, times, limit, pressTime):
         auxLimit = auxLimit + 1
 
         if auxLimit > limit:
-            print(
-                "Maximum iterations number reached. Button cannot be configured. Breaking loop")
+            print("Maximum iterations number reached. Button cannot be configured. Breaking loop")
             break
 
     print("Counter: ", counter)
@@ -114,7 +113,7 @@ def get_value(option):
 
     print(msgToSent) #Pequena prévia da mensagem a ser enviada
     return_get = ser.write((msgToSent)) #Pega o numero de bytes enviado
-    print("Bytes sent: ", return_get) #Exibe o numero de bytes enviado
+    # print("Bytes sent: ", return_get) #Exibe o numero de bytes enviado
 
     #time.sleep(0.5)
     
@@ -133,12 +132,12 @@ def get_value(option):
     
     #Mensagem recebida em bytes
 
-    if isinstance(msgReceived, bytes):
-        print("é byte mesmo")
+    # if isinstance(msgReceived, bytes):
+    #     print("é byte mesmo")
     # print(ser.read_until(bytes.fromhex(token)))
     
-    print("Mensagem recebida: ", (msgReceived.hex()))
-    print("Tamanho mensagem : ", len(msgReceived))
+    # print("Mensagem recebida: ", (msgReceived.hex()))
+    # print("Tamanho mensagem : ", len(msgReceived))
 
 
     return msgReceived.hex()
