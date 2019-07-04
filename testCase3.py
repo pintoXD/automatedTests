@@ -104,12 +104,26 @@ def sceneOne():
     #########################################   Cenario 1   ###############################################
 def profile10():
     ####################### Perfil de 10s #############################
+
+    command = '01'
+    buttonArrow = '11'
+    buttonPower = '12'
+    buzzerInfo = []
+    ledInfo = []
+    ON_OFF_TIME = '01'  # Valor inteiro '10'
     
     VBAT_MIN = 3
     ##Verifica se o sistema está em baixo consumo antes
 
     if(getBatLvl() >= VBAT_MIN): 
         ### Inicia o perfil de cura. 
+
+        profileCureTime = getCureProfileTime()
+
+        while(profileCureTime != 10):
+            profileCureTime = getCureProfileTime()
+
+        
         returnSet = set_config(command, buttonPower, ON_OFF_TIME)    
         
         if (returnSet == bytes.fromhex('99' + command + 'FF')):
