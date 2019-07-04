@@ -204,7 +204,7 @@ def sceneFour():
 
     # batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
 
-    SOC_25 = 2234
+    SOC_25 = 2420
 
     adRead = getBatLvl()
 
@@ -215,7 +215,12 @@ def sceneFour():
         buttonPower = '12'
         pressTimePower = '0A'  # 10 em hexadecimal
         ##Botão passará 10 * 100 milissegundos pressionado
-
+        profileTime = getCureProfileTime()
+        while(profileTime != 10):
+            profileTime = getCureProfileTime()
+            print("profileTime: ", profileTime)
+            time.sleep(0.5)
+       
         #Acionar o botão por exatamente menos que ON_OFF_TIME segundos (menos que 2 segundos)
         returnSet = set_config(command, buttonPower, pressTimePower)
 
@@ -224,17 +229,33 @@ def sceneFour():
                 #Se o botão for corretamente acionado
                 # verifica se a potência do LED caiu a 0 e trata caso não haja.
                 #
-
+            #time.sleep(1)
             print("Power pressed successfully")
+            # testeAux = getPotLum()    
 
+
+
+            time.sleep(5)
             buzzerInfo = getBuzzer()
+            testeAux = getPotLum()
+            print("testAux: ", testeAux)
+            print("Number of bips 1: ", len(buzzerInfo))
+            print(buzzerInfo)
+            # time.sleep(profileTime + 8)
+            # buzzerInfo = getBuzzer()
+            # print("Number of bips 2: ", len(buzzerInfo))
+            # print(buzzerInfo)
+            time.sleep(profileTime)
 
-            if(len(buzzerInfo) == 3 and getPotLum() == 0):
-                print("Test succesffully done.")
-                print("Insufficient batery charge to start a cure profile.")
+            if(testeAux != 0 and len(buzzerInfo) == 3):
+                    print("Test succesffully done.")
+                    print("Insufficient batery charge to start a cure profile.")
+                    print("Number of bips: ", len(buzzerInfo))
             else:
-                print("Test unsuccesfully. Some error occured.")
-                print("Buzzer beeps or main LED tension doesn't comply the specifications")
+
+                    print("Test unsuccesfully. Some error occured.")
+                    print("Buzzer beeps, main LED activated or battery level doesn't comply the specifications")
+          
 
 
         else:
@@ -245,16 +266,52 @@ def sceneFour():
 
         print("Battery level over 25%")
 
+def getCureProfileTime():
+
+    command = '01'
+    buttonArrow = '11'
+    pressTime = '02'  # 10 em hexadecimal
+        ##Botão passará 10 * 100 milissegundos pressionado
+
+    returnSet = set_config(command, buttonArrow, pressTime)
+
+    time.sleep(0.3)
+
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            aux = getPanel()
+
+
+            if(aux == [0, 0, 0, 1]):
+                return 60
+            elif(aux == [0, 0, 1, 0]):
+                return 40
+            elif(aux == [0, 1, 0, 0]):
+                return 20
+            elif(aux == [1, 0, 0, 0]):
+                return 10
+            else:
+                return 99
+
+                #Se o botão for corretamente acionado
+                # verifica se a potência do LED caiu a 0 e trata caso não haja.
+                
+
+    
+    else:
+      print("Error on buttonArrow configuration")
+
+
 
 
 def main():
 
   print("Hello World!")
     
-  sceneOne()
+  #sceneOne()
     # sceneTwo()
 #   sceneThree()
-#   sceneFour()
+  sceneFour()
     #   for i in range(50):
     #     print(i)
     #     sceneTwo()
