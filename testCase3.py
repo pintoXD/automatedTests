@@ -49,6 +49,39 @@ def validateBuzzer(buzzerInfo):
             print("Relative time does not comply the specifitation")
 
 
+def getCureProfileTime():
+
+    command = '01'
+    buttonArrow = '11'
+    pressTime = '02'  # 10 em hexadecimal
+    ##Botão passará 10 * 100 milissegundos pressionado
+
+    returnSet = set_config(command, buttonArrow, pressTime)
+
+    time.sleep(0.3)
+
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            aux = getPanel()
+
+            if(aux == [0, 0, 0, 1]):
+                return 60
+            elif(aux == [0, 0, 1, 0]):
+                return 40
+            elif(aux == [0, 1, 0, 0]):
+                return 20
+            elif(aux == [1, 0, 0, 0]):
+                return 10
+            else:
+                return 99
+
+                #Se o botão for corretamente acionado
+                # verifica se a potência do LED caiu a 0 e trata caso não haja.
+
+    else:
+      print("Error on buttonArrow configuration")
+
+
 def sceneOne():
     
     '''
@@ -69,7 +102,7 @@ def sceneOne():
 
     #Configurar qual botão vai ser apertado
     #########################################   Cenario 1   ###############################################
-
+def profile10():
     ####################### Perfil de 10s #############################
     
     VBAT_MIN = 3
@@ -102,9 +135,12 @@ def sceneOne():
         validateLED(ledInfo[0], '01')
         validateBuzzer(buzzerInfo[0])
 
+    else:
+        print("System in low-power consuptiion. Scenario cannot be tested")
+
         
         #########################################################################   
-
+def profile20():
     ####################### Perfil de 20s #############################
 
         ### Configura o perfil de cura ###
@@ -148,7 +184,7 @@ def sceneOne():
 
 
     #########################################################################
-
+def profile40():
     ####################### Perfil de 40s #############################
 
     
@@ -190,7 +226,7 @@ def sceneOne():
 
 
     #########################################################################
-
+def profile60():
     ####################### Perfil de 60s #############################
 
         ### Configura o perfil de cura ###
@@ -227,8 +263,8 @@ def sceneOne():
         validateLED(ledInfo[3], '08')
         validateBuzzer(buzzerInfo[3])
 
-    else:
-        print("System in low-power consuptiion. Scenario cannot be tested")
+    # else:
+    #     print("System in low-power consuptiion. Scenario cannot be tested")
 
        
 
