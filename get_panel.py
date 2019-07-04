@@ -25,7 +25,7 @@ def getPanel():
         return 'error: message has no ACK'
     if(panel_value[0:2] == '02'):
         panel_value = panel_value[2:]
-        print('responding to command 0x02')
+        # print('responding to command 0x02')
     else:
         return 'error: response to unrequired command'
     if(panel_value[len(panel_value)-2:] == 'ff'):
