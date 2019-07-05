@@ -5,6 +5,7 @@ from get_led_voltage import *
 from get_batlvl import *
 import time
 import random
+import os
 
 
 def sceneOne():
@@ -26,8 +27,8 @@ def sceneOne():
     buttonPower = '12'
     times = random.randint(1, 4)
     limit = 15
-    pressTime = '0A' ##10 em hexadecimal. Botão será então presssionado por
-                     ## 10 * 100 milissegundos.
+    pressTime = '02' ##2 em hexadecimal. Botão será então presssionado por
+                     ## 30 * 100 milissegundos.
     pressTimePower = '28' ##40 em decimal. Botão power será pressionado 
                           ##por 40 * 100 milisseegundos
 
@@ -42,12 +43,20 @@ def sceneOne():
             
         #Se o perfil for iniciado corretamente,
         # esperar por waitTime segudnos e depois pressionar o botão ON/OFF
-        returnSet = set_config(command, buttonPower, pressTime)
         
-        waitTime = random.uniform(0, 8)
-        time.sleep(waitTime)
-
+               
         returnSet = set_config(command, buttonPower, pressTime)
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            waitTime = random.uniform(0, 8)
+            time.sleep(waitTime)
+
+            returnSet = set_config(command, buttonPower, pressTimePower)
+
+        else:
+            print("First power press failed")
+            return False
+
 
         if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
@@ -55,15 +64,18 @@ def sceneOne():
             # verifica se a potência do LED caiu a 0 e trata caso não haja.
             #     
             
-            print("Power pressed successfully")
+            print("Second Power pressed successfully")
 
             time.sleep(4.5)
 
             if(getPotLum() == 0):
                 print("Main LED (cure LED) successfully shutdown")
+                print("Test ok")
+                return True
             else:
                 print("Main LED (cure LED) cannot be shutdown") 
-                 
+                print("Test is not ok")
+                return False
                  
     else:
         print("Error on buttonArrow configuration")
@@ -119,14 +131,22 @@ def sceneTwo():
 
             if(getPotLum() == 0):
                 print("Main LED (cure LED) successfully shutdown")
+                print("Scene Two ok")
+                return True
             else:
                 print("Main LED (cure LED) cannot be shutdown")
+                print("Scene Two not ok")
+                return False
         
         else:
             print("Error on buttonPower configuration")
+            print("Scene Two not ok")
+            return False
 
     else:
         print("Error on buttonArrow configuration")
+        print("Scene Two not ok")
+        return False
 
 
 def sceneThree():
@@ -174,16 +194,22 @@ def sceneThree():
         
                 print("Battery level showed in LEDs")
                 print("Real battery level is: ", getBatLvl())
-
+                print("Scene Three ok")
+                print("ledInfo is: ", ledInfo)
+                return True
         
         else:
                 print("Some error occured when showing battery level")
+                print("Scene Two not ok")
+                return False
 
         
      
 
     else:
         print("Error on buttonPower configuration")
+        print("Scene Two not ok")
+        return False
 
 
 def sceneFour():
@@ -251,20 +277,27 @@ def sceneFour():
                     print("Test succesffully done.")
                     print("Insufficient batery charge to start a cure profile.")
                     print("Number of bips: ", len(buzzerInfo))
+                    print("Scene Four ok")
+                    return True
             else:
 
                     print("Test unsuccesfully. Some error occured.")
                     print("Buzzer beeps, main LED activated or battery level doesn't comply the specifications")
-          
+                    print("Scene Four not ok")
+                    return False
 
 
         else:
             print("Error on buttonPower configuration")
+            print("Scene Four not ok")
+            return False
     
 
     else:
 
         print("Battery level over 25%")
+        print("Scene Four not ok")
+        return False
 
 def getCureProfileTime():
 
@@ -306,16 +339,49 @@ def getCureProfileTime():
 
 def main():
 
-  print("Hello World!")
+    print("Hello World!")
+        
+    #sceneOne()
+        # sceneTwo()
+    #   sceneThree()
     
-  #sceneOne()
-    # sceneTwo()
-#   sceneThree()
-  sceneFour()
-    #   for i in range(50):
-    #     print(i)
-    #     sceneTwo()
-    #     time.sleep(1)
+    #   sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+    cont = 0
+    initialTime = time.time()
+    for i in range(50):
+            print("Round ", i)
+            # aux  = sceneOne()
+            aux = sceneTwo()
+            #aux = sceneThree()
+
+            #aux = sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+        
+            if(aux):
+                cont = cont + 1
+            
+            time.sleep(1)
+
+    
+    
+    print("Successful tests percentage: ", (cont/50)*100)
+
+    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+    print("Elapsed time: ", time.time() - initialTime)
+
+
+    with open('output_tests.txt', 'a') as f:
+            print("Scene Two:")
+
+            print("Successful tests percentage: ", (cont/50)*100, file=f)
+
+            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+
+            print("Elapsed time: ", time.time() - initialTime, file = f)
+
+            print("############# END ###########\n\n")
+    
+    f.close()
 
 if __name__ == "__main__":
   main()
