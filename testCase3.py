@@ -39,6 +39,123 @@ def getCureProfileTime():
       print("Error on buttonArrow configuration")
 
 
+def profile(desiredCureProfile):
+    ####################### Perfil de 10s #############################
+
+    # desiredCureProfile deve ser os valores 10, 20, 40 ou 60
+
+    command = '01'
+    buttonArrow = '11'
+    buttonPower = '12'
+    buzzerInfo = []
+    ledInfo = []
+    pressTime = '02'  # Valor inteiro '10'
+
+    VBAT_MIN = 2420
+
+    ##Verifica se o sistema está com a carga mínima
+    if(desiredCureProfile == 10 or desiredCureProfile == 20 or
+       desiredCureProfile == 40 or desiredCureProfile == 60):
+
+        if(getBatLvl() > VBAT_MIN):
+            ### Inicia o perfil de cura.
+
+            returnSet = set_config(command, buttonPower, pressTime)
+            #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
+            #Dessa forma o vetor dos tempos do buffer vai ser esvaziado.
+            if (returnSet == bytes.fromhex('99' + command + 'FF')):
+                #Esse primeiro if serve só pra configurar o perfil de cura desejado e depois verificar
+                #se os buzzer e painel de led tão sendo acionados conforme as especificações.
+
+                time.sleep(0.5)
+
+                buzzerFirstPress = getBuzzer()
+
+                print("buzzerFirstPress is: ", buzzerFirstPress)
+                print("Length is: ", len(buzzerFirstPress))
+
+                returnSet = set_config(command, buttonPower, pressTime)
+                time.sleep(0.5)
+
+                if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+                    profileCureTime = 0
+
+                    auxCont = 0
+                    #procura pelo perfil de cura desejado
+                    #nesse caso, vai atrás do perfil de 10s
+                    #A função de procura já valida o acendimento do led de 10s no painel de LEDs
+                    while(profileCureTime != desiredCureProfile):
+                        profileCureTime = getCureProfileTime()
+                        auxCont = auxCont + 1
+
+                    time.sleep(3)
+                    auxBuzzer = getBuzzer()
+
+                    print("Current buzzer count: ", auxCont)
+                    print("Current buzzer length: ", auxBuzzer)
+                    ##A contagem  é 2 + auxCont - 1 + 1 porque
+                    #2 seriam os bipes de pressionar o botão power pra ligar e desligar o perfil de cura,
+                    #auxCont é as vezes que o botão seta foi pressionado, -1 é uma correção pois o bipe do botão
+                    #de power quando pressionado no início de perfil de cura é perdido e o 1 é o bipe que indica
+                    #a entrada no modo de baixo consumo.
+
+                    if(len(auxBuzzer) == (2 + auxCont - 1 + 1)) and len(buzzerFirstPress) > 0:
+
+                        print("Buzzer count correct")
+
+                    else:
+                        print("Buzzer count incorrect")
+
+                else:
+                        print("Second power press failed")
+
+            else:
+                print("First power press failed")
+
+            returnSet = set_config(command, buttonPower, pressTime)
+            #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
+            #Dessa forma o vetor dos tempos do buffer vai ser esvaziado.
+            if (returnSet == bytes.fromhex('99' + command + 'FF')):
+                time.sleep(0.2)
+                if(getPotLum != 0):
+
+                    time.sleep(profileCureTime + 5)
+
+                    auxBuzzer = getBuzzer()
+
+                    if(len(auxBuzzer) == (1 + (profileCureTime/10) + 1)):
+                        print("Buzzer bips count in cure profile is ok")
+                        print("Profile Analyzed: ", profileCureTime)
+                        print("Number of bipes expected: ",
+                              1 + (profileCureTime/10) + 1)
+                        print("Number of got bipes: ", len(auxBuzzer))
+
+                    else:
+                        print("Buzzer bips count in cure profile isn't ok")
+                        print("Number of bipes expected: ",
+                              1 + (profileCureTime/10) + 1)
+                        print("Number of bipes got: ", len(auxBuzzer))
+
+            else:
+
+                print("Power press from second PS failed")
+
+        else:
+            print("System in low-power consuptiion. Scenario cannot be tested")
+
+    else:
+        print("Profile time not allowed")
+
+
+
+
+
+
+
+
+
+
 def sceneOne():
     
     '''
@@ -60,120 +177,10 @@ def sceneOne():
     #Configurar qual botão vai ser apertado
     #########################################   Cenario 1   ###############################################
 
-    profile10(20)
+    profile(60)
 
 
-def profile10(desiredCureProfile):
-    ####################### Perfil de 10s #############################
-
-    # desiredCureProfile deve ser os valores 10, 20, 40 ou 60
-
-    command = '01'
-    buttonArrow = '11'
-    buttonPower = '12'
-    buzzerInfo = []
-    ledInfo = []
-    pressTime = '02'  # Valor inteiro '10'
-    
-    VBAT_MIN = 2420
-
-    ##Verifica se o sistema está com a carga mínima
-
-    if(getBatLvl() > VBAT_MIN): 
-        ### Inicia o perfil de cura.        
-        
-        returnSet = set_config(command, buttonPower, pressTime)
-        #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
-        #Dessa forma o vetor dos tempos do buffer vai ser esvaziado.
-        if (returnSet == bytes.fromhex('99' + command + 'FF')):
-            #Esse primeiro if serve só pra configurar o perfil de cura desejado e depois verificar
-            #se os buzzer e painel de led tão sendo acionados conforme as especificações.
-        
-            time.sleep(0.5)
-
-            buzzerFirstPress = getBuzzer()  
-
-            print("buzzerFirstPress is: ", buzzerFirstPress)
-            print("Length is: ", len(buzzerFirstPress))
-
-            returnSet = set_config(command, buttonPower, pressTime)
-            time.sleep(0.5)
-
-            if (returnSet == bytes.fromhex('99' + command + 'FF')):
-
-                profileCureTime = 0
-
-                auxCont = 0
-                #procura pelo perfil de cura desejado
-                #nesse caso, vai atrás do perfil de 10s
-                #A função de procura já valida o acendimento do led de 10s no painel de LEDs
-                while(profileCureTime != desiredCureProfile):
-                    profileCureTime = getCureProfileTime()
-                    auxCont = auxCont + 1
-
-                time.sleep(3)
-                auxBuzzer = getBuzzer()
-
-                print("Current buzzer count: ", auxCont)
-                print("Current buzzer length: ", auxBuzzer)
-                ##A contagem  é 2 + auxCont - 1 + 1 porque
-                #2 seriam os bipes de pressionar o botão power pra ligar e desligar o perfil de cura,
-                #auxCont é as vezes que o botão seta foi pressionado, -1 é uma correção pois o bipe do botão
-                #de power quando pressionado no início de perfil de cura é perdido e o 1 é o bipe que indica
-                #a entrada no modo de baixo consumo.
-
-                if(len(auxBuzzer) == (2 + auxCont - 1 + 1)) and len(buzzerFirstPress) > 0 :
-
-                    print("Buzzer count correct")
-
-
-                else:
-                    print("Buzzer count incorrect")
-
-
-
-            else:
-                    print("Second power press failed")
-
-        else:
-               print("First power press failed")
-
-    
-        
-        returnSet = set_config(command, buttonPower, pressTime)
-        #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
-        #Dessa forma o vetor dos tempos do buffer vai ser esvaziado.
-        if (returnSet == bytes.fromhex('99' + command + 'FF')):
-            time.sleep(0.2)    
-            if(getPotLum != 0):
-
-                time.sleep(profileCureTime + 5)
-
-                auxBuzzer = getBuzzer()
-
-                if(len(auxBuzzer) == (1 + (profileCureTime/10) + 1)):
-                    print("Buzzer bips count in cure profile is ok")
-                    print("Profile Analyzed: ", profileCureTime)
-                    print("Number of bipes expected: ", 1 + (profileCureTime/10) + 1)
-                    print("Number of got bipes: ", len(auxBuzzer))
-                    
-                else:
-                    print("Buzzer bips count in cure profile isn't ok")
-                    print("Number of bipes expected: ", 1 + (profileCureTime/10) + 1)
-                    print("Number of bipes got: ", len(auxBuzzer))
-
-
-
-
-
-        else:    
-
-            print("Power press from second PS failed")
-
-    else:
-        print("System in low-power consuptiion. Scenario cannot be tested")
-
-        
+     
 '''       
     #########################################################################   
     def profile20():
@@ -456,8 +463,8 @@ def main():
 
   print("Hello World!")
 
-#   sceneOne()
-  sceneTwo()
+  sceneOne()
+#   sceneTwo()
 #   sceneThree()
 #   sceneFour()
   #   for i in range(50):
