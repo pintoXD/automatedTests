@@ -30,7 +30,7 @@ def set_config(command, param, option):
     #Codificação da mensagem em bytes
     msgToSent = bytes.fromhex(msgToSent) 
 
-    print(msgToSent)  # Pequena prévia da mensagem a ser enviada
+    # print(msgToSent)  # Pequena prévia da mensagem a ser enviada
     return_set = ser.write((msgToSent))  # Pega o numero de bytes enviado
     # print("Bytes sent: ", return_set)  # Exibe o numero de bytes enviado
 
@@ -111,7 +111,7 @@ def get_value(option):
 
 
 
-    print(msgToSent) #Pequena prévia da mensagem a ser enviada
+    # print(msgToSent) #Pequena prévia da mensagem a ser enviada
     return_get = ser.write((msgToSent)) #Pega o numero de bytes enviado
     # print("Bytes sent: ", return_get) #Exibe o numero de bytes enviado
 
