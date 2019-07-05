@@ -110,89 +110,137 @@ def profile10():
     buttonPower = '12'
     buzzerInfo = []
     ledInfo = []
-    ON_OFF_TIME = '01'  # Valor inteiro '10'
+    pressTime = '02'  # Valor inteiro '10'
     
-    VBAT_MIN = 3
+    VBAT_MIN = 2420
     ##Verifica se o sistema está em baixo consumo antes
 
     if(getBatLvl() >= VBAT_MIN): 
         ### Inicia o perfil de cura. 
-
-        profileCureTime = getCureProfileTime()
-
-        while(profileCureTime != 10):
-            profileCureTime = getCureProfileTime()
-
         
-        returnSet = set_config(command, buttonPower, ON_OFF_TIME)    
         
+        returnSet = set_config(command, buttonPower, pressTime)
+        #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
+        #Dessa forma o vetor dos tempos do buffer vai ser esvaziado.
         if (returnSet == bytes.fromhex('99' + command + 'FF')):
-
-            ### Momento de captar as respostas da placa
-            #tratar o vetor de tuplas do buzzer
-            ##Nesse caso, só vai ter uma tupla por ser o primeiro perfil
-
-            print("Button configured")
-
+            #Esse primeiro if serve só pra configurar o perfil de cura desejado e depois verificar
+            #se os buzzer e painel de led tão sendo acionados conforme as especificações.
         
-            ledInfo = ledInfo + getPanel()
-            time.sleep(10)  # Dorme por X segundos
-            buzzerInfo = buzzerInfo + getBuzzer()
+            time.sleep(0.5)
+            returnSet = set_config(command, buttonPower, pressTime)
+
+            if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+                profileCureTime = 0
+
+                auxCont = 0
+                #procura pelo perfil de cura desejado
+                #nesse caso, vai atrás do perfil de 10s
+                #A função de procura já valida o acendimento do led de 10s no painel de LEDs
+                while(profileCureTime != 10):
+                    auxCont = auxCont + 1
+                    profileCureTime = getCureProfileTime()
+
+                time.sleep(3)
+                auxBuzzer = getBuzzer()
+
+                if(len(auxBuzzer) == (2 + auxCont + 1)):
+
+                    print("Buzzer count correct")
 
 
-        else: 
-            print("Error on buttonPower configuration")
+                else:
+                    print("Buzzer count incorrect")
 
 
+
+            else:
+                    print("Second power press failed")
+
+        else:
+               print("First power press failed")
+
+    
         
-        
-        validateLED(ledInfo[0], '01')
-        validateBuzzer(buzzerInfo[0])
+        returnSet = set_config(command, buttonPower, pressTime)
+        #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
+        #Dessa forma o vetor dos tempos do buffer vai ser esvaziado.
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+            time.sleep(0.2)    
+            if(getPotLum != 0):
+
+                time.sleep(profileCureTime + 5)
+
+                auxBuzzer = getBuzzer()
+
+                if(len(auxBuzzer) == (1 + (profileCureTime/10) + 1)):
+                    print("Buzzer bips count in cure profile is ok")
+                    print("Profile Analyzed: ", profileCureTime)
+                    print("Number of bipes expected: ", 1 + (profileCureTime/10) + 1)
+                    print("Number of got bipes: ", len(auxBuzzer))
+                    
+                else:
+                    print("Buzzer bips count in cure profile isn't ok")
+                    print("Number of bipes expected: ", 1 + (profileCureTime/10) + 1)
+                    print("Number of bipes got: ", len(auxBuzzer))
+
+
+
+
+
+        else:    
+
+            print("Power press from second PS failed")
 
     else:
         print("System in low-power consuptiion. Scenario cannot be tested")
 
         
-        #########################################################################   
+'''        #########################################################################   
 def profile20():
     ####################### Perfil de 20s #############################
-
+    command = '01'
+    buttonArrow = '11'
+    buttonPower = '12'
+    buzzerInfo = []
+    ledInfo = []
+    ON_OFF_TIME = '01'  # Valor inteiro '10'
         ### Configura o perfil de cura ###
-        returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
+       
+       
+    returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
         
 
-        if (returnSet == bytes.fromhex('99' + command + 'FF')):
-            # Se a configuração do botão seta der certo, inicia 
-            # o perfil de cura   
-            print("Button configured")
-            auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
-            # Esse if aqui verifica seo comando pra iniciar
-            # o perfil de cura foi pressionado com sucesso.
-            # Se não tiver sido, retorna mensagem de erro.
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+        # Se a configuração do botão seta der certo, inicia 
+        # o perfil de cura   
+        print("Button configured")
+        auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
+        # Esse if aqui verifica seo comando pra iniciar
+        # o perfil de cura foi pressionado com sucesso.
+        # Se não tiver sido, retorna mensagem de erro.
 
-            if(auxReturn == bytes.fromhex('99' + command + 'FF')):
+        if(auxReturn == bytes.fromhex('99' + command + 'FF')):
 
-                # Momento de captar as respostas da placa
-                ## Tratar o vetor de tuplas do buzzer
-                ### Nesse caso tem de ter duas tuplas
+            # Momento de captar as respostas da placa
+            ## Tratar o vetor de tuplas do buzzer
+            ### Nesse caso tem de ter duas tuplas
 
-                ledInfo = ledInfo + getPanel()
+            ledInfo = ledInfo + getPanel()
 
-                time.sleep(20)
+            time.sleep(20)
 
-                buzzerInfo = buzzerInfo + getBuzzer()
-
-            else:
-                print("Error on buttonPower configuration")
-
-
+            buzzerInfo = buzzerInfo + getBuzzer()
 
         else:
-            print("Error on buttonArrow configuration")
+            print("Error on buttonPower configuration")
 
 
-        validateLED(ledInfo[1], '02')
-        validateBuzzer(buzzerInfo[1])
+
+    else:
+        print("Error on buttonArrow configuration")
+
+
 
 
 
@@ -200,82 +248,89 @@ def profile20():
     #########################################################################
 def profile40():
     ####################### Perfil de 40s #############################
-
+    command = '01'
+    buttonArrow = '11'
+    buttonPower = '12'
+    buzzerInfo = []
+    ledInfo = []
+    ON_OFF_TIME = '01'  # Valor inteiro '10'
     
         ### Configura o perfil de cura ###
-        returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
+    returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
 
-        if (returnSet == bytes.fromhex('99' + command + 'FF')):
-            # Se a configuração do botão seta der certo, inicia
-            # o perfil de cura
-            print("Button configured")
-            auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
-            # Esse if aqui verifica seo comando pra iniciar
-            # o perfil de cura foi pressionado com sucesso.
-            # Se não tiver sido, retorna mensagem de erro.
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+        # Se a configuração do botão seta der certo, inicia
+        # o perfil de cura
+        print("Button configured")
+        auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
+        # Esse if aqui verifica seo comando pra iniciar
+        # o perfil de cura foi pressionado com sucesso.
+        # Se não tiver sido, retorna mensagem de erro.
 
-            if(auxReturn == bytes.fromhex('99' + command + 'FF')):
+        if(auxReturn == bytes.fromhex('99' + command + 'FF')):
 
-                # Momento de captar as respostas da placa
-                ## Tratar o vetor de tuplas do buzzer
-                ### Nesse caso tem de ter duas tuplas
+            # Momento de captar as respostas da placa
+            ## Tratar o vetor de tuplas do buzzer
+            ### Nesse caso tem de ter duas tuplas
 
-                ledInfo = ledInfo + getPanel()
+            ledInfo = ledInfo + getPanel()
 
-                time.sleep(40)
+            time.sleep(40)
 
-                buzzerInfo = buzzerInfo + getBuzzer()
-
-            else:
-                print("Error on buttonPower configuration")
+            buzzerInfo = buzzerInfo + getBuzzer()
 
         else:
-            
-            print("Error on buttonArrow configuration")
+            print("Error on buttonPower configuration")
 
+    else:
         
-        validateLED(ledInfo[2], '04')
-        validateBuzzer(buzzerInfo[2])
+        print("Error on buttonArrow configuration")
 
+    
+ 
 
 
     #########################################################################
 def profile60():
     ####################### Perfil de 60s #############################
-
+    command = '01'
+    buttonArrow = '11'
+    buttonPower = '12'
+    buzzerInfo = []
+    ledInfo = []
+    ON_OFF_TIME = '01'  # Valor inteiro '10'
         ### Configura o perfil de cura ###
-        returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
+    returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
 
-        if (returnSet == bytes.fromhex('99' + command + 'FF')):
-            # Se a configuração do botão seta der certo, inicia
-            # o perfil de cura
-            print("Button configured")
-            auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
-            # Esse if aqui verifica seo comando pra iniciar
-            # o perfil de cura foi pressionado com sucesso.
-            # Se não tiver sido, retorna mensagem de erro.
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+        # Se a configuração do botão seta der certo, inicia
+        # o perfil de cura
+        print("Button configured")
+        auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
+        # Esse if aqui verifica seo comando pra iniciar
+        # o perfil de cura foi pressionado com sucesso.
+        # Se não tiver sido, retorna mensagem de erro.
 
-            if(auxReturn == bytes.fromhex('99' + command + 'FF')):
+        if(auxReturn == bytes.fromhex('99' + command + 'FF')):
 
-                # Momento de captar as respostas da placa
-                ## Tratar o vetor de tuplas do buzzer
-                ### Nesse caso tem de ter duas tuplas
+            # Momento de captar as respostas da placa
+            ## Tratar o vetor de tuplas do buzzer
+            ### Nesse caso tem de ter duas tuplas
 
-                ledInfo = ledInfo + getPanel()
+            ledInfo = ledInfo + getPanel()
 
-                time.sleep(60)
+            time.sleep(60)
 
-                buzzerInfo = buzzerInfo + getBuzzer()
-
-            else:
-                print("Error on buttonPower configuration")
+            buzzerInfo = buzzerInfo + getBuzzer()
 
         else:
-            print("Error on buttonArrow configuration")
+            print("Error on buttonPower configuration")
 
+    else:
+        print("Error on buttonArrow configuration")
+'''
 
-        validateLED(ledInfo[3], '08')
-        validateBuzzer(buzzerInfo[3])
+  
 
     # else:
     #     print("System in low-power consuptiion. Scenario cannot be tested")
@@ -391,7 +446,7 @@ def sceneTwo():
 
 
 
-####################### Botão Power Pressionado > ON_OFF_TIME segundos #############################
+ ####################### Botão Power Pressionado > ON_OFF_TIME segundos #############################
   
     ON_OFF_TIME_LOCAL = '05'  # Valor inteiro '5'
 
