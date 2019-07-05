@@ -230,7 +230,7 @@ def sceneFour():
 
     # batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
 
-    SOC_25 = 2420
+    SOC_25 = 2410
 
     adRead = getBatLvl()
 
@@ -351,10 +351,10 @@ def main():
     for i in range(50):
             print("Round ", i)
             # aux  = sceneOne()
-            aux = sceneTwo()
-            #aux = sceneThree()
+            # aux = sceneTwo()
+            # aux = sceneThree()
 
-            #aux = sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+            aux = sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
         
             if(aux):
                 cont = cont + 1
@@ -371,7 +371,7 @@ def main():
 
 
     with open('output_tests.txt', 'a') as f:
-            print("Scene Two:")
+            print("Scene Four:")
 
             print("Successful tests percentage: ", (cont/50)*100, file=f)
 
@@ -379,7 +379,7 @@ def main():
 
             print("Elapsed time: ", time.time() - initialTime, file = f)
 
-            print("############# END ###########\n\n")
+            print("############# END ###########\n\n", file=f)
     
     f.close()
 
