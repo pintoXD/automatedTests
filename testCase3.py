@@ -196,102 +196,103 @@ def profile10():
         print("System in low-power consuptiion. Scenario cannot be tested")
 
         
-'''        #########################################################################   
-def profile20():
-    ####################### Perfil de 20s #############################
-    command = '01'
-    buttonArrow = '11'
-    buttonPower = '12'
-    buzzerInfo = []
-    ledInfo = []
-    ON_OFF_TIME = '01'  # Valor inteiro '10'
-        ### Configura o perfil de cura ###
-       
-       
-    returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
+'''       
+    #########################################################################   
+    def profile20():
+        ####################### Perfil de 20s #############################
+        command = '01'
+        buttonArrow = '11'
+        buttonPower = '12'
+        buzzerInfo = []
+        ledInfo = []
+        ON_OFF_TIME = '01'  # Valor inteiro '10'
+            ### Configura o perfil de cura ###
         
+        
+        returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
+            
 
-    if (returnSet == bytes.fromhex('99' + command + 'FF')):
-        # Se a configuração do botão seta der certo, inicia 
-        # o perfil de cura   
-        print("Button configured")
-        auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
-        # Esse if aqui verifica seo comando pra iniciar
-        # o perfil de cura foi pressionado com sucesso.
-        # Se não tiver sido, retorna mensagem de erro.
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+            # Se a configuração do botão seta der certo, inicia 
+            # o perfil de cura   
+            print("Button configured")
+            auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
+            # Esse if aqui verifica seo comando pra iniciar
+            # o perfil de cura foi pressionado com sucesso.
+            # Se não tiver sido, retorna mensagem de erro.
 
-        if(auxReturn == bytes.fromhex('99' + command + 'FF')):
+            if(auxReturn == bytes.fromhex('99' + command + 'FF')):
 
-            # Momento de captar as respostas da placa
-            ## Tratar o vetor de tuplas do buzzer
-            ### Nesse caso tem de ter duas tuplas
+                # Momento de captar as respostas da placa
+                ## Tratar o vetor de tuplas do buzzer
+                ### Nesse caso tem de ter duas tuplas
 
-            ledInfo = ledInfo + getPanel()
+                ledInfo = ledInfo + getPanel()
 
-            time.sleep(20)
+                time.sleep(20)
 
-            buzzerInfo = buzzerInfo + getBuzzer()
+                buzzerInfo = buzzerInfo + getBuzzer()
+
+            else:
+                print("Error on buttonPower configuration")
+
+
 
         else:
-            print("Error on buttonPower configuration")
-
-
-
-    else:
-        print("Error on buttonArrow configuration")
+            print("Error on buttonArrow configuration")
 
 
 
 
 
 
-    #########################################################################
-def profile40():
-    ####################### Perfil de 40s #############################
-    command = '01'
-    buttonArrow = '11'
-    buttonPower = '12'
-    buzzerInfo = []
-    ledInfo = []
-    ON_OFF_TIME = '01'  # Valor inteiro '10'
-    
-        ### Configura o perfil de cura ###
-    returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
+        #########################################################################
+    def profile40():
+        ####################### Perfil de 40s #############################
+        command = '01'
+        buttonArrow = '11'
+        buttonPower = '12'
+        buzzerInfo = []
+        ledInfo = []
+        ON_OFF_TIME = '01'  # Valor inteiro '10'
+        
+            ### Configura o perfil de cura ###
+        returnSet = set_config(command, buttonArrow, ON_OFF_TIME)
 
-    if (returnSet == bytes.fromhex('99' + command + 'FF')):
-        # Se a configuração do botão seta der certo, inicia
-        # o perfil de cura
-        print("Button configured")
-        auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
-        # Esse if aqui verifica seo comando pra iniciar
-        # o perfil de cura foi pressionado com sucesso.
-        # Se não tiver sido, retorna mensagem de erro.
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+            # Se a configuração do botão seta der certo, inicia
+            # o perfil de cura
+            print("Button configured")
+            auxReturn = set_config(command, buttonPower, ON_OFF_TIME)
+            # Esse if aqui verifica seo comando pra iniciar
+            # o perfil de cura foi pressionado com sucesso.
+            # Se não tiver sido, retorna mensagem de erro.
 
-        if(auxReturn == bytes.fromhex('99' + command + 'FF')):
+            if(auxReturn == bytes.fromhex('99' + command + 'FF')):
 
-            # Momento de captar as respostas da placa
-            ## Tratar o vetor de tuplas do buzzer
-            ### Nesse caso tem de ter duas tuplas
+                # Momento de captar as respostas da placa
+                ## Tratar o vetor de tuplas do buzzer
+                ### Nesse caso tem de ter duas tuplas
 
-            ledInfo = ledInfo + getPanel()
+                ledInfo = ledInfo + getPanel()
 
-            time.sleep(40)
+                time.sleep(40)
 
-            buzzerInfo = buzzerInfo + getBuzzer()
+                buzzerInfo = buzzerInfo + getBuzzer()
+
+            else:
+                print("Error on buttonPower configuration")
 
         else:
-            print("Error on buttonPower configuration")
+            
+            print("Error on buttonArrow configuration")
 
-    else:
         
-        print("Error on buttonArrow configuration")
-
     
- 
 
 
-    #########################################################################
-def profile60():
+        #########################################################################
+    def profile60():
     ####################### Perfil de 60s #############################
     command = '01'
     buttonArrow = '11'
