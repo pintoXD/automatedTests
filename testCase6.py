@@ -223,24 +223,25 @@ def sceneThree():
  
 
         returnSet = set_config(command, buttonPower, '1E')
-        time.sleep(3)
+        #time.sleep(3)
+        initialTime = time.time()
 
         if(returnSet == bytes.fromhex('99' + command + 'FF')):
              ##Espera um tempo aleatório antes de apertar o botão seta de vera.
-
-            waitTime = random.uniform(0, 4)
+        
+            waitTime = random.uniform(0, 3)
             time.sleep(waitTime)
 
             returnSet = set_config(command, buttonArrow, pressTime)
-            time.sleep(0.5)
+            time.sleep(0.2)
         else:
-            print("Shuffle arrow press failed.")
+            print("Power press failed.")
 
 
         # waitTime = random.uniform(0, 4)
         # time.sleep(waitTime)
 
-        # returnSet = set_config(command, buttonArrow, pressTime)
+        
 
         if(returnSet == bytes.fromhex('99' + command + 'FF')):
 
@@ -250,72 +251,50 @@ def sceneThree():
 
             ##Depois que o botão seta for pressionado, verificar 
             ##se o painel continua a mostrar a leitura da bateria.
-            
-            
- 
-
-            if(ledInfo == [0, 0, 0, 0]):
-                print("PS 1 Scenario 3 from case 6 was complied")
-                auxReturn = auxReturn + True
-            else:
-                print("PS 1 is not ok. Scenario 3 from case 6 wasn't complied")
-                auxReturn = auxReturn + False
-
-
-            
-
-
-        else:
-
-             print("Button SETA unconfigured")
-             auxReturn = auxReturn + False
-
-        ##Momento de verificar se a leitura da bateria se manteve
-        # pelos 5 segundos necessários.
-
-
-
-        returnSet = set_config(command, buttonPower, '1E')
-        time.sleep(3)
-        # startTime = time.time()
-
-        if(returnSet == bytes.fromhex('99' + command + 'FF')):
-            ##Espera um tempo aleatório antes de apertar o botão seta de vera.
-            startTime = time.time()
+           
             cont  = 0
-            while cont < 10:
+            while cont < 5:
 
                 ledInfo = getPanel()
                 print("Cont: ", cont)
 
-                if(ledInfo == [0, 0, 0, 0]):
+                if(ledInfo != [0, 0, 0, 0]):
                     cont = cont + 1
+               
+                time.sleep(0.15)
+
+            if(cont >= 10):
+                print("PS One from Scenario 3 was complied")
+                print("Nothing happens")
+                auxReturn = auxReturn + [True]
+            else:
+                print("PS One from Scenario 3 was complied")
+                print("Something happens")
+                auxReturn = auxReturn + [False]
                 
 
-            # time.sleep(0.1)
+            #elapsedTime = time.time() - startTime
 
-
-
-            elapsedTime = time.time() - startTime
-
-            if(elapsedTime >= 5) and (ledInfo == [0, 0, 0, 0]):
-                print("PS 2 Scenario 3 from case 6 was complied")
-                auxReturn = auxReturn + True
-
-            else:
-                print("PS 2 Scenario 3 from case 6 was not complied")
-                auxReturn = auxReturn + False
-
-
-        
-        
-        
-        
-        
-        
         else:
-            print("Power press failed.")
-            auxReturn = auxReturn + False
+            print("Shuffle power press failed")
+
+
+        while(getPanel() != [0, 0, 0, 0]):
+            time.sleep(0.1)
+        
+        elapsedTime = time.time() - initialTime
+
+        
+        if(elapsedTime >= 5) and (ledInfo == [0, 0, 0, 0]):
+            print("PS 2 Scenario 3 from case 6 was complied")
+            auxReturn = auxReturn + [True]
+
+        else:
+            print("PS 2 Scenario 3 from case 6 was not complied")
+            auxReturn = auxReturn + [False]
+
+
+                
         
 
 
@@ -328,13 +307,13 @@ def main():
 
 #   sceneOne()
 #   sceneTwo()
-#   sceneThree()
+    sceneThree()
   #sceneFour()
   #   for i in range(50):
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
-    for index in range(3):
+'''   for index in range(3):
         print("Scene ", index, ":")
 
         cont = 0
@@ -377,7 +356,7 @@ def main():
 
         f.close()
 
-
+'''
 
 
 
