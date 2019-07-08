@@ -15,6 +15,16 @@ quanto lendo tensões geradas e ainda assim, a leitura não retorna
 um valor aceitável para conversão.
 Por exemplo, valor lido na bateria é de 1434 quando deveria ser algo em torno do dobro.
 
+
+## teste bateria ##
+
+Caso não haja, criar um caso de testes que verifique se a leitura obtida do A/D da placa de aquisição está
+de acordo com a leitura mostrada no painel de leds da placa principal.
+
+
+
+
+
 #### get_buzzer ###
 
 Aparentemente tá ok. Ele manda o número de tuplas que representam o número de bipes dados, mas os valores de tempo estão meio estranhos.
