@@ -11,10 +11,10 @@ import time
 # Subcenário 1:
 def switchCase2(var):
     switcher = {
-        '[0, 0, 0, 1]': 10,
-        '[0, 0, 1, 0]': 20,
-        '[0, 1, 0, 0]': 40,
-        '[1, 0, 0, 0]': 60,
+        '[0, 0, 0, 1]': 60,
+        '[0, 0, 1, 0]': 40,
+        '[0, 1, 0, 0]': 20,
+        '[1, 0, 0, 0]': 10,
     }
     return switcher.get(var, 'invalid configuration')
 
@@ -38,6 +38,9 @@ def subcenseta1():
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
+        FILE = open('randinfo.txt', 'w')
+        FILE.write('{}\n'.format(rtime))
+        FILE.close()
     
     seta = set_config('01', '11', '0A')
     time.sleep(1)
@@ -76,13 +79,13 @@ def subcenseta2():
     panel_after = getPanel()
     
     i, j = getIndex(panel_before, panel_after)
-    x = 0
+    x = 2.6
     case = switchCase2(str(panel_after))
-
-    while(x != case):
+    time.sleep(2.6)
+    while(x < case):
         x = x + 1
         if(getPotLum() == 0):
-            return 'teste falhou. led azul nao parece estar ligado'
+            print('teste falhou. led azul nao parece estar ligado')
         else:
             time.sleep(1)
     
@@ -91,8 +94,6 @@ def subcenseta2():
         print(j , i)
     else:
         print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
-        print(j, i)
-    return j
 
 def subcenseta3():
     rtime = random.randint(10, 30)
@@ -113,10 +114,12 @@ def subcenseta3():
     buz = getBuzzer()
 
     if(buz[0] == 0): #mudar depois para um teste com o período correto do buzzer
-        return 'erro no teste. nao houve beep'
+        print('erro no teste. nao houve beep')
     else:
-        if(getBatLvl() < 3.8):
-            return 'teste falhou. perfil de cura executado alem da restricao de bateria'
+        vbat = getBatLvl()
+        print(vbat)
+        if(vbat < 3.8):
+            print('teste falhou. perfil de cura executado alem da restricao de bateria')
         else:
             panel_after = getPanel()
             i, j = getIndex(panel_before, panel_after)
@@ -126,31 +129,34 @@ def subcenseta3():
             else:
                 print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
                 print(j, i)
-            return j
-    
+            print(j)
+
 def censeta2():
     if(getPotLum() != 0):
-        return 'led de cura ainda esta ativado'
+        print('led de cura ainda esta ativado')
     else:
-        on_off = set_config('01', '12', '32')
-        time.sleep(5)
-        print('ON/OFF: '+ on_off)
+        seta = set_config('01', '11', '02')
+        time.sleep(0.2)
+        panel_before = getPanel()
 
-        rtime = random.randint(10, 30)
+        on_off = set_config('01', '12', '32')
+        time.sleep(5)        
+
+        rtime = random.randint(10, 15)
         rhex = hex(rtime)[2:]
         if(len(rhex) < 2):
             rhex = '0' + rhex
-        panel_before = getPanel()
+        
 
         seta = set_config('01', '11', rhex)
         time.sleep(rtime/10)
-        print('Seta: ', seta)
+        
         panel_after = getPanel()
 
         if(panel_before != panel_after):
-            return 'teste falhou. seta interfere no mosotrador de bateria'
+            print('teste falhou. seta interfere no mosotrador de bateria')
         else:
-            return 'teste passou'
+            print('teste passou')
 
 
 def subcenonoff1():
@@ -167,9 +173,9 @@ def subcenonoff1():
         panel = getPanel()
         panel = str(panel)
         profile = switchCase2(panel)
-        print(profile)
+        print("Perfil ativo: ", profile)
         
-        print('ON/OFF: ', on_off)
+        #print('ON/OFF: ', on_off)
 
         curve = getCurve(profile)
         if(profile == 10):
@@ -177,50 +183,53 @@ def subcenonoff1():
                 if(mask10(c[1], c[0])):
                     return 'teste passou'
                 else:
+                    print(c)
                     return 'teste falhou'
         elif(profile == 20):
             for c in curve:
                 if(mask20(c[1], c[0])):
                     return 'teste passou'
                 else:
+                    print(c)
                     return 'teste falhou'
         elif(profile == 40):
             for c in curve:
                 if(mask40(c[1], c[0])):
                     return 'teste passou'
                 else:
+                    print(c)
                     return 'teste falhou'
         else:
             for c in curve:
                 if(mask60(c[1], c[0])):
                     return 'teste passou'
                 else:
+                    print(c)
                     return 'teste falhou'
-        #if(maskSelect(profile)):
-        #    return 'teste passou. perfil correto acendeu'
-        #else:
-        #    return 'teste falhou. o perfil acionado nao e o correto'
 
 def subcenonoff2():
     if(getPotLum() != 0):
         return 'led de cura ainda esta ativado'
     else:
-        rtime = random.randint(2, 27)
-        rhex = hex(rtime)[2:]
-        if(len(rhex) < 2):
-            rhex = '0' + rhex
-        on_off = set_config('01', '12', rhex)
-        time.sleep(rtime/10)
-        print('ON/OFF: ', on_off)
-
-        buz, = getBuzzer()
-        if(buz == 0):
-            return 'teste falhou. nao houve beep'
-        else:
-            if(getPotLum() != 0):
-                return 'teste falhou. foi iniciado um novo ciclo'
+        if(getBatLvl() < 3.8):
+            rtime = random.randint(2, 14)
+            rhex = hex(rtime)[2:]
+            if(len(rhex) < 2):
+                rhex = '0' + rhex
+            on_off = set_config('01', '12', rhex)
+            time.sleep(rtime/10)
+            print('ON/OFF: ', on_off)
+            time.sleep(1)
+            buz = getBuzzer()
+            if(len(buz) == 0):
+                return 'teste falhou. nao houve beep'
             else:
-                return 'teste passou'
+                if(getPotLum() != 0):
+                    return 'teste falhou. foi iniciado um novo ciclo'
+                else:
+                    return 'teste passou'
+        else:
+            print('Bateria está acima de VBAT_MIN')
 
 def subcenonoff3():
     rtime = random.randint(30, 50)
@@ -237,8 +246,8 @@ def subcenonoff3():
     if(panel_before not in options):
         return 'falha. o mostrador de carga nao obedece as especificacoes'
     else:
-        bat_adc_value = getBatLvl()
-        print(panel_before, bat_adc_value)
+        vbat = getBatLvl()
+        print(panel_before, vbat)
     
     time.sleep(5)
 
@@ -263,11 +272,10 @@ def subcenonoff4():
 
         panel_after = getPanel()
         options = [[0,0,1,1], [0,0,0,1], [0,1,1,1], [1,1,1,1]]
-        if(panel_before not in options):
+        if(panel_after not in options):
             return 'falha. o mostrador de carga nao obedece as especificacoes'
         else:
-            bat_adc_value = getBatLvl()
-            print(panel_before, bat_adc_value)
+            vbat = getBatLvl()
     
         time.sleep(5)
 
@@ -333,26 +341,25 @@ def cen2subonoff4():
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
-    time.sleep(3)
+
+    panel_before = getPanel()
 
     on_off = set_config('01', '12', rhex)
     time.sleep(rtime/10)
 
-    panel_before = get_value('02')
-
     time.sleep(5)
     
-    panel_after = get_value('02')
+    panel_after = getPanel()
 
-    if(panel_before == [0,0,0,0]):
-        pass
-    else:
+    if(panel_before != [0,0,0,0]):
         return 'erro: dispositivo nao esta em baixo consumo'
+    else:
+        pass
 
     if(panel_after != [0,0,0,0]):
         return 'erro: dispositivo nao esta em baixo consumo'
     else:
         return 'teste passou'
 
-
-print(subcenonoff1())
+#for i in range(50):
+print(cen2subonoff4())
