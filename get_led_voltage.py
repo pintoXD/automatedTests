@@ -9,7 +9,6 @@ def getPotLum():
         return 'error: message has no ACK'
     if(voltg[0:2] == '04'):
         voltg = voltg[2:]
-        print('responding to command 0x04')
     else:
         return 'error: response to unrequired command'
     if(voltg[len(voltg)-2:] == 'ff'):
@@ -26,6 +25,5 @@ def getPotLum():
             1.702597885e-15*pow(voltg, 6) - 5.762038572e-12*pow(voltg, 5) + \
             1.14039482e-8*pow(voltg, 4) - 1.34384905e-5*pow(voltg, 3) + \
             9.132915482e-3*pow(voltg, 2) - 2.824372903*voltg + 422.2915764
-        print(pot_lum)
         return pot_lum
 

@@ -16,8 +16,8 @@ def set_config(command, param, option):
 
 
   # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ## 
-  #  ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # LINUX ##
-    ser = serial.Serial('COM6', 115200, timeout=3)  # WINDOWS ##
+    #ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # LINUX ##
+    ser = serial.Serial('COM5', 115200, timeout=3)  # WINDOWS ##
 
     #token_ACK='99' #Token para inicio de comunicação
     token_FIN='ff' #Token para fim de comunicação
@@ -30,7 +30,7 @@ def set_config(command, param, option):
     #Codificação da mensagem em bytes
     msgToSent = bytes.fromhex(msgToSent) 
 
-    # print(msgToSent)  # Pequena prévia da mensagem a ser enviada
+    #print(msgToSent)  # Pequena prévia da mensagem a ser enviada
     return_set = ser.write((msgToSent))  # Pega o numero de bytes enviado
     # print("Bytes sent: ", return_set)  # Exibe o numero de bytes enviado
 
@@ -97,7 +97,7 @@ def get_value(option):
     #### Escolher qual a porta serial que placa tá ##########
 
     #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
-    ser = serial.Serial('COM6', 115200, timeout=3)  # WINDOWS ##
+    ser = serial.Serial('COM5', 115200, timeout=3)  # WINDOWS ##
     
     #ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1) ## LINUX ##
     
@@ -111,7 +111,7 @@ def get_value(option):
 
 
 
-    # print(msgToSent) #Pequena prévia da mensagem a ser enviada
+    #print(msgToSent) #Pequena prévia da mensagem a ser enviada
     return_get = ser.write((msgToSent)) #Pega o numero de bytes enviado
     # print("Bytes sent: ", return_get) #Exibe o numero de bytes enviado
 
