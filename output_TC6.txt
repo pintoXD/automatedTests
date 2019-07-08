@@ -4,7 +4,7 @@
 Scene  0 :
 Successful tests percentage:  100.0
 Unsuccessful tests percentage:  0.0
-Elapsed time:  593.5567116737366
+Elapsed time:  593.1684432029724
 ############# END ###########
 
 
@@ -12,9 +12,9 @@ Elapsed time:  593.5567116737366
 
 
 Scene  1 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  276.61732506752014
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  422.3852336406708
 ############# END ###########
 
 
