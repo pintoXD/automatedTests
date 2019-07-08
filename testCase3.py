@@ -114,20 +114,20 @@ def profile(desiredCureProfile):
                         print("Buzzer count correct")
                         print("PS1  from Scene is OK")
 
-                        auxReturn = auxReturn + True
+                        auxReturn = auxReturn + [True]
 
 
                     else:
                         print("Buzzer count incorrect")
-                        auxReturn = auxReturn + False
+                        auxReturn = auxReturn + [False]
 
                 else:
                         print("Second power press failed")
-                        auxReturn = auxReturn + False
+                        auxReturn = auxReturn + [False]
 
             else:
                 print("First power press failed")
-                auxReturn = auxReturn + False
+                auxReturn = auxReturn + [False]
 
             returnSet = set_config(command, buttonPower, pressTime)
             #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
@@ -147,19 +147,19 @@ def profile(desiredCureProfile):
                               1 + (profileCureTime/10) + 1)
                         print("Number of got bipes: ", len(auxBuzzer))
 
-                        auxReturn = auxReturn + True
+                        auxReturn = auxReturn + [True]
 
                     else:
                         print("Buzzer bips count in cure profile isn't ok")
                         print("Number of bipes expected: ",
                               1 + (profileCureTime/10) + 1)
                         print("Number of bipes got: ", len(auxBuzzer))
-                        auxReturn = auxReturn + False
+                        auxReturn = auxReturn + [False]
 
             else:
 
                 print("Power press from second PS failed")
-                auxReturn = auxReturn + False
+                auxReturn = auxReturn + [False]
 
         else:
             print("System in low-power consuptiion. Scenario cannot be tested")
