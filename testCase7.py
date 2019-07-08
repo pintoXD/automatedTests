@@ -370,7 +370,7 @@ def main():
     print("Elapsed time: ", time.time() - initialTime)
 
 
-    with open('output_tests.txt', 'a') as f:
+    with open('output_TC7s.txt', 'a') as f:
             print("Scene Four:")
 
             print("Successful tests percentage: ", (cont/50)*100, file=f)

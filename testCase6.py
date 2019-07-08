@@ -1,8 +1,10 @@
 from serialTeste import *
 from get_buzzer import *
 from get_panel import *
-import random
 import time
+import random
+import os
+
 
 '''
 def validateLED(ledInfo, ledToken):
@@ -79,7 +81,7 @@ def sceneOne():
     ON_OFF_TIME_LOCAL = '1E' #30 Em decimal
 
     ##ON_OFF_TIME global é de 0x1E * 100 milssegundos.
-    print("Settinf button power")
+    print("Setting button power")
     returnSet = set_config(command, buttonPower, ON_OFF_TIME_LOCAL)
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
@@ -123,12 +125,17 @@ def sceneOne():
 
         if cont >= 5 and ledInfo == [0, 0, 0, 0]:
             print("Battery level read is runnning ok")
+            print("Scenario One is ok")
             return True
         else:
             print("Battery level reading is not running ok")
+            print("Scenario One isn't ok")
             return False
 
+    else:
 
+        print("Power button press failed")
+        return False
 
 def sceneTwo():
 
@@ -169,9 +176,11 @@ def sceneTwo():
 
         if(ledInfo == [0, 0, 0, 0]):
             print("Test ok. Scenario 2 from case 6 was complied")
+            return True
 
         else:
             print("Test is not ok. Scenario 2 from case 6 wasn't complied")    
+            return False
 
 
 
@@ -179,6 +188,7 @@ def sceneTwo():
     else:
 
         print("Button unconfigured")
+        return False
 
 
 
@@ -187,7 +197,6 @@ def sceneTwo():
 
 def sceneThree():
 
-
         '''
 
             Esse cenário é realizado durante a leitura da tensão da bateria.
@@ -195,6 +204,8 @@ def sceneThree():
             e nada deve acontecer.
 
         '''
+
+        auxReturn = []
 
         startTime = time.time()
 
@@ -245,8 +256,10 @@ def sceneThree():
 
             if(ledInfo == [0, 0, 0, 0]):
                 print("PS 1 Scenario 3 from case 6 was complied")
+                auxReturn = auxReturn + True
             else:
                 print("PS 1 is not ok. Scenario 3 from case 6 wasn't complied")
+                auxReturn = auxReturn + False
 
 
             
@@ -255,6 +268,7 @@ def sceneThree():
         else:
 
              print("Button SETA unconfigured")
+             auxReturn = auxReturn + False
 
         ##Momento de verificar se a leitura da bateria se manteve
         # pelos 5 segundos necessários.
@@ -286,9 +300,11 @@ def sceneThree():
 
             if(elapsedTime >= 5) and (ledInfo == [0, 0, 0, 0]):
                 print("PS 2 Scenario 3 from case 6 was complied")
+                auxReturn = auxReturn + True
 
             else:
                 print("PS 2 Scenario 3 from case 6 was not complied")
+                auxReturn = auxReturn + False
 
 
         
@@ -299,45 +315,73 @@ def sceneThree():
         
         else:
             print("Power press failed.")
+            auxReturn = auxReturn + False
         
 
 
-   
-
-
-
-
-
-
-      
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
+        return (auxReturn[0] and auxReturn[1]) #Só retorna verdadeiro se os dois PS derem certo.
 
 
 def main():
 
-  print("Hello World!")
+    print("Hello World!")
 
 #   sceneOne()
 #   sceneTwo()
-  sceneThree()
+#   sceneThree()
   #sceneFour()
   #   for i in range(50):
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
+
+
+    cont = 0
+    initialTime = time.time()
+    for i in range(50):
+            print("Round ", i)
+            aux  = sceneOne()
+            # aux = sceneTwo()
+            # aux = sceneThree()
+
+            if(aux):
+                cont = cont + 1
+            
+            time.sleep(1)
+
+
+
+    print("Successful tests percentage: ", (cont/50)*100)
+
+    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+    print("Elapsed time: ", time.time() - initialTime)
+
+
+    with open('output_TC6.txt', 'a') as f:
+            print("Scene X:")
+
+            print("Successful tests percentage: ", (cont/50)*100, file=f)
+
+            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+
+            print("Elapsed time: ", time.time() - initialTime, file = f)
+
+            print("############# END ###########\n\n", file=f)
+
+    f.close()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
