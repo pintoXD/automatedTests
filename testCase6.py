@@ -263,7 +263,7 @@ def sceneThree():
                
                 time.sleep(0.15)
 
-            if(cont >= 10):
+            if(cont >= 5):
                 print("PS One from Scenario 3 was complied")
                 print("Nothing happens")
                 auxReturn = auxReturn + [True]
