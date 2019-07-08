@@ -208,7 +208,7 @@ def sceneThree():
 
         auxReturn = []
 
-        startTime = time.time()
+        
 
         # checker = sceneOne()
 
