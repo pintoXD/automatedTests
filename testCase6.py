@@ -278,11 +278,14 @@ def sceneThree():
         else:
             print("Shuffle power press failed")
 
-
-        while(getPanel() != [0, 0, 0, 0]):
-            time.sleep(0.1)
+        ledInfo = getPanel()
+        while(ledInfo != [0, 0, 0, 0]):
+            ledInfo = getPanel()
+            time.sleep(0.2)
         
         elapsedTime = time.time() - initialTime
+
+        # print
 
         
         if(elapsedTime >= 5) and (ledInfo == [0, 0, 0, 0]):
