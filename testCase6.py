@@ -334,42 +334,48 @@ def main():
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
+    for index in range(3):
+        print("Scene ", index, ":")
+
+        cont = 0
+        initialTime = time.time()
+        for i in range(50):
+                print("Round ", i)
+                if(index == 0):
+                    aux  = sceneOne()
+                elif(index == 1):
+                    aux = sceneTwo()
+                elif(index == 2):
+                    aux = sceneThree()
+
+                if(aux):
+                    cont = cont + 1
+                
+                time.sleep(1)
 
 
-    cont = 0
-    initialTime = time.time()
-    for i in range(50):
-            print("Round ", i)
-            aux  = sceneOne()
-            # aux = sceneTwo()
-            # aux = sceneThree()
 
-            if(aux):
-                cont = cont + 1
-            
-            time.sleep(1)
+        print("Successful tests percentage: ", (cont/50)*100)
+
+        print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+        print("Elapsed time: ", time.time() - initialTime)
 
 
+        with open('output_TC6.txt', 'a') as f:
+                print("############# INIT ###########\n\n", file=f)
+                
+                print("Scene ", index, ":", file=f)
 
-    print("Successful tests percentage: ", (cont/50)*100)
+                print("Successful tests percentage: ", (cont/50)*100, file=f)
 
-    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
 
-    print("Elapsed time: ", time.time() - initialTime)
+                print("Elapsed time: ", time.time() - initialTime, file = f)
 
+                print("############# END ###########\n\n", file=f)
 
-    with open('output_TC6.txt', 'a') as f:
-            print("Scene X:")
-
-            print("Successful tests percentage: ", (cont/50)*100, file=f)
-
-            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
-
-            print("Elapsed time: ", time.time() - initialTime, file = f)
-
-            print("############# END ###########\n\n", file=f)
-
-    f.close()
+        f.close()
 
 
 
