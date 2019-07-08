@@ -13,15 +13,6 @@ def getBatLvl():
     else:
         return 'error: response to unrequired command'
 
-
-    # print("Indexes")
-
-    # print(len(batlvl) - 3)
-
-
-    # print(len(batlvl) - 1)
-
-
     if(batlvl[len(batlvl)-2:] == 'ff'):
         batlvl = batlvl[:len(batlvl)-2]
         # print("ENTROU PORRA")
@@ -33,13 +24,5 @@ def getBatLvl():
     batlvl = int(batlvl, 16)
 
     # print("Volts: ", ((3.3 * batlvl)/4095)*2)
-    # return ((3.3 * batlvl)/4095)*2
-    return batlvl
-
-
-
-def getBatVoltage():
-    
-    batlvl = getBatLvl()
-
     return ((3.3 * batlvl)/4095)*2
+    #return batlvl

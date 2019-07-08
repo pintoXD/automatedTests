@@ -7,25 +7,26 @@ def mask10(data, time):
             return True
         else:
             return False
-    if(3 <= time and time > 6):
-        y = (-500/3)*time + 1600
-        if(data <= y+150 and y >= y-150):
+    elif(3 <= time and time < 6):
+        y = (-288/3)*time + 1356
+        if(data <= y+150 and data >= y-150):
             return True
         else:
             return False
-    if(6 <= time and time > 10):
-        if(data <= 750 and data >= 450):
+    elif(6 <= time and time < 9.7):
+        if(data <= 750 and data >= 550):
             return True
         else:
             return False
-    if(time >= 10 and data != 0):
+    elif(time >= 9.7 and data != 0):
+        return False
+    else:
         return False
 
 def mask20(data, time):
     if(0 <= time and time < 7):
-        y = (1033/7)*time
+        y = 1.29463663*time**3  - 50.33672491*time**2 + 561.04598579*time -641.45642991
         if(data <= (y+150) and data >= (y-150)):
-            print('entrou')
             return True
         else:
             return False
@@ -37,14 +38,14 @@ def mask20(data, time):
             return False
 
     elif(10 <= time and time < 13):
-        y = (-320/3)*time + 1740
+        y = (-288/3)*time + 1356
         if(data <= y+150 and data >= y-150):
             return True
         else:
             return False
 
-    elif(13 <= time and time < 20):
-        if(data <= 850 and data >= 550):
+    elif(13 <= time and time < 19.7):
+        if(data <= 750 and data >= 550):
             return True
         else:
             return False
@@ -56,7 +57,7 @@ def mask20(data, time):
 
 def mask40(data, time):
     if(0 <= time and time > 7):
-        y = (1100/7)*time
+        y = 203.0051115649151895*time - 74.7630227525785544
         if(data <= y+150 and y >= y-150):
             return True
         else:
@@ -75,7 +76,7 @@ def mask40(data, time):
         else:
             return False
 
-    if(13 <= time and time > 40):
+    if(13 <= time and time > 39.7):
         if(data <= 750 and data >= 450):
             return True
         else:
@@ -96,7 +97,7 @@ def mask60(data, time):
             return True
         else:
             return False
-    if(6 <= time and time > 60):
+    if(6 <= time and time > 59.7):
         if(data <= 750 and data >= 450):
             return True
         else:
@@ -114,6 +115,10 @@ def getCurve(profile):
     #De forma que time.time() - now seja no máximo 3s na primeira iteração
     while(now < future):
         profcurve.append((now - zero, getPotLum()))
-        time.sleep(0.5)
         now = time.time()
+    FILE = open('data.txt', 'w')
+    for l in profcurve:
+        FILE.write(str(l[0])+',')
+        FILE.write(str(l[1])+'\n')
+    FILE.close()
     return profcurve
