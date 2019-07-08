@@ -156,11 +156,12 @@ def sceneTwo():
     pressTime = '0A'    #10em hexadecimal
                                 #Precisa ser em hexadeciaml o número
 
-    #Aperta o botão power por ON_OFF_TIME * 100 milissegundos
+    #Aperta o botão power por '1E' * 100 milissegundos
     returnSet = set_config(command, buttonPower, '1E')
     time.sleep(3)
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
+        time.sleep(3)
         returnSet = set_config(command, buttonPower, pressTime)
         time.sleep(1)
     else:
