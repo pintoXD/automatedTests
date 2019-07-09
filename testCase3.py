@@ -196,13 +196,13 @@ def sceneOne():
     #Configurar qual botão vai ser apertado
     #########################################   Cenario 1   ###############################################
     auxReturn = []
-    with open('output_TC3_SONE.txt', 'w') as scenario:
+    with open('output_TC3_SONE.txt', 'a') as scenario:
 
 
 
         print("############ INIT #############", file=scenario)
 
-        print("Date: ", now.strftime("%Y-%m-%d %H:%M"))
+        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=scenario)
 
         auxReturn = auxReturn + [profile(10)]
 
@@ -233,21 +233,27 @@ def sceneTwo():
 
     now = datetime.datetime.now()
 
-    with open('output_TC3_STWO.txt', 'w') as scenario:
+    with open('output_TC3_STWO.txt', 'a') as scenario:
         
-
+        
         print("############ INIT #############", file=scenario)
-        print("Date: ", now.strftime("%Y-%m-%d %H:%M"))
+        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=scenario)
 
-        auxReturn = auxReturn + psOneSceneTwo()
+        time.sleep(5.1)
+
+        auxReturn = auxReturn + [psOneSceneTwo()]
 
         print("Return from psOneSceneTwo: ", auxReturn[0], file=scenario)
 
-        auxReturn = auxReturn + psTwoSceneTwo()
+        time.sleep(5.1)
+
+        auxReturn = auxReturn + [psTwoSceneTwo()]
 
         print("Return from psTwoSceneTwo: ", auxReturn[1], file=scenario)
 
-        auxReturn = auxReturn + psThreeSceneTwo()
+        time.sleep(5.1)
+
+        auxReturn = auxReturn + [psThreeSceneTwo()]
 
         print("Return from psThreeSceneTwo: ", auxReturn[2], file=scenario)
 
@@ -269,11 +275,13 @@ def psOneSceneTwo():
 
     ledInfoAfter = getCureProfileTime()
 
+    time.sleep(0.2)
+
     print("ledInfoBefore - after = ", ledInfoAfter - ledInfoBefore)
 
     if ((ledInfoAfter - ledInfoBefore == 20) or
         (ledInfoAfter - ledInfoBefore == 10)   or     
-        (ledInfoBefore - ledInfoAfter == -50)):
+        (ledInfoAfter - ledInfoBefore == -50)):
 
 
         print("First PS from scenario 2 is ok")
@@ -296,12 +304,19 @@ def psTwoSceneTwo():
     buttonPower = '12'
     # ON_OFF_TIME_LOCAL = '01'
 
+    # auxPotLum = getPotLum()
+
+    # auxPotLum = int(auxPotLum, 16)
+
     if(getPotLum() > 0):
         #SE o led de cura tiver ligado, desligar ele antes
+        print("Cure on. Shutting down.")
         set_config(command, buttonPower, pressTime)
+        time.sleep(0.5)
 
 
     returnSet = set_config(command, buttonPower, pressTime)
+    time.sleep(0.5)
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
@@ -311,7 +326,9 @@ def psTwoSceneTwo():
 
         print("Button configured")
 
-       
+        # auxPotLum = getPotLum()
+
+        # auxPotLum = int(auxPotLum, 16)
 
         if(getPotLum() > 0):
             print("PS Two from scenario two is ok")
@@ -334,9 +351,9 @@ def psTwoSceneTwo():
 
 def psThreeSceneTwo():
 
+    # time.sleep
 
-
-
+    
   ####################### Botão Power Pressionado > ON_OFF_TIME segundos #############################
   
     pressTime = '1E'  # Valor inteiro '10'
@@ -352,23 +369,25 @@ def psThreeSceneTwo():
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
+        time.sleep(3)
         ### Momento de captar as respostas da placa
         #tratar o vetor de tuplas do buzzer
         # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
 
         print("Button configured")
-        time.sleep(3.2)
 
-        ledInfo= getPanel()
+        ledInfoOld = getPanel()
         cont = 0
         # ledInfo = ledInfoOld
 
         #Esse while conta as variações nos leds do painel.
         #Se tiver mais de 5 variações dos leds, ele entende que a bateria tá sendo lida direitinho.
         while(cont < 5):
-          aux = getPanel()  
+          ledInfo = getPanel()
+          print("Led info inside: ", ledInfo)
+          print("ledInfoOld inside: ", ledInfoOld)
 
-          if(aux != ledInfo):
+          if(ledInfo != ledInfoOld):
          
             ledInfo = getPanel()  
             cont = cont + 1
@@ -406,21 +425,26 @@ def main():
     print("Hello World!")
 
 #   sceneOne()
-  #sceneTwo()
+    # sceneTwo()
+    # psOneSceneTwo()
+    # psTwoSceneTwo()
+    # time.sleep(4)
+    # psThreeSceneTwo()
 #   sceneThree()
   #sceneFour()
   #   for i in range(50):
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
+  
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
-   
-        for index in range(2):
+                index = 1
+        # for index in range(2):
 
                 cont = 0
                 initialTime = time.time()
-                for i in range(50):
+                for i in range(5):
                         print("Round ", i)
                         if(index == 0):
                             print("Scene One choosen")
@@ -454,6 +478,7 @@ def main():
                 print("Elapsed time: ", time.time() - initialTime, file = f)
 
                 print("\n\n############# END #############\n\n", file=f)
+
 
     f.close()
 

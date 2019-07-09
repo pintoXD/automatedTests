@@ -21,17 +21,23 @@
 # print("Buzinfo outside ", buz_info)
 cont = 40
 
-with open('teste.txt', 'a') as f:
+# with open('teste.txt', 'a') as f:
     
-    print("############# INIT ##################")
+#     print("############# INIT ##################")
 
 
-    print("Successful tests percentage: ", (cont/50)*100, file=f)
+#     print("Successful tests percentage: ", (cont/50)*100, file=f)
 
-    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+#     print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
 
-    print("############# END ##################")
+#     print("############# END ##################")
 
-    # print("Elapsed time: ", time.time() - initialTime, file=f)
+#     # print("Elapsed time: ", time.time() - initialTime, file=f)
 
-f.close()
+# f.close()
+
+
+for i in range(2):
+    # i = i + 1
+
+    print("Index = ", i)

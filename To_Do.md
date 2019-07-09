@@ -21,7 +21,10 @@ Por exemplo, valor lido na bateria é de 1434 quando deveria ser algo em torno d
 Caso não haja, criar um caso de testes que verifique se a leitura obtida do A/D da placa de aquisição está
 de acordo com a leitura mostrada no painel de leds da placa principal.
 
+## Adicionar cenário de teste ## 
+Adicionar cenário 5 ao test de caso 7: Tensão abaixo da carag mínima tem de emitir um bipe longo (500ms)
 
+## Aqruivo de configuração ##
 
 
 

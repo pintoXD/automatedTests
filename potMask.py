@@ -122,3 +122,5 @@ def getCurve(profile):
         FILE.write(str(l[1])+'\n')
     FILE.close()
     return profcurve
+
+
