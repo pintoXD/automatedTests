@@ -6,7 +6,7 @@ from get_batlvl import *
 import time
 import random
 import os
-
+import datetime
 
 
 
@@ -162,7 +162,7 @@ def profile(desiredCureProfile):
                 auxReturn = auxReturn + [False]
 
         else:
-            print("System in low-power consuptiion. Scenario cannot be tested")
+            print("System in low-power consumption. Scenario cannot be tested")
             return False
 
     else:
@@ -190,24 +190,71 @@ def sceneOne():
     # ledInfo = []
     # ON_OFF_TIME = '01'  # Valor inteiro '10'
 
+
+    now = datetime.datetime.now()
+
     #Configurar qual botão vai ser apertado
     #########################################   Cenario 1   ###############################################
     auxReturn = []
+    with open('output_TC3_SONE.txt', 'w') as scenario:
 
 
-    auxReturn = auxReturn + profile(10)
-    auxReturn = auxReturn + profile(20)
-    auxReturn = auxReturn + profile(40)
-    auxReturn = auxReturn + profile(60)
+
+        print("############ INIT #############", file=scenario)
+
+        print("Date: ", now.strftime("%Y-%m-%d %H:%M"))
+
+        auxReturn = auxReturn + [profile(10)]
+
+        print("Return form profile 10s: ", auxReturn[0], file=scenario)
+
+        auxReturn = auxReturn + [profile(20)]
+
+        print("Return form profile 20s: ", auxReturn[1], file=scenario)
+
+        auxReturn = auxReturn + [profile(40)]
+        
+        print("Return form profile 40s: ", auxReturn[2], file=scenario)
+
+        auxReturn = auxReturn + [profile(60)]
+    
+        print("Return form profile 60s: ", auxReturn[3], file=scenario)
+
+
+        print("############ END #############", file=scenario)
+
+    scenario.close()
 
 
     return (auxReturn[0] and auxReturn[1] and auxReturn[2] and auxReturn[3])
      
 def sceneTwo():
     auxReturn = []
-    auxReturn = auxReturn + psOneSceneTwo()
-    auxReturn = auxReturn + psTwoSceneTwo()
-    auxReturn = auxReturn + psThreeSceneTwo()
+
+    now = datetime.datetime.now()
+
+    with open('output_TC3_STWO.txt', 'w') as scenario:
+        
+
+        print("############ INIT #############", file=scenario)
+        print("Date: ", now.strftime("%Y-%m-%d %H:%M"))
+
+        auxReturn = auxReturn + psOneSceneTwo()
+
+        print("Return from psOneSceneTwo: ", auxReturn[0], file=scenario)
+
+        auxReturn = auxReturn + psTwoSceneTwo()
+
+        print("Return from psTwoSceneTwo: ", auxReturn[1], file=scenario)
+
+        auxReturn = auxReturn + psThreeSceneTwo()
+
+        print("Return from psThreeSceneTwo: ", auxReturn[2], file=scenario)
+
+        print("############ END #############", file=scenario)
+
+    scenario.close()
+
 
     return (auxReturn[0] and auxReturn [1] and auxReturn[2])
 
@@ -366,39 +413,47 @@ def main():
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
+    now = datetime.datetime.now()
+    with open('output_TC3.txt', 'a') as f: 
+   
+        for index in range(2):
 
-    cont = 0
-    initialTime = time.time()
-    for i in range(50):
-            print("Round ", i)
-            aux  = sceneOne()
-            # aux = sceneTwo()
-            # aux = sceneThree()
+                cont = 0
+                initialTime = time.time()
+                for i in range(50):
+                        print("Round ", i)
+                        if(index == 0):
+                            print("Scene One choosen")
+                            aux = sceneOne()
+                        elif(index == 1):
+                            print("Scene Two choosen")
+                            aux = sceneTwo()
+                        if(aux):
+                            cont = cont + 1
+                        
+                        time.sleep(1)
 
-            if(aux):
-                cont = cont + 1
-            
-            time.sleep(1)
+                print("############# INIT #############\n\n", file=f)
+
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Successful tests percentage: ", (cont/50)*100)
+
+                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+                print("Elapsed time: ", time.time() - initialTime)
 
 
+                
+                print("Scene", index + 1 ,":")
 
-    print("Successful tests percentage: ", (cont/50)*100)
+                print("Successful tests percentage: ", (cont/50)*100, file=f)
 
-    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
 
-    print("Elapsed time: ", time.time() - initialTime)
+                print("Elapsed time: ", time.time() - initialTime, file = f)
 
-
-    with open('output_TC5.txt', 'a') as f:
-            print("Scene X:")
-
-            print("Successful tests percentage: ", (cont/50)*100, file=f)
-
-            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
-
-            print("Elapsed time: ", time.time() - initialTime, file = f)
-
-            print("############# END ###########\n\n", file=f)
+                print("\n\n############# END #############\n\n", file=f)
 
     f.close()
 
