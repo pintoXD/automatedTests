@@ -16,8 +16,8 @@ def set_config(command, param, option):
 
 
   # ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ## 
-    #ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # LINUX ##
-    ser = serial.Serial('COM5', 115200, timeout=3)  # WINDOWS ##
+    ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)  # LINUX ##
+    # ser = serial.Serial('COM5', 115200, timeout=3)  # WINDOWS ##
 
     #token_ACK='99' #Token para inicio de comunicação
     token_FIN='ff' #Token para fim de comunicação
@@ -97,9 +97,9 @@ def get_value(option):
     #### Escolher qual a porta serial que placa tá ##########
 
     #ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) ## LINUX ##
-    ser = serial.Serial('COM5', 115200, timeout=3)  # WINDOWS ##
+    # ser = serial.Serial('COM5', 115200, timeout=3)  # WINDOWS ##
     
-    #ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1) ## LINUX ##
+    ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1) ## LINUX ##
     
 
     # token_ACK = '99'  # Token para inicio de comunicação
