@@ -74,12 +74,15 @@ def sceneOne():
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
         returnSet = set_config(command, buttonPower, pressTime)
-        time.sleep(3.2)
+        
     else:
         print("First power press failed")
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
+       
+       # Espera os 3 segundos pra saber se os buzzer tão certo e o painel de led tá desligado mesmo.
 
+        time.sleep(3.2)
         buzzerInfo = getBuzzer()
 
         if(buzzerInfo[1][0] * 100 >= 100 and getPanel() == [0, 0, 0, 0]):
@@ -127,7 +130,7 @@ def sceneTwo():
         if((buzzerInfo[1][0] * 100 >= 100)  
             # and (buzzerInfo[1][1] - buzzerInfo[0][1] >= 495)
             and (getPanel() == [0, 0, 0, 0]) ):
-            #Verfica se o valor de buzzerInfo * 10mS é igual aos 3S da especificação
+            #Verfica se o valor de buzzerInfo * 10mS é igual aos 100mS da especificação
             print("Test successful. Inactive period and bip time comply the specification")
             return True
         else:
@@ -146,7 +149,7 @@ def sceneTwo():
    
 def main():
 
-    print("Hello World!")
+  print("Hello World!")
 
 #   sceneOne()
   #sceneTwo()
@@ -156,31 +159,43 @@ def main():
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
+  # 
+  # 
+  with open('output_TC5.txt', 'w') as f:
+       
+        for index in range(2):
+            cont = 0
+            initialTime = time.time()
+            for i in range(50):
+                    print("Round ", i)
+                    if(index == 0):
+                        print("Scene One choosen")
+                        aux = sceneOne()
+                    elif(index == 1):
+                        print("Scene Two choosen")
+                        aux = sceneTwo()
+                    # elif(index == 2):
+                    #     aux = sceneThree()
+                    # aux  = sceneOne()
+                    # aux = sceneTwo()
+                    # aux = sceneThree()
 
-    cont = 0
-    initialTime = time.time()
-    for i in range(50):
-            print("Round ", i)
-            aux  = sceneOne()
-            # aux = sceneTwo()
-            # aux = sceneThree()
-
-            if(aux):
-                cont = cont + 1
-            
-            time.sleep(1)
+                    if(aux):
+                        cont = cont + 1
+                    
+                    time.sleep(1)
 
 
 
-    print("Successful tests percentage: ", (cont/50)*100)
+            print("Successful tests percentage: ", (cont/50)*100)
 
-    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
 
-    print("Elapsed time: ", time.time() - initialTime)
+            print("Elapsed time: ", time.time() - initialTime)
 
 
-    with open('output_TC5.txt', 'a') as f:
-            print("Scene X:")
+    
+            print("Scene ", index + 1, ":")
 
             print("Successful tests percentage: ", (cont/50)*100, file=f)
 
@@ -190,7 +205,8 @@ def main():
 
             print("############# END ###########\n\n", file=f)
 
-    f.close()
+    
+  f.close()
 
 
 
