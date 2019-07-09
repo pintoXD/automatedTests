@@ -107,23 +107,26 @@ def sceneOne():
             percebidas.
 
         '''    
-        while cont < 5:
+        initialTime = time.time()
+        cont = 0
+        ledInfo = getPanel()
+     
+        while ledInfo != [0, 0, 0, 0]:
             ledInfo = getPanel()
-            
-            if(ledInfo != ledInfoOld):
-                cont = cont + 1
-                ledInfoOld = ledInfo
-                    
-            
-            time.sleep(0.1)    
+            cont = cont + 1           
+            time.sleep(0.2)    
 
      ########### TO DO #############
     #### Validate the test
 
-        time.sleep(5)
+        # time.sleep(5)
         ledInfo = getPanel()
 
-        if cont >= 5 and ledInfo == [0, 0, 0, 0]:
+        elapsedTime = time.time() - initialTime
+
+        print("Elapsed time: ", elapsedTime)
+
+        if cont >= 10 and ledInfo == [0, 0, 0, 0] and elapsedTime >= 5:
             print("Battery level read is runnning ok")
             print("Scenario One is ok")
             return True
@@ -224,17 +227,18 @@ def sceneThree():
  
 
         returnSet = set_config(command, buttonPower, '1E')
-        #time.sleep(3)
+        time.sleep(3)
         initialTime = time.time()
 
         if(returnSet == bytes.fromhex('99' + command + 'FF')):
              ##Espera um tempo aleatório antes de apertar o botão seta de vera.
         
-            waitTime = random.uniform(0, 3)
+            waitTime = random.uniform(0.5, 3)
+            print("Sleep time: ", waitTime)
             time.sleep(waitTime)
 
             returnSet = set_config(command, buttonArrow, pressTime)
-            time.sleep(0.2)
+            time.sleep(0.5)
         else:
             print("Power press failed.")
 
@@ -286,6 +290,8 @@ def sceneThree():
         
         elapsedTime = time.time() - initialTime
 
+        print("Elapsed time: ", elapsedTime)
+
         # print
 
         
@@ -314,11 +320,15 @@ def main():
 #   sceneTwo()c\cc
     # sceneThree()
   #sceneFour()
-  #   for i in range(50):
-  #     print(i)
-  #     sceneTwo()
-  #     time.sleep(1)
+    for i in range(10):
+      print("Round ", i)
+      sceneOne()
+    #   sceneTwo()
+    #   sceneThree()
+      time.sleep(1)
 
+
+'''
     with open('output_TC6.txt', 'w') as f:
         for index in range(3):
                 print("Scene ", index, ":")
@@ -363,8 +373,8 @@ def main():
 
                 # f.close()
 
-
         f.close()
+    '''
 
 
 
