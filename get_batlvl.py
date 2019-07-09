@@ -24,5 +24,11 @@ def getBatLvl():
     batlvl = int(batlvl, 16)
 
     # print("Volts: ", ((3.3 * batlvl)/4095)*2)
-    return ((3.3 * batlvl)/4095)*2
+    return batlvl
     #return batlvl
+
+
+def getBatVoltage():
+    batlvl = getBatLvl()
+    
+    return ((3.3 * batlvl)/4095)*2
