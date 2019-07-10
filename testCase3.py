@@ -312,14 +312,14 @@ def psTwoSceneTwo():
         #SE o led de cura tiver ligado, desligar ele antes
         print("Cure on. Shutting down.")
         set_config(command, buttonPower, pressTime)
-        time.sleep(0.5)
+        time.sleep(1)
 
 
     returnSet = set_config(command, buttonPower, pressTime)
-    time.sleep(0.5)
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
+        time.sleep(5)
         ### Momento de captar as respostas da placa
         #tratar o vetor de tuplas do buzzer
         # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
@@ -375,36 +375,43 @@ def psThreeSceneTwo():
         # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
 
         print("Button configured")
-
+        limiar = 6
         ledInfoOld = getPanel()
         cont = 0
-        # ledInfo = ledInfoOld
+        control = 0
+        ledInfo = ledInfoOld
 
         #Esse while conta as variações nos leds do painel.
         #Se tiver mais de 5 variações dos leds, ele entende que a bateria tá sendo lida direitinho.
-        while(cont < 5):
+        while(cont < limiar):
           ledInfo = getPanel()
-          print("Led info inside: ", ledInfo)
-          print("ledInfoOld inside: ", ledInfoOld)
-
-          if(ledInfo != ledInfoOld):
+        #   print("Led info inside: ", ledInfo)
+        #   print("ledInfoOld inside: ", ledInfoOld)
+          if((ledInfo == [1, 1, 1, 1]) or (ledInfo == [0, 1, 1, 1]) or (ledInfo == [0, 0, 1, 1]) or (ledInfo == [0, 0, 0, 1]) or (ledInfo == [0, 0, 0, 0])):
+                if(ledInfo != ledInfoOld):
+                    ledInfoOld = ledInfo
          
-            ledInfo = getPanel()  
-            cont = cont + 1
-            time.sleep(0.1) 
-          
-          if(cont == 10):
-              cont = 0
-              break
-        
+                    ledInfo = getPanel()  
+                    cont = cont + 1
+            
+          if(control >= 70):
+              print("Cannot read the led pannel properly.\n PS 3 from Scenario two failed.")
+              return False
+            #   break
 
-        if(cont >= 5):
+          time.sleep(0.05) 
+        
+          control = control + 1
+
+        #   print("Control: ", control)
+
+        if(cont >= limiar):
             # if(ledInfo == [1, 1, 1, 1] or ledInfo == [0, 1, 1, 1] or 
             #    ledInfo == [0, 0, 1, 1] or ledInfo == [0, 0, 0, 1]):
             print("PS three from scenario two is ok")
             print("Battery level test ok.")
             return True
-            
+        
         else:
             print("PS three from scenario two isn't ok")
             print("Battery level test find an error")
@@ -423,6 +430,13 @@ def psThreeSceneTwo():
 def main():
 
     print("Hello World!")
+    totalRound = 50
+
+    # for i in range(10):
+    #     print("Rodada:", i)
+    #     sceneTwo()
+    #     time.sleep(1)
+
 
 #   sceneOne()
     # sceneTwo()
@@ -436,7 +450,8 @@ def main():
   #     print(i)
   #     sceneTwo()
   #     time.sleep(1)
-  
+
+
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
                 index = 1
@@ -444,7 +459,7 @@ def main():
 
                 cont = 0
                 initialTime = time.time()
-                for i in range(5):
+                for i in range(totalRound):
                         print("Round ", i)
                         if(index == 0):
                             print("Scene One choosen")
@@ -468,8 +483,9 @@ def main():
                 print("Elapsed time: ", time.time() - initialTime)
 
 
+
                 
-                print("Scene", index + 1 ,":")
+                print("Scene", index + 1 ,":", file=f)
 
                 print("Successful tests percentage: ", (cont/50)*100, file=f)
 
