@@ -409,30 +409,30 @@ def sceneFour():
 
 
             if(myTuple[1] == 5):
-                auxBatLvl = getBatLvl()
+                auxBatLvl = round(getBatVoltage(), 3) + 0.04
 
-                if(myTuple[0] == 1 and (auxBatLvl <= 2409)):
+                if(myTuple[0] == 1 and (auxBatLvl <= 3.8)):
 
                         print("Panel measure complies with battery read")
                         print("Level read: Lower than 25%")
                                                     
 
-                elif(myTuple[0] == 1 and (auxBatLvl >= 2410  and auxBatLvl <= 2419)):
+                elif(myTuple[0] == 1 and (auxBatLvl >= 3.816  and auxBatLvl <= 3.9)):
                         print("Panel measure complies with battery read")
                         print("Level read: 0'%' - 25'%'")
 
 
-                elif(myTuple[0] == 2 and (auxBatLvl >= 2440  and auxBatLvl <= 2471)):
+                elif(myTuple[0] == 2 and (auxBatLvl >= 3.916  and auxBatLvl <= 4.0)):
                         print("Panel measure complies with battery read")
                         print("Level read: 25'%' - 50'%'")
 
 
 
-                elif(myTuple[0] == 3 and (auxBatLvl >= 2472  and auxBatLvl <= 2533)):   
+                elif(myTuple[0] == 3 and (auxBatLvl >= 4.016  and auxBatLvl <= 4.1)):   
                         print("Panel measure complies with battery read")
                         print("Level read: 50'%' - 75'%'")
 
-                elif(myTuple[0] == 4 and (auxBatLvl >= 2534)):   
+                elif(myTuple[0] == 4 and (auxBatLvl >= 4.216)):   
                         print("Panel measure complies with battery read")
                         print("Level read: 75'%' - 100'%'")
 
