@@ -1,10 +1,11 @@
 from serialTeste import *
 from get_buzzer import *
 from get_panel import *
+from get_batlvl import *
 import time
 import random
 import os
-
+import statistics
 
 '''
 def validateLED(ledInfo, ledToken):
@@ -311,6 +312,151 @@ def sceneThree():
         return (auxReturn[0] and auxReturn[1]) #Só retorna verdadeiro se os dois PS derem certo.
 
 
+
+def sceneFour():
+
+        '''
+
+            Esse cenário procura verificar se o nível de bateria mostrado no painel de LEDs,
+            corresponde ao nível da bateria lido pelo AD da placa de aquisição. Visa ratificar
+            se a leitura da bateria para o painel de LEDs.
+            
+        '''
+
+
+        auxReturn = []
+
+        # checker = sceneOne()
+
+       ##ON_OFF_TIME global é de 0x14 * 100 milssegundos.
+
+        command = '01'
+        buttonPower = '12'
+        buttonArrow = '11'
+        pressTime = '1E'  # 10 em hexadecimal
+        #Precisa ser em hexadeciaml o número
+
+        returnSet = set_config(command, buttonPower, '1E')
+        # initialTime = time.time()
+
+        if(returnSet == bytes.fromhex('99' + command + 'FF')):
+             ##Espera um tempo aleatório antes de apertar o botão seta de vera.
+            time.sleep(3)
+
+
+            cont = 0
+            ledInfo = getPanel()
+            ledInfoOld = getPanel()
+
+            myTuple = ''
+
+            # ledInfo = []
+            # ledInfoOld = []
+
+ 
+
+            while (cont < 6):
+                # print("Inside")
+                aux = getPanel()
+                # ledInfoOld = getPanel()
+
+                # time.sleep(0.40)
+
+                ledInfo = getPanel()
+
+                if(ledInfo != ledInfoOld):
+
+                    # print("LedInfo current inside: ", ledInfo)
+                    # print("Ledinfo old inside: ", ledInfoOld)
+                    # print("Cont is: ", cont)
+
+
+
+                    if((ledInfo == [0, 0, 0, 0] and ledInfoOld == [0, 0, 0, 1])  or (ledInfo == [0, 0, 0, 1] and ledInfoOld == [0, 0, 0, 0])):
+                            myTuple = (1, cont)
+
+                    
+                    if((ledInfo == [0, 0, 0, 1] and ledInfoOld == [0, 0, 1, 1])  or (ledInfo == [0, 0, 1, 1] and ledInfoOld == [0, 0, 0, 1])):
+                            myTuple = (2, cont)
+
+
+                    if((ledInfo == [0, 0, 1, 1] and ledInfoOld == [0, 1, 1, 1])  or (ledInfo == [0, 1, 1, 1] and ledInfoOld == [0, 0, 1, 1])):
+                            myTuple = (3, cont)
+                        
+
+                    if((ledInfo == [0, 1, 1, 1] and ledInfoOld == [1, 1, 1, 1])  or (ledInfo == [1, 1, 1, 1] and ledInfoOld == [0, 1, 1, 1])):
+                             myTuple = (4, cont)
+
+
+
+
+
+                    ledInfoOld = ledInfo
+
+                    cont = cont + 1
+
+
+
+                time.sleep(0.05)
+
+
+                # print("LedInfo current outside: ", ledInfo)
+                # print("Ledinfo old outside: ", ledInfoOld)
+
+
+            print("myTuple[0] is: ", myTuple[0])
+            print("myTuple[1] is: ", myTuple[1])
+
+
+            if(myTuple[1] == 5):
+                auxBatLvl = getBatLvl()
+
+                if(myTuple[0] == 1 and (auxBatLvl <= 2409)):
+
+                        print("Panel measure complies with battery read")
+                        print("Level read: Lower than 25%")
+                                                    
+
+                elif(myTuple[0] == 1 and (auxBatLvl >= 2410  and auxBatLvl <= 2419)):
+                        print("Panel measure complies with battery read")
+                        print("Level read: 0'%' - 25'%'")
+
+
+                elif(myTuple[0] == 2 and (auxBatLvl >= 2440  and auxBatLvl <= 2471)):
+                        print("Panel measure complies with battery read")
+                        print("Level read: 25'%' - 50'%'")
+
+
+
+                elif(myTuple[0] == 3 and (auxBatLvl >= 2472  and auxBatLvl <= 2533)):   
+                        print("Panel measure complies with battery read")
+                        print("Level read: 50'%' - 75'%'")
+
+                elif(myTuple[0] == 4 and (auxBatLvl >= 2534)):   
+                        print("Panel measure complies with battery read")
+                        print("Level read: 75'%' - 100'%'")
+
+
+                else:
+
+                        print("Battery level out of interval considerations")
+
+
+        
+        else:
+            print("Power press failed.")
+
+
+
+    
+
+
+
+
+
+
+
+
 def main():
 
     
@@ -319,13 +465,13 @@ def main():
 #   sceneOne()
 #   sceneTwo()c\cc
     # sceneThree()
-  #sceneFour()
-    for i in range(10):
-      print("Round ", i)
-      sceneOne()
-    #   sceneTwo()
-    #   sceneThree()
-      time.sleep(1)
+    sceneFour()
+    # for i in range(10):
+    #   print("Round ", i)
+    #   sceneOne()
+    # #   sceneTwo()
+    # #   sceneThree()
+    #   time.sleep(1)
 
 
 '''
