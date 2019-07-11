@@ -245,6 +245,7 @@ def sceneTwo():
 
         print("Return from psOneSceneTwo: ", auxReturn[0], file=scenario)
 
+
         time.sleep(5.1)
 
         auxReturn = auxReturn + [psTwoSceneTwo()]
@@ -292,6 +293,23 @@ def psOneSceneTwo():
 
 
         print("First PS from scenario 2 isn't ok")
+        now = datetime.datetime.now()
+        with open('save_states_psOne.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+            
+            print("PS 1 from Scene 2 get an error.", file=f)
+            print("current ledInfoBefore:", ledInfoBefore, file=f)
+            print("Current ledInfoAfter:", ledInfoAfter, file=f )
+
+            print("############ END #############", file=f)
+
+
+        f.close()
+
+
+
         return False
 
 
@@ -304,7 +322,7 @@ def psTwoSceneTwo():
     buttonPower = '12'
     # ON_OFF_TIME_LOCAL = '01'
 
-    # auxPotLum = getPotLum()
+    auxPotLum = ''
 
     # auxPotLum = int(auxPotLum, 16)
 
@@ -326,11 +344,11 @@ def psTwoSceneTwo():
 
         print("Button configured")
 
-        # auxPotLum = getPotLum()
+        auxPotLum = getPotLum()
 
         # auxPotLum = int(auxPotLum, 16)
 
-        if(getPotLum() > 0):
+        if(auxPotLum > 0):
             print("PS Two from scenario two is ok")
             
             set_config(command, buttonPower, pressTime)
@@ -341,12 +359,47 @@ def psTwoSceneTwo():
 
         else:
             print("PS Two from scenario two isn't ok")
+
+            now = datetime.datetime.now()
+            with open('save_states_psTwo.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("PS 2 from Scene 2 get an error.", file=f)
+                print("Error on inside if statement\n", file=f)
+                print("current auxPotLum:", auxPotLum, file=f)
+                print("Current returSet:", returnSet, file=f)
+
+                print("############ END #############", file=f)
+
+
+
+            f.close()
+
             return False
     
     
     else:
         print("psTwoSceneTwo got an error.")
         print("Error on buttonPower configuration.")
+
+
+        now = datetime.datetime.now()
+        with open('save_states_psTwo.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("PS 2 from Scene 2 get an error.", file=f)
+            print("Error on pot Lum that checks if cure LED is alerady on.", file=f)
+            print("current auxPotLum:", auxPotLum, file=f)
+            
+           
+            print("############ END #############", file=f)
+
+        f.close()
+
         return False
 
 def psThreeSceneTwo():
@@ -395,8 +448,32 @@ def psThreeSceneTwo():
                     cont = cont + 1
             
           if(control >= 70):
-              print("Cannot read the led pannel properly.\n PS 3 from Scenario two failed.")
-              return False
+                print("Cannot read the led pannel properly.\n While enters in a deadlock\n PS 3 from Scenario two failed.")
+
+
+                now = datetime.datetime.now()
+                with open('save_states_psThree.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                    print("PS 3 from Scene 2 get an error.", file=f)
+                    # print("Error on inside if statement\n", file=f)
+                    print(
+                        "Cannot read the led pannel properly.\n While enters in a deadlock\n PS 3 from Scenario two failed.", file=f)
+
+                    # print("current returSet:", returnSet, file=f)
+                    print("Current control:", control, file=f)
+                    # print("Current ledInfoOld", ledInfoOld, file=f)
+                    # print("Current ledInfo", ledInfo, file=f)
+
+                    print("############ END #############", file=f)
+
+                f.close()
+
+
+
+                return False
             #   break
 
           time.sleep(0.05) 
@@ -415,6 +492,28 @@ def psThreeSceneTwo():
         else:
             print("PS three from scenario two isn't ok")
             print("Battery level test find an error")
+
+            now = datetime.datetime.now()
+            with open('save_states_psThree.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("PS 3 from Scene 2 get an error.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print("Battery level test find an error", file=f)
+                print("current cont:", cont, file=f)
+                print("Current control:", control, file=f)
+                print("Current ledInfoOld", ledInfoOld, file=f)
+                print("Current ledInfo", ledInfo, file=f)
+
+                print("############ END #############", file=f)
+
+
+            f.close()
+
+
+
             return False
 
 
@@ -423,6 +522,29 @@ def psThreeSceneTwo():
 
     else:
         print("Error on buttonPower configuration")
+
+        now = datetime.datetime.now()
+        with open('save_states_psThree.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("PS 3 from Scene 2 get an error.", file=f)
+            # print("Error on inside if statement\n", file=f)
+            print("Error on buttonPower configuration", file=f)
+            print("current returSet:", returnSet, file=f)
+            # print("Current control:", control, file=f)
+            # print("Current ledInfoOld", ledInfoOld, file=f)
+            # print("Current ledInfo", ledInfo, file=f)
+
+            print("############ END #############", file=f)
+
+        f.close()
+
+
+
+
+
         return False
 
 
@@ -431,13 +553,20 @@ def main():
 
     print("Hello World!")
     totalRound = 50
+    cont = 0
+    for i in range(totalRound):
+        print("Rodada:", i)
+        aux = sceneTwo()
+        if(aux):
+            cont = cont + 1
 
-    # for i in range(10):
-    #     print("Rodada:", i)
-    #     sceneTwo()
-    #     time.sleep(1)
+        time.sleep(1)
 
 
+    print("Successful tests percentage: ",
+                (cont/50)*100)
+
+    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
 #   sceneOne()
     # sceneTwo()
     # psOneSceneTwo()
@@ -451,7 +580,7 @@ def main():
   #     sceneTwo()
   #     time.sleep(1)
 
-
+'''
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
                 index = 1
@@ -498,7 +627,7 @@ def main():
 
     f.close()
 
-
+'''
 
 
 
