@@ -375,7 +375,7 @@ def sceneFive():
         '''
 
             A ideia aqui vai ser basicamente o seguinte:
-            Eu não sei se, quando está com carga mínima, ao mandar acionar o perfil de cura,
+            Eu não sei se, quando eocesses that have a file open with the commastá com carga mínima, ao mandar acionar o perfil de cura,
             o vetor dos buzzers é limpo como acontece no acionamento dos perfis de cura usualmente.
 
             Então, eu resolvi pegar o vetor de buzzer antes de acionar o botão power
@@ -386,7 +386,7 @@ def sceneFive():
         '''
 
 
-        buzzerInfoOld = getBuzzer()
+        # buzzerInfoOld = getBuzzer()
 
 
         returnSet = set_config(command, buttonPower, pressTimePower)
@@ -398,19 +398,19 @@ def sceneFive():
             time.sleep(0.5)
             testePotLum = getPotLum()
 
-            time.sleep(2)
+            time.sleep(5)
             buzzerInfo = getBuzzer()
             print("testePotLum: ", testePotLum)
 
-            buzAux = []
-            lenAux = len(buzzerInfo) - len(buzzerInfoOld)
+            # buzAux = []
+            # lenAux = len(buzzerInfo) - len(buzzerInfoOld)
 
             # if(lenAux > 0):
-            buzAux = buzzerInfo[len(buzzerInfo) - lenAux :]
+            # buzAux = buzzerInfo[len(buzzerInfo) - lenAux :]
 
 
             #Aí aqui ele vai testar           
-            if(testePotLum == 0 and (buzAux[0][0] == 5)):
+            if(testePotLum == 0 and (buzzerInfo[0][0] == 5)):
                     print("Test succesffully done.")
                     print("Insufficient batery charge to start a cure profile.")
                     print("Number of bips: ", len(buzzerInfo))
@@ -442,6 +442,12 @@ def main():
     #   sceneThree()
     
     #   sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+    sceneFive()
+
+
+    '''
+
+
     cont = 0
     initialTime = time.time()
     for i in range(50):
@@ -478,6 +484,10 @@ def main():
             print("############# END ###########\n\n", file=f)
     
     f.close()
+
+
+
+    '''
 
 if __name__ == "__main__":
   main()
