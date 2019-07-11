@@ -351,13 +351,22 @@ def sceneFive():
 
     # batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
 
-    SOC_THRESHOLD_CMIN = 2358 + 10 #hISTERESIS de +- 10. Coloquei pra mais aqui.
+    # SOC_THRESHOLD_CMIN = 2358 - 10 #hISTERESIS de +- 10. Coloquei pra mais aqui.
+    voltagCalibration = 0.02
 
-    adRead = getBatLvl()
+    SOC_THRESHOLD_CMIN_VOLTAGE = 3.8 - 0.016
 
+    # adRead = getBatLvl() + 0.04
+    adRead = round(getBatVoltage(), 3) + voltagCalibration
+
+    print("BAttery voltage with compensation: ",
+          round(getBatVoltage(), 3) + voltagCalibration)
+
+    print("BAttery voltage without compensation: ",
+          round(getBatVoltage(), 3))
 
     #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
-    if(adRead <= SOC_THRESHOLD_CMIN):
+    if(adRead <= SOC_THRESHOLD_CMIN_VOLTAGE):
        
         command = '01'
         buttonPower = '12'
@@ -427,7 +436,10 @@ def sceneFive():
 
 
 
+    else:
 
+        print("Battery level above the specification")
+        print("BAttery voltage with compensation: ", round(getBatVoltage(), 3) + 0.04)
 
 
 
