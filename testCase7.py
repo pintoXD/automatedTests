@@ -8,6 +8,41 @@ import random
 import os
 
 
+def getCureProfileTime():
+
+    command = '01'
+    buttonArrow = '11'
+    pressTime = '02'  # 10 em hexadecimal
+    ##Botão passará 10 * 100 milissegundos pressionado
+
+    returnSet = set_config(command, buttonArrow, pressTime)
+
+    time.sleep(0.3)
+
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            aux = getPanel()
+
+            if(aux == [0, 0, 0, 1]):
+                return 60
+            elif(aux == [0, 0, 1, 0]):
+                return 40
+            elif(aux == [0, 1, 0, 0]):
+                return 20
+            elif(aux == [1, 0, 0, 0]):
+                return 10
+            else:
+                return 99
+
+                #Se o botão for corretamente acionado
+                # verifica se a potência do LED caiu a 0 e trata caso não haja.
+
+    else:
+      print("Error on buttonArrow configuration")
+
+
+
+
 def sceneOne():
 
     '''
@@ -275,7 +310,7 @@ def sceneFour():
 
             if(testeAux != 0 and len(buzzerInfo) == 3):
                     print("Test succesffully done.")
-                    print("Insufficient batery charge to start a cure profile.")
+                    print("Battery charge almost empty.")
                     print("Number of bips: ", len(buzzerInfo))
                     print("Scene Four ok")
                     return True
@@ -299,40 +334,101 @@ def sceneFour():
         print("Scene Four not ok")
         return False
 
-def getCureProfileTime():
 
-    command = '01'
-    buttonArrow = '11'
-    pressTime = '02'  # 10 em hexadecimal
+def sceneFive():
+
+    '''
+        Para esse cenário, é pedido que o sistema esteja ligado,
+        mas não esteja realizando nenhum perfil de cura.
+        Também é pedido que a bateria esteja abaixo de 25% e também abaixo do limite de carga mínima.
+
+     
+
+    '''
+
+    # MAX_BAT_LEVEL = 4.2 ##Esse valor deve mudar. Favor conferir o valor total da tensão da bateria
+    # CURRENT_BAT_LEVEL = getBatLvl()
+
+    # batteryPercentage = 100 - ((CURRENT_BAT_LEVEL/MAX_BAT_LEVEL) * 100)
+
+    SOC_THRESHOLD_CMIN = 2358 + 10 #hISTERESIS de +- 10. Coloquei pra mais aqui.
+
+    adRead = getBatLvl()
+
+
+    #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
+    if(adRead <= SOC_THRESHOLD_CMIN):
+       
+        command = '01'
+        buttonPower = '12'
+        pressTimePower = '02'  # 10 em hexadecimal
         ##Botão passará 10 * 100 milissegundos pressionado
+        profileTime = getCureProfileTime()
 
-    returnSet = set_config(command, buttonArrow, pressTime)
-
-    time.sleep(0.3)
-
-    if (returnSet == bytes.fromhex('99' + command + 'FF')):
-
-            aux = getPanel()
+        while(profileTime != 10):
+            profileTime = getCureProfileTime()
+            print("profileTime: ", profileTime)
+            time.sleep(0.5)
 
 
-            if(aux == [0, 0, 0, 1]):
-                return 60
-            elif(aux == [0, 0, 1, 0]):
-                return 40
-            elif(aux == [0, 1, 0, 0]):
-                return 20
-            elif(aux == [1, 0, 0, 0]):
-                return 10
+
+        '''
+
+            A ideia aqui vai ser basicamente o seguinte:
+            Eu não sei se, quando está com carga mínima, ao mandar acionar o perfil de cura,
+            o vetor dos buzzers é limpo como acontece no acionamento dos perfis de cura usualmente.
+
+            Então, eu resolvi pegar o vetor de buzzer antes de acionar o botão power
+            e pegar ele depois também. Dessa forma, eu posso comparar o tamanho deles e então pegar
+            só os últimos elementos que foram adicionados.
+
+            Espero que seja assim mesmo
+        '''
+
+
+        buzzerInfoOld = getBuzzer()
+
+
+        returnSet = set_config(command, buttonPower, pressTimePower)
+
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            print("Power pressed successfully")
+            # testeAux = getPotLum()
+            time.sleep(0.5)
+            testePotLum = getPotLum()
+
+            time.sleep(2)
+            buzzerInfo = getBuzzer()
+            print("testePotLum: ", testePotLum)
+
+            buzAux = []
+            lenAux = len(buzzerInfo) - len(buzzerInfoOld)
+
+            # if(lenAux > 0):
+            buzAux = buzzerInfo[len(buzzerInfo) - lenAux :]
+
+
+            #Aí aqui ele vai testar           
+            if(testePotLum == 0 and (buzAux[0][0] == 5)):
+                    print("Test succesffully done.")
+                    print("Insufficient batery charge to start a cure profile.")
+                    print("Number of bips: ", len(buzzerInfo))
+                    print("Scene Four ok")
+                    return True
             else:
-                return 99
 
-                #Se o botão for corretamente acionado
-                # verifica se a potência do LED caiu a 0 e trata caso não haja.
-                
+                    print("Test unsuccesfully. Some error occured.")
+                    print("Buzzer beeps, main LED activated or battery level doesn't comply the specifications")
+                    print("Scene Four not ok")
+                    return False
 
-    
-    else:
-      print("Error on buttonArrow configuration")
+
+
+
+
+
+
 
 
 
