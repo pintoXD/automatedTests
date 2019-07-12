@@ -186,7 +186,7 @@ def sceneTwo():
 
     '''
 
-    time.sleep(5)
+    time.sleep(6)
 
     # checker = sceneOne()
 
@@ -688,8 +688,27 @@ def main():
     # #   sceneTwo()
     # #   sceneThree()
     #   time.sleep(1)
+    print("Hello World!")
+    totalRound = 50
+    cont = 0
+    for i in range(totalRound):
+        print("Rodada:", i)
+        aux = sceneTwo()
+        if(aux):
+            cont = cont + 1
+
+        time.sleep(1)
 
 
+    print("Successful tests percentage: ",
+                (cont/50)*100)
+
+    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+
+
+
+'''
 
     with open('output_TC6.txt', 'w') as f:
         for index in range(3):
@@ -739,7 +758,7 @@ def main():
         f.close()
     
 
-
+'''
 
 
 

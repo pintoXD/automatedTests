@@ -1,40 +1,400 @@
 ############ INIT #############
 Scene Four got an error.
-Date:  2019-07-12 17:20
+Date:  2019-07-12 18:48
 Battery level over 25%
-Current battery level:  2392.02
+Current battery level:  2317.02
 ############ END #############
 
 
 ############ INIT #############
 Scene Four got an error.
-Date:  2019-07-12 17:21
+Date:  2019-07-12 18:48
 Battery level over 25%
-Current battery level:  2392.02
+Current battery level:  2390.02
 ############ END #############
 
 
 ############ INIT #############
 Scene Four got an error.
-Date:  2019-07-12 17:21
+Date:  2019-07-12 18:48
 Battery level over 25%
-Current battery level:  2392.02
+Current battery level:  2391.02
 ############ END #############
 
 
 ############ INIT #############
 Scene Four got an error.
-Date:  2019-07-12 17:21
+Date:  2019-07-12 18:49
 Battery level over 25%
-Current battery level:  2318.02
+Current battery level:  2391.02
 ############ END #############
 
 
 ############ INIT #############
 Scene Four got an error.
-Date:  2019-07-12 17:21
+Date:  2019-07-12 18:49
 Battery level over 25%
-Current battery level:  2392.02
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:49
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:50
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:50
+Battery level over 25%
+Current battery level:  2390.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:50
+Battery level over 25%
+Current battery level:  2391.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:50
+Battery level over 25%
+Current battery level:  2316.02
+############ END #############
+
+
+############ INIT #############
+Scene Four got an error.
+Date:  2019-07-12 18:50
+Battery level over 25%
+Current battery level:  2390.02
 ############ END #############
 
 

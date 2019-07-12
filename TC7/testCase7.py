@@ -420,7 +420,7 @@ def sceneFour():
 
     SOC_25_VOLTAGE = 3.916
 
-    adRead = round(getBatLvl(), 3) + 0.02
+    adRead = round(getBatVoltage(), 3) + 0.02
 
 
     #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
@@ -675,8 +675,8 @@ def main():
 
     now = datetime.datetime.now()
     with open('output_TC7.txt', 'a') as f:
-                # index = 1
-        for index in range(2):
+                index = 3
+        # for index in range(4):
 
                 cont = 0
                 initialTime = time.time()
