@@ -121,13 +121,65 @@ def profile(desiredCureProfile):
                         print("Buzzer count incorrect")
                         auxReturn = auxReturn + [False]
 
+                        now = datetime.datetime.now()
+                        with open('save_states_sceneOnetxt', 'a') as f:
+
+                            print("############ INIT #############", file=f)
+                            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                            print("Error inside Profile\n Part One\n Buzzer Count Incorrect.", file=f)
+                            print("Current buzzer count:",
+                                  len(auxBuzzer), file=f)
+                            # print("Current ledInfoAfter:", ledInfoAfter, file=f)
+
+                            print("############ END #############", file=f)
+
+                        f.close()
+
+
+
+
+
+
                 else:
                         print("Second power press failed")
                         auxReturn = auxReturn + [False]
+                        now = datetime.datetime.now()
+                        with open('save_states_sceneOnetxt', 'a') as f:
+
+                            print("############ INIT #############", file=f)
+                            print("Date: ", now.strftime(
+                                "%Y-%m-%d %H:%M"), file=f)
+
+                            print(
+                                "Error inside Profile\n Part One\n Second power press failed.", file=f)
+                            print("Current returnSet",
+                                  returnSet, file=f)
+                            # print("Current ledInfoAfter:", ledInfoAfter, file=f)
+
+                            print("############ END #############", file=f)
+
+                        f.close()
 
             else:
                 print("First power press failed")
                 auxReturn = auxReturn + [False]
+                now = datetime.datetime.now()
+                with open('save_states_sceneOnetxt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime(
+                        "%Y-%m-%d %H:%M"), file=f)
+
+                    print(
+                        "Error inside Profile\n Part One\n First power press failed.", file=f)
+                    print("Current returnSet",
+                            returnSet, file=f)
+                    # print("Current ledInfoAfter:", ledInfoAfter, file=f)
+
+                    print("############ END #############", file=f)
+
+                f.close()
 
             returnSet = set_config(command, buttonPower, pressTime)
             #Aperta o botão de power duas vezes para ligar e desligar o perfil de cura.
@@ -156,17 +208,101 @@ def profile(desiredCureProfile):
                         print("Number of bipes got: ", len(auxBuzzer))
                         auxReturn = auxReturn + [False]
 
+                        now = datetime.datetime.now()
+                        with open('save_states_sceneOnetxt', 'a') as f:
+
+                            print("############ INIT #############", file=f)
+                            print("Date: ", now.strftime(
+                                "%Y-%m-%d %H:%M"), file=f)
+                            print(
+                                "Error inside Profile\n Part Two\n First power press failed.", file=f)
+                            print("Buzzer bips count in cure profile isn't ok", file=f)
+                            print("Number of bipes expected: ",
+                                1 + (profileCureTime/10) + 1, file=f)
+                            print("Number of bipes got: ", len(auxBuzzer), file=f)
+                                # print("Current ledInfoAfter:", ledInfoAfter, file=f)
+
+                            print("############ END #############", file=f)
+
+                        f.close()
+
+
+
+
+
+                        
+
             else:
 
                 print("Power press from second PS failed")
                 auxReturn = auxReturn + [False]
 
+                now = datetime.datetime.now()
+                with open('save_states_sceneOnetxt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime(
+                        "%Y-%m-%d %H:%M"), file=f)
+
+                    print(
+                        "Error inside Profile\n Part Two\n First power press failed.", file=f)
+                    print("Current returnSet",
+                            returnSet, file=f)
+                    # print("Current ledInfoAfter:", ledInfoAfter, file=f)
+
+                    print("############ END #############", file=f)
+
+                f.close()
+
+
+
+
+
+
+
+
         else:
             print("System in low-power consumption. Scenario cannot be tested")
+            now = datetime.datetime.now()
+            with open('save_states_sceneOnetxt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime(
+                    "%Y-%m-%d %H:%M"), file=f)
+
+                print(
+                    "Error inside Profile\n Part Two\n System in low-power consumption. Scenario cannot be tested.\n", file=f)
+                # print("Current returnSet",
+                #         returnSet, file=f)
+                print("Current bat level:", getBatLvl(), file=f)
+                print("Current rounded bat voltage:", round(getBatVoltage(), 3), file=f)
+
+                print("############ END #############", file=f)
+
+            f.close()
+
             return False
 
     else:
         print("Profile time not allowed")
+        now = datetime.datetime.now()
+        with open('save_states_sceneOnetxt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Date: ", now.strftime(
+                "%Y-%m-%d %H:%M"), file=f)
+
+            print(
+                "Error inside Profile\n Part Two\n Profile time not allowed.\n", file=f)
+            # print("Current returnSet",
+            #         returnSet, file=f)
+            print("Current desiredCureProfile:", desiredCureProfile, file=f)
+            # print("Current rounded bat voltage:",
+            #         round(getBatVoltage(), 3), file=f)
+
+            print("############ END #############", file=f)
+
+        f.close()
         return False
 
     return (auxReturn[0] and auxReturn[1])
