@@ -118,7 +118,7 @@ def profile(desiredCureProfile):
 
 
                     else:
-                        print("Buzzer count incorrect")
+                        print("Buzzer count incorrect or profile time selection failed")
                         auxReturn = auxReturn + [False]
 
                         now = datetime.datetime.now()
@@ -130,7 +130,7 @@ def profile(desiredCureProfile):
                             print("Error inside Profile\n Part One\n Buzzer Count Incorrect.", file=f)
                             print("Current buzzer count:",
                                   len(auxBuzzer), file=f)
-                            # print("Current ledInfoAfter:", ledInfoAfter, file=f)
+                            print("Current profile cure time:", profileCureTime, file=f)
 
                             print("############ END #############", file=f)
 
@@ -203,6 +203,7 @@ def profile(desiredCureProfile):
 
                     else:
                         print("Buzzer bips count in cure profile isn't ok")
+                        
                         print("Number of bipes expected: ",
                               1 + (profileCureTime/10) + 1)
                         print("Number of bipes got: ", len(auxBuzzer))
@@ -217,9 +218,13 @@ def profile(desiredCureProfile):
                             print(
                                 "Error inside Profile\n Part Two\n First power press failed.", file=f)
                             print("Buzzer bips count in cure profile isn't ok", file=f)
+                            
                             print("Number of bipes expected: ",
                                 1 + (profileCureTime/10) + 1, file=f)
                             print("Number of bipes got: ", len(auxBuzzer), file=f)
+
+                            print("Current profile cure time: ",
+                                  (profileCureTime), file=f)
                                 # print("Current ledInfoAfter:", ledInfoAfter, file=f)
 
                             print("############ END #############", file=f)
@@ -327,79 +332,79 @@ def sceneOne():
     # ON_OFF_TIME = '01'  # Valor inteiro '10'
 
 
-    now = datetime.datetime.now()
+    # now = datetime.datetime.now()
 
     #Configurar qual botão vai ser apertado
     #########################################   Cenario 1   ###############################################
     auxReturn = []
-    with open('output_TC3_SONE.txt', 'a') as scenario:
+    # with open('output_TC3_SONE.txt', 'a') as scenario:
 
 
 
-        print("############ INIT #############", file=scenario)
+    # print("############ INIT #############", file=scenario)
 
-        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=scenario)
+    # print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=scenario)
 
-        auxReturn = auxReturn + [profile(10)]
+    auxReturn = auxReturn + [profile(10)]
 
-        print("Return form profile 10s: ", auxReturn[0], file=scenario)
+    # print("Return form profile 10s: ", auxReturn[0], file=scenario)
 
-        auxReturn = auxReturn + [profile(20)]
+    auxReturn = auxReturn + [profile(20)]
 
-        print("Return form profile 20s: ", auxReturn[1], file=scenario)
+    # print("Return form profile 20s: ", auxReturn[1], file=scenario)
 
-        auxReturn = auxReturn + [profile(40)]
-        
-        print("Return form profile 40s: ", auxReturn[2], file=scenario)
-
-        auxReturn = auxReturn + [profile(60)]
+    auxReturn = auxReturn + [profile(40)]
     
-        print("Return form profile 60s: ", auxReturn[3], file=scenario)
+    # print("Return form profile 40s: ", auxReturn[2], file=scenario)
+
+    auxReturn = auxReturn + [profile(60)]
+
+        # print("Return form profile 60s: ", auxReturn[3], file=scenario)
 
 
-        print("############ END #############", file=scenario)
+        # print("############ END #############", file=scenario)
 
-    scenario.close()
+    # scenario.close()
 
 
     return (auxReturn[0] and auxReturn[1] and auxReturn[2] and auxReturn[3])
      
 def sceneTwo():
-    auxReturn = []
+        auxReturn = []
 
-    now = datetime.datetime.now()
+        now = datetime.datetime.now()
 
-    with open('output_TC3_STWO.txt', 'a') as scenario:
+    # with open('output_TC3_STWO.txt', 'a') as scenario:
         
         
-        print("############ INIT #############", file=scenario)
-        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=scenario)
+        # print("############ INIT #############", file=scenario)
+        # print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=scenario)
 
-        time.sleep(5.1)
+        time.sleep(5)
 
         auxReturn = auxReturn + [psOneSceneTwo()]
 
-        print("Return from psOneSceneTwo: ", auxReturn[0], file=scenario)
+        # print("Return from psOneSceneTwo: ", auxReturn[0], file=scenario)
 
 
-        time.sleep(5.1)
+        time.sleep(5)
 
         auxReturn = auxReturn + [psTwoSceneTwo()]
 
-        print("Return from psTwoSceneTwo: ", auxReturn[1], file=scenario)
+        # print("Return from psTwoSceneTwo: ", auxReturn[1], file=scenario)
 
-        time.sleep(5.1)
+        time.sleep(5)
 
         auxReturn = auxReturn + [psThreeSceneTwo()]
 
-        print("Return from psThreeSceneTwo: ", auxReturn[2], file=scenario)
+    #     print("Return from psThreeSceneTwo: ", auxReturn[2], file=scenario)
 
-        print("############ END #############", file=scenario)
+    #     print("############ END #############", file=scenario)
 
-    scenario.close()
+    # scenario.close()
 
 
-    return (auxReturn[0] and auxReturn [1] and auxReturn[2])
+        return (auxReturn[0] and auxReturn [1] and auxReturn[2])
 
 
 def psOneSceneTwo():
@@ -430,12 +435,12 @@ def psOneSceneTwo():
 
         print("First PS from scenario 2 isn't ok")
         now = datetime.datetime.now()
-        with open('save_states_psOne.txt', 'a') as f:
+        with open('save_states_sceneTwo.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
+            print("PS 1 from Scene 2 get an error.", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
             
-            print("PS 1 from Scene 2 get an error.", file=f)
             print("current ledInfoBefore:", ledInfoBefore, file=f)
             print("Current ledInfoAfter:", ledInfoAfter, file=f )
 
@@ -473,7 +478,7 @@ def psTwoSceneTwo():
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
-        time.sleep(5)
+        time.sleep(5.5)
         ### Momento de captar as respostas da placa
         #tratar o vetor de tuplas do buzzer
         # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
@@ -522,12 +527,12 @@ def psTwoSceneTwo():
 
 
         now = datetime.datetime.now()
-        with open('save_states_psTwo.txt', 'a') as f:
+        with open('save_states_sceneTwo.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
+            print("PS 2 from Scene 2 get an error.\n", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
 
-            print("PS 2 from Scene 2 get an error.", file=f)
             print("Error on pot Lum that checks if cure LED is alerady on.", file=f)
             print("current auxPotLum:", auxPotLum, file=f)
             
@@ -630,12 +635,12 @@ def psThreeSceneTwo():
             print("Battery level test find an error")
 
             now = datetime.datetime.now()
-            with open('save_states_psThree.txt', 'a') as f:
+            with open('save_states_sceneTwo.txt', 'a') as f:
 
                 print("############ INIT #############", file=f)
+                print("PS 3 from Scene 2 get an error.", file=f)
                 print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
 
-                print("PS 3 from Scene 2 get an error.", file=f)
                 # print("Error on inside if statement\n", file=f)
                 print("Battery level test find an error", file=f)
                 print("current cont:", cont, file=f)
@@ -686,7 +691,7 @@ def psThreeSceneTwo():
 
 
 def main():
-
+    '''
     print("Hello World!")
     totalRound = 50
     cont = 0
@@ -703,6 +708,9 @@ def main():
                 (cont/50)*100)
 
     print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+    '''
+    totalRound = 50
 #   sceneOne()
     # sceneTwo()
     # psOneSceneTwo()
@@ -716,11 +724,11 @@ def main():
   #     sceneTwo()
   #     time.sleep(1)
 
-'''
+
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
-                index = 1
-        # for index in range(2):
+                # index = 1
+        for index in range(2):
 
                 cont = 0
                 initialTime = time.time()
@@ -763,7 +771,7 @@ def main():
 
     f.close()
 
-'''
+
 
 
 
