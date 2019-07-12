@@ -6,6 +6,8 @@ import time
 import random
 import os
 import statistics
+import os
+import datetime
 
 '''
 def validateLED(ledInfo, ledToken):
@@ -134,11 +136,46 @@ def sceneOne():
         else:
             print("Battery level reading is not running ok")
             print("Scenario One isn't ok")
+            now = datetime.datetime.now()
+            with open('states_TC6.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Scenario One isn't ok.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print("Battery level reading is not running ok", file=f)
+                print("current cont:", cont, file=f)
+                print("Current ledInfo:", ledInfo, file=f)
+                # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+                print("############ END #############", file=f)
+
+            f.close()
+
             return False
 
     else:
 
         print("Power button press failed")
+
+        now = datetime.datetime.now()
+        with open('states_TC6.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("Scenario One isn't ok.", file=f)
+            # print("Error on inside if statement\n", file=f)
+            print("Power button press failed", file=f)
+            print("current returnSet:", returnSet, file=f)
+            # print("Current ledInfo:", ledInfo, file=f)
+            # # print("Current ledInfoOld", ledInfoOld, file=f)
+            # print("Current ledInfo", ledInfo, file=f)
+            print("############ END #############", file=f)
+
+        f.close()
+
         return False
 
 def sceneTwo():
@@ -171,6 +208,25 @@ def sceneTwo():
     else:
         print("First power press failed.")
 
+        now = datetime.datetime.now()
+        with open('states_TC6.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Scenario Two isn't ok.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print("First power press failed", file=f)
+                print("current returnSet:", returnSet, file=f)
+                # print("Current ledInfo:", ledInfo, file=f)
+                # # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+                print("############ END #############", file=f)
+
+        f.close()
+
+        return False
+
     # returnSet = set_config(command, buttonPower, pressTime)
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
@@ -184,7 +240,25 @@ def sceneTwo():
             return True
 
         else:
-            print("Test is not ok. Scenario 2 from case 6 wasn't complied")    
+            print("Test is not ok. Scenario 2 from case 6 wasn't complied")
+
+            now = datetime.datetime.now()
+            with open('states_TC6.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                    print("Scenario Two isn't ok.", file=f)
+                    # print("Error on inside if statement\n", file=f)
+                    # print("First power press failed", file=f)
+                    # print("current returnSet:", returnSet, file=f)
+                    print("Current ledInfo:", ledInfo, file=f)
+                    # # print("Current ledInfoOld", ledInfoOld, file=f)
+                    # print("Current ledInfo", ledInfo, file=f)
+                    print("############ END #############", file=f)
+
+            f.close()
+
             return False
 
 
@@ -193,6 +267,25 @@ def sceneTwo():
     else:
 
         print("Button unconfigured")
+        now = datetime.datetime.now()
+        with open('states_TC6.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Scenario Two isn't ok.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print("Second power press failed", file=f)
+                print("current returnSet:", returnSet, file=f)
+                # print("Current ledInfo:", ledInfo, file=f)
+                # # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+                print("############ END #############", file=f)
+
+        f.close()
+
+
+
         return False
 
 
@@ -231,6 +324,8 @@ def sceneThree():
         time.sleep(3)
         initialTime = time.time()
 
+        waitTime = 0
+
         if(returnSet == bytes.fromhex('99' + command + 'FF')):
              ##Espera um tempo aleatório antes de apertar o botão seta de vera.
         
@@ -242,6 +337,24 @@ def sceneThree():
             time.sleep(0.5)
         else:
             print("Power press failed.")
+            now = datetime.datetime.now()
+            with open('states_TC6.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                    print("Scenario Three isn't ok.", file=f)
+                    # print("Error on inside if statement\n", file=f)
+                    print("Power press failed", file=f)
+                    print("current returnSet:", returnSet, file=f)
+                    # print("Current ledInfo:", ledInfo, file=f)
+                    # # print("Current ledInfoOld", ledInfoOld, file=f)
+                    # print("Current ledInfo", ledInfo, file=f)
+                    print("############ END #############", file=f)
+
+            f.close()
+
+            return False
 
 
         # waitTime = random.uniform(0, 4)
@@ -277,12 +390,54 @@ def sceneThree():
                 print("PS One from Scenario 3 was complied")
                 print("Something happens")
                 auxReturn = auxReturn + [False]
+
+
+                now = datetime.datetime.now()
+                with open('states_TC6.txt', 'a') as f:
+
+                            print("############ INIT #############", file=f)
+                            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                            print("Scenario Three isn't ok.", file=f)
+                            # print("Error on inside if statement\n", file=f)
+                            print(
+                                "PS One from Scenario 3 wasn't complied\nSomething happens", file=f)
+                            print("Current cont:", cont, file=f)
+                            print("Current ledInfo:", ledInfo, file=f)
+                            # # print("Current ledInfoOld", ledInfoOld, file=f)
+                            # print("Current ledInfo", ledInfo, file=f)
+                            print("############ END #############", file=f)
+
+                f.close()
+
+
+
                 
 
             #elapsedTime = time.time() - startTime
 
         else:
-            print("Shuffle power press failed")
+            print("Shuffle arrow press failed")
+            now = datetime.datetime.now()
+            with open('states_TC6.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Scenario Three isn't ok.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print(
+                    "PS One from Scenario 3 get an error", file=f)
+                print("Shuffle arrow press failed", file=f)
+                print("Current waitTime to press arrow:", ledInfo, file=f)
+                # # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+                print("############ END #############", file=f)
+
+            f.close()
+            return False
+
+
 
         ledInfo = getPanel()
         while(ledInfo != [0, 0, 0, 0]):
@@ -303,6 +458,24 @@ def sceneThree():
         else:
             print("PS 2 Scenario 3 from case 6 was not complied")
             auxReturn = auxReturn + [False]
+            now = datetime.datetime.now()
+            with open('states_TC6.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Scenario Three isn't ok.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print(
+                    "PS 2 Scenario 3 from case 6 was not complied", file=f)
+                # print("Shuffle arrow press failed", file=f)
+                print("Current elapsedTime:", elapsedTime, file=f)
+                # # print("Current ledInfoOld", ledInfoOld, file=f)
+                print("Current ledInfo", ledInfo, file=f)
+                print("############ END #############", file=f)
+
+            f.close()
+            
 
 
                 
@@ -439,13 +612,54 @@ def sceneFour():
 
                 else:
 
-                        print("Battery level out of interval considerations")
+                    print("Battery level out of interval considerations")
+                    now = datetime.datetime.now()
+                    with open('states_TC6.txt', 'a') as f:
+
+                        print("############ INIT #############", file=f)
+                        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                        print("Scenario Four isn't ok.", file=f)
+                        # print("Error on inside if statement\n", file=f)
+                        print(
+                            "Battery level out of interval considerations", file=f)
+                        # print("Shuffle arrow press failed", file=f)
+                        print("Current tuple:", myTuple, file=f)
+                        print("Current rounded battery voltage",
+                              round(getBatVoltage(), 3), file=f)
+                        print("Current rounded battery voltage + 0.04",
+                              round(getBatVoltage(), 3) + 0.04, file=f)
+                        print("############ END #############", file=f)
+
+                    f.close()
+
+                    return False
 
 
         
         else:
             print("Power press failed.")
+            now = datetime.datetime.now()
+            with open('states_TC6.txt', 'a') as f:
 
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Scenario Four isn't ok.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print(
+                    "Power press failed", file=f)
+                # print("Shuffle arrow press failed", file=f)
+                print("Current returnSet:", returnSet, file=f)
+                # print("Current rounded battery voltage",
+                #         round(getBatVoltage(), 3), file=f)
+                # print("Current rounded battery voltage + 0.04",
+                #         round(getBatVoltage(), 3) + 0.04, file=f)
+                print("############ END #############", file=f)
+
+            f.close()
+
+            return False
 
 
     
