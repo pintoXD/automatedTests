@@ -12,7 +12,7 @@
 Devido a uma imprecisão na leitura do AD, o valor analógico de limiar entre 3.8V e 3.9V está flutuando muito.
 Necessário, assim, então, fazer um teste com um valor de tensão que faça com que a placa do produto apite 3 vezes e a potência luminosa seja maior que 0, para só então analisar qual o valor do AD para essa situação.
 
-
+## Testar os tempos de aquisição no Docklight ##
 
 ## teste bateria ##
 
