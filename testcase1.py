@@ -1,5 +1,5 @@
 from serialTeste import set_config, get_value
-from potMask import *
+from potMask import mask10, mask20, mask40, mask60, getCurve
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
@@ -307,8 +307,37 @@ def cen2subonoff1():
             return 'teste passou'
 
 
-######---------------------------------------######
-#falta desenvolver caso on_off 2 subcenario 2
+def cen2subonoff2():
+    seta = set_config('01', '11', '0a')
+    time.sleep(1)
+
+    profile = switchCase2(str(getPanel()))
+    
+    #Escolha de um momento aleatório para começar a pressionar o botão ON/OFF
+    press = random.randint(2, profile)
+    phex = hex(press)[2:]
+    if(len(phex) < 2):
+        phex = '0' + phex
+    
+    #Escolha do momento de soltar o botão ON/OFF
+    release = profile - press + random.randint(2, 15)/10
+    rhex = hex(release)
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
+
+    on_off = set_config('01', '12', '0a')
+    time.sleep(1)
+    time.sleep(press)
+    on_off = set_config('01', '12', rhex)
+    time.sleep(release)
+    
+    on_off = set_config('01', '12', '02')
+    time.sleep(0.2)
+
+    if(getPotLum() == 0):
+        return 'teste falhou. perfil de cura não iniciado'
+    else:
+        return 'teste passou'
 
 
 def cen2subonoff3():

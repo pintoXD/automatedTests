@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from serialTeste import set_config, get_value
-from potMask import maskSelect
+from potMask import mask10, mask20, mask40, mask60, getCurve
 from get_panel import getPanel
 from get_buzzer import getBuzzer
-from get_led_voltage import getPotLum
-from potMask import maskSelect
 from get_batlvl import getBatLvl
 import random
 import time
@@ -20,15 +18,41 @@ def switchCase(var):
 
 def cen1():
 
-    profile_on = switchCase(getPanel())
-    
     on_off = set_config('01', '12', '0a')
-    print(on_off)
-    result = maskSelect(profile_on)
-    if(result != 'ok'):
-        print(result)
+    time.sleep(1)
+    profile = switchCase(getPanel())
+    on_off = set_config('01', '12', '0a')
+    time.sleep(1)
+    
+    curve = getCurve(profile)
+    if(profile == 10):
+        for c in curve:
+            if(mask10(c[1], c[0])):
+                return 'teste passou'
+            else:
+                print(c)
+                return 'teste falhou'
+    elif(profile == 20):
+        for c in curve:
+            if(mask20(c[1], c[0])):
+                return 'teste passou'
+            else:
+                print(c)
+                return 'teste falhou'
+    elif(profile == 40):
+        for c in curve:
+            if(mask40(c[1], c[0])):
+                return 'teste passou'
+            else:
+                print(c)
+                return 'teste falhou'
     else:
-        return 'teste passou'
+        for c in curve:
+            if(mask60(c[1], c[0])):
+                return 'teste passou'
+            else:
+                print(c)
+                return 'teste falhou'
 
 
     
