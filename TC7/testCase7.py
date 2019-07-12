@@ -6,6 +6,7 @@ from get_batlvl import *
 import time
 import random
 import os
+import datetime
 
 
 def getCureProfileTime():
@@ -90,6 +91,25 @@ def sceneOne():
 
         else:
             print("First power press failed")
+
+
+            now = datetime.datetime.now()
+            with open('states_TC7.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene One get an error.", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Power press failed", file=f)
+                print("Current returnSet: ", returnSet, file=f)
+
+                print("############ END #############\n\n", file=f)
+
+            f.close()
+
+
+
+
             return False
 
 
@@ -110,10 +130,46 @@ def sceneOne():
             else:
                 print("Main LED (cure LED) cannot be shutdown") 
                 print("Test is not ok")
-                return False
+
+                now = datetime.datetime.now()
+                with open('states_TC7.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Scene One get an error.", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                    print("Main LED (cure LED) cannot be shutdown", file = f)
+                    print("Current getPotLum", getPotLum(), file=f)
+                    # print("Current returnSet: ", returnSet, file=f)
+
+                    print("############ END #############\n\n", file=f)
+
+                f.close()
+
+            return False
                  
     else:
         print("Error on buttonArrow configuration")
+        now = datetime.datetime.now()
+        with open('states_TC7.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Scene One get an error.", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("Current getPotLum", getPotLum(), file=f)
+            print("Error on buttonArrow configuration", file=f)
+            print("Current returnSet: ", returnSet, file=f)
+
+            print("############ END #############\n\n", file=f)
+
+        f.close()
+
+
+
+
+
+        
 
 def sceneTwo():
 
@@ -171,16 +227,66 @@ def sceneTwo():
             else:
                 print("Main LED (cure LED) cannot be shutdown")
                 print("Scene Two not ok")
+
+
+                now = datetime.datetime.now()
+                with open('states_TC7.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Scene Two get an error.", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                    print("Main LED (cure LED) cannot be shutdown", file = f)
+                    print("Current getPotLum", getPotLum(), file=f)
+                    # print("Current returnSet: ", returnSet, file=f)
+
+                    print("############ END #############\n\n", file=f)
+
+                f.close()
+
+
                 return False
         
         else:
             print("Error on buttonPower configuration")
             print("Scene Two not ok")
+
+            now = datetime.datetime.now()
+            with open('states_TC7.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene Two get an error.", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Error on buttonPower configuration", file=f)
+                print("Current returnSet: ", returnSet, file=f)
+
+                print("############ END #############\n\n", file=f)
+
+            f.close()
+
             return False
 
     else:
         print("Error on buttonArrow configuration")
         print("Scene Two not ok")
+
+
+        now = datetime.datetime.now()
+        with open('states_TC7.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Scene Two get an error.", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("Error on buttonArrow configuration", file=f)
+            print("Current returnSet: ", returnSet, file=f)
+
+            print("############ END #############\n\n", file=f)
+
+        f.close()
+
+
         return False
 
 
@@ -235,7 +341,32 @@ def sceneThree():
         
         else:
                 print("Some error occured when showing battery level")
-                print("Scene Two not ok")
+                print("Scene Three not ok")
+                
+
+                now = datetime.datetime.now()
+                with open('states_TC7.txt', 'a') as f:
+
+                        print("############ INIT #############", file=f)
+                        print("Scene Three get an error.", file=f)
+                        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+
+                        print("Some error occured when showing battery level", file=f)
+                        print("Current flag:", flag, file=f)
+                        print("Current ledInfo", ledInfo, file=f)
+                        # print("Error on buttonArrow configuration", file=f)
+                        # print("Current returnSet: ", returnSet, file=f)
+
+                        print("############ END #############\n\n", file=f)
+
+                f.close()
+
+
+
+
+
+
                 return False
 
         
@@ -244,6 +375,26 @@ def sceneThree():
     else:
         print("Error on buttonPower configuration")
         print("Scene Two not ok")
+
+        now = datetime.datetime.now()
+        with open('states_TC7.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene Three get an error.", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Error on buttonPower configuration", file=f)
+                print("Current returnSet: ", returnSet, file=f)
+
+                print("############ END #############\n\n", file=f)
+
+        f.close()
+      
+
+
+
+
+
         return False
 
 
@@ -267,11 +418,13 @@ def sceneFour():
 
     SOC_25 = 2410
 
-    adRead = getBatLvl()
+    SOC_25_VOLTAGE = 3.916
+
+    adRead = round(getBatLvl(), 3) + 0.02
 
 
     #Cenário de teste só é iniciado se a bateria tever menos de 25% de carga
-    if(adRead <= SOC_25):
+    if(adRead <= SOC_25_VOLTAGE):
         command = '01'
         buttonPower = '12'
         pressTimePower = '0A'  # 10 em hexadecimal
@@ -319,12 +472,54 @@ def sceneFour():
                     print("Test unsuccesfully. Some error occured.")
                     print("Buzzer beeps, main LED activated or battery level doesn't comply the specifications")
                     print("Scene Four not ok")
+
+                    now = datetime.datetime.now()
+                    with open('states_TC7.txt', 'a') as f:
+
+                            print("############ INIT #############", file=f)
+                            print("Scene Four got an error.", file=f)
+                            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                            print("Buzzer beeps, main LED activated or battery level doesn't comply the specifications", file=f)
+
+
+                            # print("Some error occured when showing battery level", file=f)
+                            print("Current buzzerInfo:", buzzerInfo, file=f)
+                            print("Current potLum", testeAux, file=f)
+                            print("Currente profileTime:", profileTime, file=f)
+                            # print("Error on buttonArrow configuration", file=f)
+                            # print("Current returnSet: ", returnSet, file=f)
+
+                            print("############ END #############\n\n", file=f)
+
+                    f.close()
+
+
+
+
                     return False
 
 
         else:
             print("Error on buttonPower configuration")
             print("Scene Four not ok")
+
+            now = datetime.datetime.now()
+            with open('states_TC7.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Scene Four got an error.", file=f)
+                    print("Date: ", now.strftime(
+                        "%Y-%m-%d %H:%M"), file=f)
+
+                    print("Error on buttonPower configuration", file=f)
+                    print("Current returnSet: ", returnSet, file=f)
+
+                    print("############ END #############\n\n", file=f)
+
+            f.close()
+
+
+
             return False
     
 
@@ -332,6 +527,26 @@ def sceneFour():
 
         print("Battery level over 25%")
         print("Scene Four not ok")
+
+        now = datetime.datetime.now()
+        with open('states_TC7.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene Four got an error.", file=f)
+                print("Date: ", now.strftime(
+                    "%Y-%m-%d %H:%M"), file=f)
+
+                print("Battery level over 25%", file=f)
+                print("Current battery level: ", adRead, file=f)
+
+
+                print("############ END #############\n\n", file=f)
+
+        f.close()
+
+
+
+
         return False
 
 
@@ -448,58 +663,73 @@ def sceneFive():
 def main():
 
     print("Hello World!")
+    totalRound = 50
         
     #sceneOne()
         # sceneTwo()
     #   sceneThree()
     
     #   sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
-    sceneFive()
+    # sceneFive()
 
 
-    '''
+    now = datetime.datetime.now()
+    with open('output_TC7.txt', 'a') as f:
+                # index = 1
+        for index in range(2):
+
+                cont = 0
+                initialTime = time.time()
+                for i in range(totalRound):
+                        print("Round ", i)
+                        if(index == 0):
+                            print("Scene One choosen")
+                            aux = sceneOne()
+                        elif(index == 1):
+                            print("Scene Two choosen")
+                            aux = sceneTwo()
+
+                        elif(index == 2):
+                            print("Scene Three choosen")
+                            aux = sceneThree()
+                            
+
+                        elif(index == 3):
+
+                            print("Scene Four choosen")
+                            aux = sceneFour()
+                            
 
 
-    cont = 0
-    initialTime = time.time()
-    for i in range(50):
-            print("Round ", i)
-            # aux  = sceneOne()
-            # aux = sceneTwo()
-            # aux = sceneThree()
+                        if(aux):
+                            cont = cont + 1
 
-            aux = sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
-        
-            if(aux):
-                cont = cont + 1
-            
-            time.sleep(1)
+                        time.sleep(1)
 
-    
-    
-    print("Successful tests percentage: ", (cont/50)*100)
+                print("############# INIT #############\n\n", file=f)
 
-    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
 
-    print("Elapsed time: ", time.time() - initialTime)
+                print("Successful tests percentage: ", (cont/50)*100)
 
+                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
 
-    with open('output_TC7s.txt', 'a') as f:
-            print("Scene Four:")
+                print("Elapsed time: ", time.time() - initialTime)
 
-            print("Successful tests percentage: ", (cont/50)*100, file=f)
+                print("Scene", index + 1, ":", file=f)
 
-            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+                print("Successful tests percentage: ", (cont/50)*100, file=f)
 
-            print("Elapsed time: ", time.time() - initialTime, file = f)
+                print("Unsuccessful tests percentage: ",
+                      ((50 - cont)/50) * 100, file=f)
 
-            print("############# END ###########\n\n", file=f)
-    
+                print("Elapsed time: ", time.time() - initialTime, file=f)
+
+                print("\n\n############# END #############\n\n", file=f)
+
     f.close()
 
 
-
-    '''
 
 if __name__ == "__main__":
   main()

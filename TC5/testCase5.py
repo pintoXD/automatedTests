@@ -4,7 +4,7 @@ from get_panel import *
 import time
 import random
 import os
-
+import datetime
 
 #teste commnet
 
@@ -78,6 +78,32 @@ def sceneOne():
     else:
         print("First power press failed")
 
+        now = datetime.datetime.now()
+        with open('states_TC5.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Scene One get an error.", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("First power press failed", file=f)
+            print("Current returnSet: ", returnSet, file=f)
+
+            # print("Error on inside if statement\n", file=f)
+            # print("Battery level test find an error", file=f)
+            # print("current cont:", cont, file=f)
+            # print("Current control:", control, file=f)
+            # print("Current ledInfoOld", ledInfoOld, file=f)
+            # print("Current ledInfo", ledInfo, file=f)
+
+            print("############ END #############\n\n", file=f)
+
+
+        f.close()
+
+
+
+
+
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
        
        # Espera os 3 segundos pra saber se os buzzer tão certo e o painel de led tá desligado mesmo.
@@ -93,6 +119,38 @@ def sceneOne():
         else:
             print("Buzzer bip time doesn't comply the specs or smothing else happened")
             print("Scenario One isn't Ok")
+            now = datetime.datetime.now()
+            with open('states_TC5.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene One get an error.", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print(
+                    "Buzzer bip time doesn't comply the specs or something else happened", file=f)
+
+                
+                print("Current buzzerInfo", buzzerInfo, file=f)
+
+                # print("First power press failed", file=f)
+                # print("Current returnSet: ", returnSet, file=f)
+
+                # print("Error on inside if statement\n", file=f)
+                # print("Battery level test find an error", file=f)
+                # print("current cont:", cont, file=f)
+                # print("Current control:", control, file=f)
+                # print("Current ledInfoOld", ledInfoOld, file=f)
+
+                print("############ END #############\n\n", file=f)
+
+
+            f.close()
+
+
+
+
+
+
             return False
 
 
@@ -100,6 +158,33 @@ def sceneOne():
 
     else:
         print("Second power press failed")
+        now = datetime.datetime.now()
+        with open('states_TC5.txt', 'a') as f:
+
+            print("############ INIT #############", file=f)
+            print("Scene One get an error.", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+            print("Second power press failed", file=f)
+            print("Current returnSet: ", returnSet, file=f)
+
+            # print("Error on inside if statement\n", file=f)
+            # print("Battery level test find an error", file=f)
+            # print("current cont:", cont, file=f)
+            # print("Current control:", control, file=f)
+            # print("Current ledInfoOld", ledInfoOld, file=f)
+            # print("Current ledInfo", ledInfo, file=f)
+
+            print("############ END #############\n\n", file=f)
+
+
+        f.close()
+            
+
+
+
+
+
         return False
  
 
@@ -135,11 +220,67 @@ def sceneTwo():
             return True
         else:
             print("Inactive period uzzer bip time doesn't comply the specs or smothing else happened")
+
+            now = datetime.datetime.now()
+            with open('states_TC5.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene One get an error.", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print(
+                    "Inactive period uzzer bip time doesn't comply the specs or smothing else happened", file=f)
+
+                # print("First power press failed", file=f)
+                print("Current buzzerInfo: ", buzzerInfo, file=f)
+                print("Current getPanel: ", getPanel(), file = f)
+
+                # print("Error on inside if statement\n", file=f)
+                # print("Battery level test find an error", file=f)
+                # print("current cont:", cont, file=f)
+                # print("Current control:", control, file=f)
+                # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+
+                print("############ END #############\n\n", file=f)
+
+            f.close()
+
+
+
+
             return False
 
     else:
-        print("Power pressa failed")    
+        print("Power press failed")    
+        
+
+        now = datetime.datetime.now()
+        with open('states_TC5.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Scene One get an error.", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+
+                print("Power press failed", file=f)
+                print("Current returnSet: ", returnSet, file=f)
+
+                # print("Error on inside if statement\n", file=f)
+                # print("Battery level test find an error", file=f)
+                # print("current cont:", cont, file=f)
+                # print("Current control:", control, file=f)
+                # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+
+                print("############ END #############\n\n", file=f)
+
+        f.close()
+        
+        
+        
+        
         return False
+        
 
 
 

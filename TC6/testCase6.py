@@ -4,7 +4,7 @@ from get_panel import *
 from get_batlvl import *
 import time
 import random
-import os
+# import os
 import statistics
 import os
 import datetime
@@ -186,6 +186,8 @@ def sceneTwo():
 
     '''
 
+    time.sleep(5)
+
     # checker = sceneOne()
 
     # if(checker == True):
@@ -199,10 +201,10 @@ def sceneTwo():
 
     #Aperta o botão power por '1E' * 100 milissegundos
     returnSet = set_config(command, buttonPower, '1E')
-    time.sleep(3)
+    # time.sleep(3)
 
     if(returnSet == bytes.fromhex('99' + command + 'FF')):
-        time.sleep(3)
+        time.sleep(3.2)
         returnSet = set_config(command, buttonPower, pressTime)
         time.sleep(1)
     else:
@@ -595,13 +597,13 @@ def sceneFour():
                         print("Level read: 0'%' - 25'%'")
 
 
-                elif(myTuple[0] == 2 and (auxBatLvl >= 3.916  and auxBatLvl <= 4.0)):
+                elif(myTuple[0] == 2 and (auxBatLvl >= 3.916  and auxBatLvl <= 4.015)):
                         print("Panel measure complies with battery read")
                         print("Level read: 25'%' - 50'%'")
 
 
 
-                elif(myTuple[0] == 3 and (auxBatLvl >= 4.016  and auxBatLvl <= 4.1)):   
+                elif(myTuple[0] == 3 and (auxBatLvl >= 4.016  and auxBatLvl <= 4.215)):   
                         print("Panel measure complies with battery read")
                         print("Level read: 50'%' - 75'%'")
 
@@ -679,7 +681,7 @@ def main():
 #   sceneOne()
 #   sceneTwo()c\cc
     # sceneThree()
-    sceneFour()
+        # sceneFour()
     # for i in range(10):
     #   print("Round ", i)
     #   sceneOne()
@@ -688,7 +690,7 @@ def main():
     #   time.sleep(1)
 
 
-'''
+
     with open('output_TC6.txt', 'w') as f:
         for index in range(3):
                 print("Scene ", index, ":")
@@ -710,7 +712,6 @@ def main():
                         time.sleep(1)
 
 
-
                 print("Successful tests percentage: ", (cont/50)*100)
 
                 print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
@@ -720,8 +721,10 @@ def main():
 
                 # with open('output_TC6.txt', 'a') as f:
                 print("############# INIT ###########\n\n", file=f)
+                now = datetime.datetime.now()
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
                 
-                print("Scene ", index, ":", file=f)
+                print("Scene ", index + 1, ":", file=f)
 
                 print("Successful tests percentage: ", (cont/50)*100, file=f)
 
@@ -734,7 +737,7 @@ def main():
                 # f.close()
 
         f.close()
-    '''
+    
 
 
 
