@@ -50,3 +50,16 @@ Elapsed time:  72.88184833526611
 ############# END #############
 
 
+############# INIT #############
+
+
+Date:  2019-07-12 19:04
+Scene 4 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  1054.7219169139862
+
+
+############# END #############
+
+

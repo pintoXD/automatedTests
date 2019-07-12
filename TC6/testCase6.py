@@ -186,7 +186,7 @@ def sceneTwo():
 
     '''
 
-    time.sleep(6)
+    time.sleep(1)
 
     # checker = sceneOne()
 
@@ -677,7 +677,7 @@ def main():
 
     
     print("Hello World!")
-
+    '''
 #   sceneOne()
 #   sceneTwo()c\cc
     # sceneThree()
@@ -696,6 +696,8 @@ def main():
         aux = sceneTwo()
         if(aux):
             cont = cont + 1
+          else:
+            roundErrors = roundErrors + [i]
 
         time.sleep(1)
 
@@ -705,13 +707,16 @@ def main():
 
     print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
 
+    '''
 
 
 
-'''
 
-    with open('output_TC6.txt', 'w') as f:
-        for index in range(3):
+    roundErrors = []
+
+    with open('output_TC6.txt', 'a') as f:
+                index = 1
+        # for index in range(3):
                 print("Scene ", index, ":")
 
                 cont = 0
@@ -727,6 +732,8 @@ def main():
 
                         if(aux):
                             cont = cont + 1
+                        else:
+                            roundErrors = roundErrors + [i]
                         
                         time.sleep(1)
 
@@ -734,6 +741,8 @@ def main():
                 print("Successful tests percentage: ", (cont/50)*100)
 
                 print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+                print("Round Errors:", roundErrors, file=f)
 
                 print("Elapsed time: ", time.time() - initialTime)
 
@@ -755,10 +764,10 @@ def main():
 
                 # f.close()
 
-        f.close()
+    f.close()
     
 
-'''
+
 
 
 

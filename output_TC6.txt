@@ -28,3 +28,15 @@ Elapsed time:  473.72592520713806
 ############# END ###########
 
 
+Round Errors: []
+############# INIT ###########
+
+
+Date:  2019-07-12 19:31
+Scene  2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  337.0454115867615
+############# END ###########
+
+
