@@ -1,0 +1,24 @@
+############ INIT #############
+Date:  2019-07-12 11:18
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-12 11:36
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-12 15:44
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############

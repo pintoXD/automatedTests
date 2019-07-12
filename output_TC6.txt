@@ -2,9 +2,9 @@
 
 
 Scene  0 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  593.1684432029724
+Successful tests percentage:  98.0
+Unsuccessful tests percentage:  2.0
+Elapsed time:  477.73133850097656
 ############# END ###########
 
 
@@ -12,9 +12,19 @@ Elapsed time:  593.1684432029724
 
 
 Scene  1 :
+Successful tests percentage:  52.0
+Unsuccessful tests percentage:  48.0
+Elapsed time:  537.4371943473816
+############# END ###########
+
+
+############# INIT ###########
+
+
+Scene  2 :
 Successful tests percentage:  100.0
 Unsuccessful tests percentage:  0.0
-Elapsed time:  422.3852336406708
+Elapsed time:  473.72592520713806
 ############# END ###########
 
 
