@@ -8,7 +8,7 @@ import random
 import os
 import datetime
 
-
+rodada = 0
 
 def getCureProfileTime():
 
@@ -76,7 +76,7 @@ def profile(desiredCureProfile):
                 #Esse primeiro if serve só pra configurar o perfil de cura desejado e depois verificar
                 #se os buzzer e painel de led tão sendo acionados conforme as especificações.
 
-                time.sleep(0.5)
+                time.sleep(0.3)
 
                 buzzerFirstPress = getBuzzer()
 
@@ -122,14 +122,16 @@ def profile(desiredCureProfile):
                         auxReturn = auxReturn + [False]
 
                         now = datetime.datetime.now()
-                        with open('save_states_sceneOnetxt', 'a') as f:
+                        with open('states_TC3_scene_one.txt', 'a') as f:
 
                             print("############ INIT #############", file=f)
                             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                            print("Round: ", rodada, file=f)
 
                             print("Error inside Profile\n Part One\n Buzzer Count Incorrect.", file=f)
                             print("Current buzzer count:",
                                   len(auxBuzzer), file=f)
+                            print("Expected buzzer count: ", (2 + auxCont - 1 + 1), file=f)
                             print("Current profile cure time:", profileCureTime, file=f)
 
                             print("############ END #############", file=f)
@@ -145,12 +147,14 @@ def profile(desiredCureProfile):
                         print("Second power press failed")
                         auxReturn = auxReturn + [False]
                         now = datetime.datetime.now()
-                        with open('save_states_sceneOnetxt', 'a') as f:
+                        with open('states_TC3_scene_one.txt', 'a') as f:
 
                             print("############ INIT #############", file=f)
                             print("Date: ", now.strftime(
                                 "%Y-%m-%d %H:%M"), file=f)
 
+
+                            print("Round: ", rodada, file=f)
                             print(
                                 "Error inside Profile\n Part One\n Second power press failed.", file=f)
                             print("Current returnSet",
@@ -165,12 +169,12 @@ def profile(desiredCureProfile):
                 print("First power press failed")
                 auxReturn = auxReturn + [False]
                 now = datetime.datetime.now()
-                with open('save_states_sceneOnetxt', 'a') as f:
+                with open('states_TC3_scene_one.txt', 'a') as f:
 
                     print("############ INIT #############", file=f)
                     print("Date: ", now.strftime(
                         "%Y-%m-%d %H:%M"), file=f)
-
+                    print("Round: ", rodada, file=f)
                     print(
                         "Error inside Profile\n Part One\n First power press failed.", file=f)
                     print("Current returnSet",
@@ -203,18 +207,18 @@ def profile(desiredCureProfile):
 
                     else:
                         print("Buzzer bips count in cure profile isn't ok")
-                        
                         print("Number of bipes expected: ",
                               1 + (profileCureTime/10) + 1)
                         print("Number of bipes got: ", len(auxBuzzer))
                         auxReturn = auxReturn + [False]
 
                         now = datetime.datetime.now()
-                        with open('save_states_sceneOnetxt', 'a') as f:
+                        with open('states_TC3_scene_one.txt', 'a') as f:
 
                             print("############ INIT #############", file=f)
                             print("Date: ", now.strftime(
                                 "%Y-%m-%d %H:%M"), file=f)
+                            print("Round: ", rodada, file=f)
                             print(
                                 "Error inside Profile\n Part Two\n First power press failed.", file=f)
                             print("Buzzer bips count in cure profile isn't ok", file=f)
@@ -243,11 +247,12 @@ def profile(desiredCureProfile):
                 auxReturn = auxReturn + [False]
 
                 now = datetime.datetime.now()
-                with open('save_states_sceneOnetxt', 'a') as f:
+                with open('states_TC3_scene_one.txt', 'a') as f:
 
                     print("############ INIT #############", file=f)
                     print("Date: ", now.strftime(
                         "%Y-%m-%d %H:%M"), file=f)
+                    print("Round: ", rodada, file=f)
 
                     print(
                         "Error inside Profile\n Part Two\n First power press failed.", file=f)
@@ -269,11 +274,12 @@ def profile(desiredCureProfile):
         else:
             print("System in low-power consumption. Scenario cannot be tested")
             now = datetime.datetime.now()
-            with open('save_states_sceneOnetxt', 'a') as f:
+            with open('states_TC3_scene_one.txt', 'a') as f:
 
                 print("############ INIT #############", file=f)
                 print("Date: ", now.strftime(
                     "%Y-%m-%d %H:%M"), file=f)
+                print("Round: ", rodada, file=f)
 
                 print(
                     "Error inside Profile\n Part Two\n System in low-power consumption. Scenario cannot be tested.\n", file=f)
@@ -291,11 +297,12 @@ def profile(desiredCureProfile):
     else:
         print("Profile time not allowed")
         now = datetime.datetime.now()
-        with open('save_states_sceneOnetxt', 'a') as f:
+        with open('states_TC3_scene_one.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
             print("Date: ", now.strftime(
                 "%Y-%m-%d %H:%M"), file=f)
+            print("Round: ", rodada, file=f)
 
             print(
                 "Error inside Profile\n Part Two\n Profile time not allowed.\n", file=f)
@@ -435,11 +442,12 @@ def psOneSceneTwo():
 
         print("First PS from scenario 2 isn't ok")
         now = datetime.datetime.now()
-        with open('save_states_sceneTwo.txt', 'a') as f:
+        with open('states_TC3_sceneTwo_PS1.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
             print("PS 1 from Scene 2 get an error.", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+            print("Round: ", rodada, file=f)
             
             print("current ledInfoBefore:", ledInfoBefore, file=f)
             print("Current ledInfoAfter:", ledInfoAfter, file=f )
@@ -501,20 +509,30 @@ def psTwoSceneTwo():
         else:
             print("PS Two from scenario two isn't ok")
 
+            auxMsg=''
+
+            if(getPanel() != [0, 0, 0, 0]):
+                auxMsg = "Panel indicates that cure profile maybe activated. Need to check getPotLum()"
+
+
             now = datetime.datetime.now()
-            with open('save_states_psTwo.txt', 'a') as f:
+            with open('states_TC3_scene2_ps2.txt', 'a') as f:
 
                 print("############ INIT #############", file=f)
                 print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                print("Round: ", rodada, file=f)
 
                 print("PS 2 from Scene 2 get an error.", file=f)
                 print("Error on inside if statement\n", file=f)
+                print(auxMsg, file=f)
                 print("current auxPotLum:", auxPotLum, file=f)
+                print("Current getPotLum: ", getPotLum(), file=f)
                 print("Current returSet:", returnSet, file=f)
 
                 print("############ END #############", file=f)
 
-
+            if(getPotLum > 0):
+                set_config('01', '12', '02')
 
             f.close()
 
@@ -527,13 +545,15 @@ def psTwoSceneTwo():
 
 
         now = datetime.datetime.now()
-        with open('save_states_sceneTwo.txt', 'a') as f:
+        with open('states_TC3_scene2_ps2.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
             print("PS 2 from Scene 2 get an error.\n", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+            print("Round: ", rodada, file=f)
 
             print("Error on pot Lum that checks if cure LED is alerady on.", file=f)
+            print("Error on buttonPower configuration.", file=f)
             print("current auxPotLum:", auxPotLum, file=f)
             
            
@@ -593,10 +613,11 @@ def psThreeSceneTwo():
 
 
                 now = datetime.datetime.now()
-                with open('save_states_psThree.txt', 'a') as f:
+                with open('states_TC3_scene2_ps3.txt', 'a') as f:
 
                     print("############ INIT #############", file=f)
                     print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                    print("Round: ", rodada, file=f)
 
                     print("PS 3 from Scene 2 get an error.", file=f)
                     # print("Error on inside if statement\n", file=f)
@@ -635,11 +656,12 @@ def psThreeSceneTwo():
             print("Battery level test find an error")
 
             now = datetime.datetime.now()
-            with open('save_states_sceneTwo.txt', 'a') as f:
+            with open('states_TC3_scene2_ps3.txt', 'a') as f:
 
                 print("############ INIT #############", file=f)
                 print("PS 3 from Scene 2 get an error.", file=f)
                 print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                print("Round: ", rodada, file=f)
 
                 # print("Error on inside if statement\n", file=f)
                 print("Battery level test find an error", file=f)
@@ -665,10 +687,11 @@ def psThreeSceneTwo():
         print("Error on buttonPower configuration")
 
         now = datetime.datetime.now()
-        with open('save_states_psThree.txt', 'a') as f:
+        with open('states_TC3_scene2_ps3.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+            print("Round: ", rodada, file=f)
 
             print("PS 3 from Scene 2 get an error.", file=f)
             # print("Error on inside if statement\n", file=f)
@@ -710,7 +733,10 @@ def main():
     print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
 
     '''
-    totalRound = 50
+    global rodada
+
+
+    totalRound = 10
 #   sceneOne()
     # sceneTwo()
     # psOneSceneTwo()
@@ -727,13 +753,14 @@ def main():
 
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
-                # index = 1
-        for index in range(2):
+                index = 1
+        # for index in range(2):
 
                 cont = 0
                 initialTime = time.time()
                 for i in range(totalRound):
                         print("Round ", i)
+                        rodada = i
                         if(index == 0):
                             print("Scene One choosen")
                             aux = sceneOne()
@@ -749,9 +776,10 @@ def main():
 
                 print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
 
-                print("Successful tests percentage: ", (cont/50)*100)
+                print("Successful tests percentage: ", (cont/totalRound)*100)
 
-                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+                print("Unsuccessful tests percentage: ",
+                      ((totalRound - cont)/totalRound) * 100)
 
                 print("Elapsed time: ", time.time() - initialTime)
 
@@ -760,9 +788,11 @@ def main():
                 
                 print("Scene", index + 1 ,":", file=f)
 
-                print("Successful tests percentage: ", (cont/50)*100, file=f)
+                print("Successful tests percentage: ",
+                      (cont/totalRound)*100, file=f)
 
-                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+                print("Unsuccessful tests percentage: ",
+                      ((totalRound - cont)/totalRound) * 100, file=f)
 
                 print("Elapsed time: ", time.time() - initialTime, file = f)
 
