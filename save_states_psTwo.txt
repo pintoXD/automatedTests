@@ -22,3 +22,67 @@ Error on inside if statement
 current auxPotLum: 0
 Current returSet: b'\x99\x01\xff'
 ############ END #############
+############ INIT #############
+Date:  2019-07-18 14:08
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:09
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:10
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:11
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:11
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:12
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:12
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:13
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+current auxPotLum: 0
+Current returSet: b'\x99\x01\xff'
+############ END #############

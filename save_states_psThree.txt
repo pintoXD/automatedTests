@@ -22,3 +22,27 @@ Cannot read the led pannel properly.
  PS 3 from Scenario two failed.
 Current control: 70
 ############ END #############
+############ INIT #############
+Date:  2019-07-18 14:09
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:11
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
+############ INIT #############
+Date:  2019-07-18 14:13
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
