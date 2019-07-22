@@ -9,6 +9,7 @@ import os
 import datetime
 
 rodada = 0
+iteration = 0
 
 def getCureProfileTime():
 
@@ -126,7 +127,8 @@ def profile(desiredCureProfile):
 
                             print("############ INIT #############", file=f)
                             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-                            print("Round: ", rodada, file=f)
+                            print("Iterarion: ", iteration, file=f) 
+                            print("Round: ", rodada, file=f) 
 
                             print("Error inside Profile\n Part One\n Buzzer Count Incorrect.", file=f)
                             print("Current buzzer count:",
@@ -154,7 +156,9 @@ def profile(desiredCureProfile):
                                 "%Y-%m-%d %H:%M"), file=f)
 
 
-                            print("Round: ", rodada, file=f)
+                            print("Iterarion: ", iteration, file=f)
+
+                            print("Round: ", rodada, file=f) 
                             print(
                                 "Error inside Profile\n Part One\n Second power press failed.", file=f)
                             print("Current returnSet",
@@ -174,7 +178,8 @@ def profile(desiredCureProfile):
                     print("############ INIT #############", file=f)
                     print("Date: ", now.strftime(
                         "%Y-%m-%d %H:%M"), file=f)
-                    print("Round: ", rodada, file=f)
+                    print("Iterarion: ", iteration, file=f)
+                    print("Round: ", rodada, file=f) 
                     print(
                         "Error inside Profile\n Part One\n First power press failed.", file=f)
                     print("Current returnSet",
@@ -218,7 +223,8 @@ def profile(desiredCureProfile):
                             print("############ INIT #############", file=f)
                             print("Date: ", now.strftime(
                                 "%Y-%m-%d %H:%M"), file=f)
-                            print("Round: ", rodada, file=f)
+                            print("Iterarion: ", iteration, file=f)
+                            print("Round: ", rodada, file=f)  
                             print(
                                 "Error inside Profile\n Part Two\n First power press failed.", file=f)
                             print("Buzzer bips count in cure profile isn't ok", file=f)
@@ -252,7 +258,8 @@ def profile(desiredCureProfile):
                     print("############ INIT #############", file=f)
                     print("Date: ", now.strftime(
                         "%Y-%m-%d %H:%M"), file=f)
-                    print("Round: ", rodada, file=f)
+                    print("Iterarion: ", iteration, file=f)
+                    print("Round: ", rodada, file=f)  
 
                     print(
                         "Error inside Profile\n Part Two\n First power press failed.", file=f)
@@ -279,7 +286,8 @@ def profile(desiredCureProfile):
                 print("############ INIT #############", file=f)
                 print("Date: ", now.strftime(
                     "%Y-%m-%d %H:%M"), file=f)
-                print("Round: ", rodada, file=f)
+                print("Iterarion: ", iteration, file=f) 
+                print("Round: ", rodada, file=f)  
 
                 print(
                     "Error inside Profile\n Part Two\n System in low-power consumption. Scenario cannot be tested.\n", file=f)
@@ -302,7 +310,8 @@ def profile(desiredCureProfile):
             print("############ INIT #############", file=f)
             print("Date: ", now.strftime(
                 "%Y-%m-%d %H:%M"), file=f)
-            print("Round: ", rodada, file=f)
+            print("Iterarion: ", iteration, file=f)
+            print("Round: ", rodada, file=f)  
 
             print(
                 "Error inside Profile\n Part Two\n Profile time not allowed.\n", file=f)
@@ -447,7 +456,8 @@ def psOneSceneTwo():
             print("############ INIT #############", file=f)
             print("PS 1 from Scene 2 get an error.", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-            print("Round: ", rodada, file=f)
+            print("Iterarion: ", iteration, file=f)
+            print("Round: ", rodada, file=f)  
             
             print("current ledInfoBefore:", ledInfoBefore, file=f)
             print("Current ledInfoAfter:", ledInfoAfter, file=f )
@@ -520,7 +530,8 @@ def psTwoSceneTwo():
 
                 print("############ INIT #############", file=f)
                 print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-                print("Round: ", rodada, file=f)
+                print("Iterarion: ", iteration, file=f)
+                print("Round: ", rodada, file=f)  
 
                 print("PS 2 from Scene 2 get an error.", file=f)
                 print("Error on inside if statement\n", file=f)
@@ -531,7 +542,7 @@ def psTwoSceneTwo():
 
                 print("############ END #############", file=f)
 
-            if(getPotLum > 0):
+            if(getPotLum() > 0):
                 set_config('01', '12', '02')
 
             f.close()
@@ -550,7 +561,8 @@ def psTwoSceneTwo():
             print("############ INIT #############", file=f)
             print("PS 2 from Scene 2 get an error.\n", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-            print("Round: ", rodada, file=f)
+            print("Iterarion: ", iteration, file=f)
+            print("Round: ", rodada, file=f)  
 
             print("Error on pot Lum that checks if cure LED is alerady on.", file=f)
             print("Error on buttonPower configuration.", file=f)
@@ -617,7 +629,8 @@ def psThreeSceneTwo():
 
                     print("############ INIT #############", file=f)
                     print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-                    print("Round: ", rodada, file=f)
+                    print("Iterarion: ", iteration, file=f)
+                    print("Round: ", rodada, file=f)  
 
                     print("PS 3 from Scene 2 get an error.", file=f)
                     # print("Error on inside if statement\n", file=f)
@@ -661,7 +674,8 @@ def psThreeSceneTwo():
                 print("############ INIT #############", file=f)
                 print("PS 3 from Scene 2 get an error.", file=f)
                 print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-                print("Round: ", rodada, file=f)
+                print("Iterarion: ", iteration, file=f)
+                print("Round: ", rodada, file=f)  
 
                 # print("Error on inside if statement\n", file=f)
                 print("Battery level test find an error", file=f)
@@ -691,7 +705,8 @@ def psThreeSceneTwo():
 
             print("############ INIT #############", file=f)
             print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-            print("Round: ", rodada, file=f)
+            print("Iterarion: ", iteration, file=f)
+            print("Round: ", rodada, file=f)  
 
             print("PS 3 from Scene 2 get an error.", file=f)
             # print("Error on inside if statement\n", file=f)
@@ -734,9 +749,11 @@ def main():
 
     '''
     global rodada
+    global iteration
 
 
-    totalRound = 10
+    totalRound = 50
+    totalIteration = 3
 #   sceneOne()
     # sceneTwo()
     # psOneSceneTwo()
@@ -753,50 +770,53 @@ def main():
 
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
-                index = 1
-        # for index in range(2):
+        for iterationIndex in range(totalIteration):
+                    iteration = iterationIndex
+                    index = 1
+                    # for index in range(2):
 
-                cont = 0
-                initialTime = time.time()
-                for i in range(totalRound):
-                        print("Round ", i)
-                        rodada = i
-                        if(index == 0):
-                            print("Scene One choosen")
-                            aux = sceneOne()
-                        elif(index == 1):
-                            print("Scene Two choosen")
-                            aux = sceneTwo()
-                        if(aux):
-                            cont = cont + 1
-                        
-                        time.sleep(1)
+                    cont = 0
+                    initialTime = time.time()
+                    for i in range(totalRound):
+                            print("Round ", i)
+                            rodada = i
+                            if(index == 0):
+                                print("Scene One choosen")
+                                aux = sceneOne()
+                            elif(index == 1):
+                                print("Scene Two choosen")
+                                aux = sceneTwo()
+                            if(aux):
+                                cont = cont + 1
+                            
+                            time.sleep(1)
 
-                print("############# INIT #############\n\n", file=f)
-
-                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-
-                print("Successful tests percentage: ", (cont/totalRound)*100)
-
-                print("Unsuccessful tests percentage: ",
-                      ((totalRound - cont)/totalRound) * 100)
-
-                print("Elapsed time: ", time.time() - initialTime)
-
-
-
+                    print("############# INIT #############\n\n", file=f)
                 
-                print("Scene", index + 1 ,":", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                    print("Iteration No.:", totalIteration)  
+                    print("Round No.:", totalRound)
+                    print("Successful tests percentage: ", (cont/totalRound)*100)
 
-                print("Successful tests percentage: ",
-                      (cont/totalRound)*100, file=f)
+                    print("Unsuccessful tests percentage: ",
+                        ((totalRound - cont)/totalRound) * 100)
 
-                print("Unsuccessful tests percentage: ",
-                      ((totalRound - cont)/totalRound) * 100, file=f)
+                    print("Elapsed time: ", time.time() - initialTime)
 
-                print("Elapsed time: ", time.time() - initialTime, file = f)
 
-                print("\n\n############# END #############\n\n", file=f)
+
+                    
+                    print("Scene", index + 1 ,":", file=f)
+
+                    print("Successful tests percentage: ",
+                        (cont/totalRound)*100, file=f)
+
+                    print("Unsuccessful tests percentage: ",
+                        ((totalRound - cont)/totalRound) * 100, file=f)
+
+                    print("Elapsed time: ", time.time() - initialTime, file = f)
+
+                    print("\n\n############# END #############\n\n", file=f)
 
 
     f.close()

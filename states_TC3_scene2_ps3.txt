@@ -1,0 +1,40 @@
+############ INIT #############
+Date:  2019-07-22 10:15
+Iterarion:  0
+Round:  0
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
+############ INIT #############
+Date:  2019-07-22 10:16
+Iterarion:  0
+Round:  1
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
+############ INIT #############
+Date:  2019-07-22 10:16
+Iterarion:  0
+Round:  2
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
+############ INIT #############
+Date:  2019-07-22 11:20
+Iterarion:  0
+Round:  5
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+Current control: 70
+############ END #############
