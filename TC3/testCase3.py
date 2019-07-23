@@ -388,6 +388,8 @@ def sceneOne():
 def sceneTwo():
         auxReturn = []
 
+        auxNow = time.time()
+
         now = datetime.datetime.now()
 
     # with open('output_TC3_STWO.txt', 'a') as scenario:
@@ -418,7 +420,9 @@ def sceneTwo():
     #     print("############ END #############", file=scenario)
 
     # scenario.close()
+        elapsedAux = time.time() - auxNow
 
+        print("Elapsed time in scene: ", elapsedAux)
 
         return (auxReturn[0] and auxReturn [1] and auxReturn[2])
 
@@ -582,7 +586,7 @@ def psThreeSceneTwo():
     
   ####################### Botão Power Pressionado > ON_OFF_TIME segundos #############################
   
-    pressTime = '1E'  # Valor inteiro '10'
+    pressTime = '14'  # Valor inteiro '10'
     command = '01'
     buttonPower = '12'
 
@@ -595,12 +599,12 @@ def psThreeSceneTwo():
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
-        time.sleep(3)
+        time.sleep(2.2)
         ### Momento de captar as respostas da placa
         #tratar o vetor de tuplas do buzzer
         # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
 
-        print("Button configured")
+        # print("Button configured")
         limiar = 6
         ledInfoOld = getPanel()
         cont = 0
@@ -752,9 +756,9 @@ def main():
     global iteration
 
 
-    totalRound = 50
-    totalIteration = 3
-    
+    totalRound = 10
+    totalIteration = 5
+
 #   sceneOne()
     # sceneTwo()
     # psOneSceneTwo()
@@ -773,7 +777,7 @@ def main():
     with open('output_TC3.txt', 'a') as f: 
         for iterationIndex in range(totalIteration):
                     iteration = iterationIndex
-                    index = 1
+                    index = 0
                     # for index in range(2):
 
                     cont = 0
@@ -793,10 +797,12 @@ def main():
                             time.sleep(1)
 
                     print("############# INIT #############\n\n", file=f)
+
+                    print("Current iteration: ", iteration)
                 
                     print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-                    print("Iteration No.:", totalIteration)  
-                    print("Round No.:", totalRound)
+                    print("Iteration No.:", totalIteration, file=f)  
+                    print("Round No.:", totalRound, file=f)
                     print("Successful tests percentage: ", (cont/totalRound)*100)
 
                     print("Unsuccessful tests percentage: ",

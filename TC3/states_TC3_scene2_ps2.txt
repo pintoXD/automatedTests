@@ -1,0 +1,36 @@
+############ INIT #############
+Date:  2019-07-23 09:13
+Iterarion:  0
+Round:  47
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+Panel indicates that cure profile maybe activated. Need to check getPotLum()
+current auxPotLum: 0
+Current getPotLum:  779.8629441879239
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-23 09:14
+Iterarion:  0
+Round:  48
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+Panel indicates that cure profile maybe activated. Need to check getPotLum()
+current auxPotLum: 0
+Current getPotLum:  908.1294295159714
+Current returSet: b'\x99\x01\xff'
+############ END #############
+############ INIT #############
+Date:  2019-07-23 09:56
+Iterarion:  2
+Round:  23
+PS 2 from Scene 2 get an error.
+Error on inside if statement
+
+Panel indicates that cure profile maybe activated. Need to check getPotLum()
+current auxPotLum: 0
+Current getPotLum:  779.4626973372724
+Current returSet: b'\x99\x01\xff'
+############ END #############
