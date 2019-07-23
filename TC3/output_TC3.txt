@@ -63,3 +63,78 @@ Elapsed time:  1686.0773303508759
 ############# END #############
 
 
+############# INIT #############
+
+
+Date:  2019-07-23 11:52
+Iteration No.: 5
+Round No.: 10
+Scene 2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  327.8631737232208
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 11:52
+Iteration No.: 5
+Round No.: 10
+Scene 2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  327.62502336502075
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 11:52
+Iteration No.: 5
+Round No.: 10
+Scene 2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  327.8594448566437
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 11:52
+Iteration No.: 5
+Round No.: 10
+Scene 2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  327.7561545372009
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 11:52
+Iteration No.: 5
+Round No.: 10
+Scene 2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  327.76502871513367
+
+
+############# END #############
+
+
