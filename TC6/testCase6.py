@@ -715,8 +715,8 @@ def main():
     roundErrors = []
 
     with open('output_TC6.txt', 'a') as f:
-                index = 1
-        # for index in range(3):
+                # index = 1
+        for index in range(3):
                 print("Scene ", index, ":")
 
                 cont = 0

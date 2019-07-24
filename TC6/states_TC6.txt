@@ -1,0 +1,12 @@
+############ INIT #############
+Date:  2019-07-24 11:54
+Scenario Two isn't ok.
+Current ledInfo: [0, 0, 1, 1]
+############ END #############
+############ INIT #############
+Date:  2019-07-24 11:56
+Scenario Three isn't ok.
+PS 2 Scenario 3 from case 6 was not complied
+Current elapsedTime: 4.917994499206543
+Current ledInfo [0, 0, 0, 0]
+############ END #############
