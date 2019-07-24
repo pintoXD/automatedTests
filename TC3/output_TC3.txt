@@ -138,3 +138,123 @@ Elapsed time:  327.76502871513367
 ############# END #############
 
 
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 1 :
+Successful tests percentage:  76.0
+Unsuccessful tests percentage:  24.0
+Elapsed time:  8756.375254392624
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  1612.8327655792236
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 1 :
+Successful tests percentage:  76.0
+Unsuccessful tests percentage:  24.0
+Elapsed time:  8690.240285158157
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 2 :
+Successful tests percentage:  96.0
+Unsuccessful tests percentage:  4.0
+Elapsed time:  1613.392038345337
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 1 :
+Successful tests percentage:  80.0
+Unsuccessful tests percentage:  20.0
+Elapsed time:  8756.051100254059
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 2 :
+Successful tests percentage:  90.0
+Unsuccessful tests percentage:  10.0
+Elapsed time:  1622.6197302341461
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 1 :
+Successful tests percentage:  78.0
+Unsuccessful tests percentage:  22.0
+Elapsed time:  8753.805460453033
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-23 20:17
+Iteration No.: 5
+Round No.: 50
+Scene 2 :
+Successful tests percentage:  90.0
+Unsuccessful tests percentage:  10.0
+Elapsed time:  1620.2757844924927
+
+
+############# END #############
+
+

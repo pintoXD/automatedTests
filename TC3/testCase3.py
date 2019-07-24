@@ -7,6 +7,8 @@ import time
 import random
 import os
 import datetime
+import statistics
+
 
 rodada = 0
 iteration = 0
@@ -134,6 +136,7 @@ def profile(desiredCureProfile):
                             print("Current buzzer count:",
                                   len(auxBuzzer), file=f)
                             print("Expected buzzer count: ", (2 + auxCont - 1 + 1), file=f)
+                            print("Desired cure profile:", desiredCureProfile, file=f)
                             print("Current profile cure time:", profileCureTime, file=f)
 
                             print("############ END #############", file=f)
@@ -159,6 +162,8 @@ def profile(desiredCureProfile):
                             print("Iterarion: ", iteration, file=f)
 
                             print("Round: ", rodada, file=f) 
+                            print("Desired cure profile:",
+                                  desiredCureProfile, file=f)
                             print(
                                 "Error inside Profile\n Part One\n Second power press failed.", file=f)
                             print("Current returnSet",
@@ -180,8 +185,9 @@ def profile(desiredCureProfile):
                         "%Y-%m-%d %H:%M"), file=f)
                     print("Iterarion: ", iteration, file=f)
                     print("Round: ", rodada, file=f) 
+                    print("Desired cure profile:", desiredCureProfile, file=f)
                     print(
-                        "Error inside Profile\n Part One\n First power press failed.", file=f)
+                        "Error inside Profile\nPart One\nFirst power press failed.", file=f)
                     print("Current returnSet",
                             returnSet, file=f)
                     # print("Current ledInfoAfter:", ledInfoAfter, file=f)
@@ -225,9 +231,11 @@ def profile(desiredCureProfile):
                                 "%Y-%m-%d %H:%M"), file=f)
                             print("Iterarion: ", iteration, file=f)
                             print("Round: ", rodada, file=f)  
-                            print(
-                                "Error inside Profile\n Part Two\n First power press failed.", file=f)
+                            # print(
+                            #     "Error inside Profile\n Part Two\n First power press failed.", file=f)
                             print("Buzzer bips count in cure profile isn't ok", file=f)
+                            print("Desired cure profile:",
+                                  desiredCureProfile, file=f)
                             
                             print("Number of bipes expected: ",
                                 1 + (profileCureTime/10) + 1, file=f)
@@ -259,7 +267,8 @@ def profile(desiredCureProfile):
                     print("Date: ", now.strftime(
                         "%Y-%m-%d %H:%M"), file=f)
                     print("Iterarion: ", iteration, file=f)
-                    print("Round: ", rodada, file=f)  
+                    print("Round: ", rodada, file=f)
+                    print("Desired cure profile:", desiredCureProfile, file=f)
 
                     print(
                         "Error inside Profile\n Part Two\n First power press failed.", file=f)
@@ -312,6 +321,7 @@ def profile(desiredCureProfile):
                 "%Y-%m-%d %H:%M"), file=f)
             print("Iterarion: ", iteration, file=f)
             print("Round: ", rodada, file=f)  
+            print("Desired cure profile:", desiredCureProfile, file=f)
 
             print(
                 "Error inside Profile\n Part Two\n Profile time not allowed.\n", file=f)
@@ -355,7 +365,7 @@ def sceneOne():
     auxReturn = []
     # with open('output_TC3_SONE.txt', 'a') as scenario:
 
-
+    auxElapsed = time.time()
 
     # print("############ INIT #############", file=scenario)
 
@@ -381,6 +391,8 @@ def sceneOne():
         # print("############ END #############", file=scenario)
 
     # scenario.close()
+
+    print("Scene one elapsed time: ", round(time.time() - auxElapsed, 3))
 
 
     return (auxReturn[0] and auxReturn[1] and auxReturn[2] and auxReturn[3])
@@ -486,6 +498,7 @@ def psTwoSceneTwo():
     # ON_OFF_TIME_LOCAL = '01'
 
     auxPotLum = ''
+    auxMeanPotLum = []
 
     # auxPotLum = int(auxPotLum, 16)
 
@@ -500,14 +513,28 @@ def psTwoSceneTwo():
 
     if (returnSet == bytes.fromhex('99' + command + 'FF')):
 
-        time.sleep(5.5)
+        time.sleep(1)
         ### Momento de captar as respostas da placa
         #tratar o vetor de tuplas do buzzer
         # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
 
         print("Button configured")
 
-        auxPotLum = getPotLum()
+        indexer = 0
+
+        auxTime = time.time()
+
+        while(indexer < 10):
+            auxMeanPotLum = auxMeanPotLum + [getPotLum()]
+            # time.sleep(0.05)
+            indexer = indexer + 1
+
+        print("Elapsed inside while", time.time() - auxTime)
+
+        auxPotLum = statistics.mean(auxMeanPotLum)
+        
+
+        print("Aux pot lum: ", auxPotLum)
 
         # auxPotLum = int(auxPotLum, 16)
 
@@ -624,7 +651,7 @@ def psThreeSceneTwo():
                     ledInfo = getPanel()  
                     cont = cont + 1
             
-          if(control >= 70):
+          if(control >= 100):
                 print("Cannot read the led pannel properly.\n While enters in a deadlock\n PS 3 from Scenario two failed.")
 
 
@@ -641,10 +668,10 @@ def psThreeSceneTwo():
                     print(
                         "Cannot read the led pannel properly.\n While enters in a deadlock\n PS 3 from Scenario two failed.", file=f)
 
-                    # print("current returSet:", returnSet, file=f)
-                    print("Current control:", control, file=f)
-                    # print("Current ledInfoOld", ledInfoOld, file=f)
-                    # print("Current ledInfo", ledInfo, file=f)
+                    print("current returSet:", returnSet, file=f)
+                    # print("Current control:", control, file=f)
+                    print("Current ledInfoOld", ledInfoOld, file=f)
+                    print("Current ledInfo", ledInfo, file=f)
 
                     print("############ END #############", file=f)
 
@@ -776,9 +803,9 @@ def main():
     now = datetime.datetime.now()
     with open('output_TC3.txt', 'a') as f: 
         for iterationIndex in range(totalIteration):
-                    iteration = iterationIndex
-                    index = 0
-                    # for index in range(2):
+                iteration = iterationIndex
+                # index = 0
+                for index in range(2):
 
                     cont = 0
                     initialTime = time.time()
