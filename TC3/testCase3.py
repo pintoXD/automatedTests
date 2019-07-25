@@ -82,6 +82,33 @@ def profile(desiredCureProfile):
 
                 time.sleep(0.3)
 
+                auxPotLum = ''
+
+                auxMeanPotLum = []
+
+                # auxPotLum = int(auxPotLum, 16)
+                ######### INIT #############
+                indexer = 0
+
+                while(indexer < 3):
+                    auxMeanPotLum = auxMeanPotLum + [getPotLum()]
+                    # time.sleep(0.05)
+                    indexer = indexer + 1
+
+                auxPotLum = statistics.mean(auxMeanPotLum)
+
+                while(auxPotLum <= 0):
+                    set_config(command, buttonPower, pressTime)
+                    time.sleep(0.3)
+                    
+
+
+
+                
+
+
+
+                ######### FIN #############
                 buzzerFirstPress = getBuzzer()
 
                 print("buzzerFirstPress is: ", buzzerFirstPress)
@@ -618,6 +645,45 @@ def psThreeSceneTwo():
 
     # time.sleep
 
+
+ ######### Checa se o LED de cura ainda está ligado, por algu motivo, tentando assim o desligar #######
+
+    # auxLedCureOff = validateCureOff()
+    auxControl = 0
+    while(auxControl <= 50):
+
+        auxLedCureOff = validateCureOff()
+
+        if(auxLedCureOff == True):
+            break
+
+        auxControl = auxControl + 1
+
+    if(auxControl > 0):
+
+        now = datetime.datetime.now()
+        with open('states_TC3_scene2_ps3.txt', 'a') as f:
+
+            print("\n############ INIT #############\n", file=f)
+            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+            print("Iterarion: ", iteration, file=f)
+            print("Round: ", rodada, file=f)
+
+            # print("Error on inside if statement\n", file=f)
+            print(
+                "Cure LED was on. Needed to shutting it dows before start PS3", file=f)
+            print(
+                "Function to shutdown the LED was called", file=f)
+            print("No. of times the function was called: ", auxControl, file=f)
+            # print("Current control:", control, file=f)
+            # print("Current ledInfoOld", ledInfoOld, file=f)
+            # print("Current ledInfo", ledInfo, file=f)
+
+            print("\n############ END #############\n", file=f)
+
+        f.close()
+
+
     
   ####################### Botão Power Pressionado > ON_OFF_TIME segundos #############################
   
@@ -767,9 +833,98 @@ def psThreeSceneTwo():
 
 
 
+
+def validateCureOff():
+
+
+    pressTime = '02'  # Vai multiplicar por 100mS #Menor que ON_OFF_TIME
+    command = '01'
+    buttonPower = '12'
+    # ON_OFF_TIME_LOCAL = '01'
+
+    auxPotLum = ''
+    auxMeanPotLum = []
+
+    # auxPotLum = int(auxPotLum, 16)
+
+
+
+    indexer = 0
+    while(indexer < 5):
+        auxMeanPotLum = auxMeanPotLum + [getPotLum()]
+        # time.sleep(0.05)
+        indexer = indexer + 1
+
+    auxPotLum = statistics.mean(auxMeanPotLum)
+
+    if(auxPotLum > 0):
+        #SE o led de cura tiver ligado, desligar ele antes
+        print("########### CURE ON ###############")
+        print("Cure on. Shutting down.")
+        returnSet = set_config(command, buttonPower, pressTime)
+        time.sleep(0.8)
+
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+            time.sleep(0.8)
+            ### Momento de captar as respostas da placa
+            #tratar o vetor de tuplas do buzzer
+            # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
+
+            print("Button power configured")
+            indexer = 0
+            while(indexer < 3):
+                auxMeanPotLum = auxMeanPotLum + [getPotLum()]
+                # time.sleep(0.05)
+                indexer = indexer + 1
+
+            auxPotLum = statistics.mean(auxMeanPotLum)
+
+
+            if(auxPotLum == 0):
+                print("OK. Shutdown press was successful. Cure LED turned off.")
+
+                # set_config(command, buttonPower, pressTime)
+                return True
+
+
+            else:
+                print("######## ERROR ###############")
+                print("Shutdown button was pressed but cure led didn't shutdown")
+                print("Current getPotLum: ", getPotLum())
+
+                now = datetime.datetime.now()
+                with open('states_TC3_scene2_ps3.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                    print("Iterarion: ", iteration, file=f)
+                    print("Round: ", rodada, file=f)
+
+                    # print("Error on inside if statement\n", file=f)
+                    print("Cure LED was on. Needed to shutting it dows before start PS3", file=f)
+                    print("Shutdown button was pressed but cure led didn't shutdown", file=f)
+                    print("Current getPotLum: ", getPotLum(), file=f)
+                    # print("Current control:", control, file=f)
+                    # print("Current ledInfoOld", ledInfoOld, file=f)
+                    # print("Current ledInfo", ledInfo, file=f)
+
+                    print("############ END #############", file=f)
+
+                f.close()
+
+      
+                return False
+    else:
+
+        print("Cure Led is already off")
+        return True
+
+
+
+
 def sceneThree():
 
-     ####################### Botão Power Pressionado < ON_OFF_TIME segundos #############################
     #ON_OFF_TIME é de 2 segundos
     pressTime = '02'  # Vai multiplicar por 100mS #Menor que ON_OFF_TIME
     command = '01'
@@ -833,7 +988,6 @@ def sceneThree():
                 print("Iterarion: ", iteration, file=f)
                 print("Round: ", rodada, file=f)
 
-                print("PS 3 from Scene 2 get an error.", file=f)
                 # print("Error on inside if statement\n", file=f)
                 print("Shutdown was pressed but cure led didn't turned on", file=f)
                 print("Current getPotLum: ", getPotLum(), file=f)
@@ -869,7 +1023,6 @@ def sceneThree():
                     print("Iterarion: ", iteration, file=f)
                     print("Round: ", rodada, file=f)
 
-                    print("PS 3 from Scene 2 get an error.", file=f)
                     # print("Error on inside if statement\n", file=f)
                     print("Shutdown was pressed but cure led didn't shutdown", file=f)
                     print("Current getPotLum: ", getPotLum(), file=f)

@@ -38,3 +38,75 @@ PS 3 from Scene 2 get an error.
 Shutdown was pressed but cure led didn't turned on
 Current getPotLum:  0
 ############ END #############
+############ INIT #############
+Date:  2019-07-25 12:30
+Iterarion:  4
+Round:  11
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:33
+Iterarion:  4
+Round:  46
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:36
+Iterarion:  5
+Round:  31
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:39
+Iterarion:  6
+Round:  16
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:42
+Iterarion:  7
+Round:  1
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:44
+Iterarion:  7
+Round:  36
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:47
+Iterarion:  8
+Round:  21
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:50
+Iterarion:  9
+Round:  6
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:53
+Iterarion:  9
+Round:  41
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
