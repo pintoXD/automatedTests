@@ -1153,7 +1153,7 @@ def main():
 
 
     totalRound = 50
-    totalIteration = 10
+    totalIteration = 5
 
 #   sceneOne()
     # sceneTwo()
@@ -1176,7 +1176,7 @@ def main():
             # for index in range(2):
                 with open('output_TC3.txt', 'a') as f: 
                         iteration = iterationIndex
-                        index = 2
+                        index = 0
 
                         cont = 0
                         initialTime = time.time()
