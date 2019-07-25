@@ -88,6 +88,9 @@ def profile(desiredCureProfile):
 
                 # auxPotLum = int(auxPotLum, 16)
                 ######### INIT #############
+                ##Esse pedaço de código visa garantir que o botão de power vai realmente ser pressionado,
+                ##que o perfil de cura vai realmente ser ativado, pra bypassar o bug que há atulamente.
+
                 indexer = 0
 
                 while(indexer < 3):
@@ -100,9 +103,10 @@ def profile(desiredCureProfile):
                 while(auxPotLum <= 0):
                     set_config(command, buttonPower, pressTime)
                     time.sleep(0.3)
-                    
+                    auxPotLum = getPotLum()
 
 
+                
 
                 
 
