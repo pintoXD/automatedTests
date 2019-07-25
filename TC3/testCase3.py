@@ -930,7 +930,7 @@ def validateCureOff():
 def sceneThree():
 
     #ON_OFF_TIME é de 2 segundos
-    pressTime = '02'  # Vai multiplicar por 100mS #Menor que ON_OFF_TIME
+    pressTime = '05'  # Vai multiplicar por 100mS #Menor que ON_OFF_TIME
     command = '01'
     buttonPower = '12'
     # ON_OFF_TIME_LOCAL = '01'
