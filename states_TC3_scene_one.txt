@@ -1,0 +1,179 @@
+############ INIT #############
+Date:  2019-07-24 12:12
+Iterarion:  0
+Round:  0
+Error inside Profile
+ Part One
+Checking buttoArrow beeps 
+Buzzer Count Incorrect.
+Current buzzer count: 2
+Expected buzzer count:  3
+Desired cure profile: 10
+Current profile cure time: 10
+############ END #############
+############ INIT #############
+Date:  2019-07-24 16:32
+Iterarion:  0
+Round:  41
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 40
+Current profile cure time:  40
+Number of bipes expected:  6.0
+Number of bipes got:  25
+############ END #############
+############ INIT #############
+Date:  2019-07-24 16:32
+Iterarion:  0
+Round:  41
+Error inside Profile
+ Part One
+Checking buttoArrow beeps 
+Buzzer Count Incorrect.
+Current buzzer count: 12
+Expected buzzer count:  3
+Desired cure profile: 60
+Current profile cure time: 60
+############ END #############
+############ INIT #############
+Date:  2019-07-24 16:33
+Iterarion:  0
+Round:  41
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 60
+Current profile cure time:  60
+Number of bipes expected:  8.0
+Number of bipes got:  11
+############ END #############
+############ INIT #############
+Date:  2019-07-24 17:24
+Iterarion:  1
+Round:  0
+Error inside Profile
+ Part One
+Checking buttoArrow beeps 
+Buzzer Count Incorrect.
+Current buzzer count: 2
+Expected buzzer count:  3
+Desired cure profile: 10
+Current profile cure time: 10
+############ END #############
+############ INIT #############
+Date:  2019-07-24 17:25
+Iterarion:  1
+Round:  0
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 10
+Current profile cure time:  10
+Number of bipes expected:  3.0
+Number of bipes got:  2
+############ END #############
+############ INIT #############
+Date:  2019-07-24 20:23
+Iterarion:  2
+Round:  0
+Error inside Profile
+ Part One
+Checking buttoArrow beeps 
+Buzzer Count Incorrect.
+Current buzzer count: 2
+Expected buzzer count:  3
+Desired cure profile: 10
+Current profile cure time: 10
+############ END #############
+############ INIT #############
+Date:  2019-07-24 20:24
+Iterarion:  2
+Round:  0
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 10
+Current profile cure time:  10
+Number of bipes expected:  3.0
+Number of bipes got:  2
+############ END #############
+############ INIT #############
+Date:  2019-07-24 23:22
+Iterarion:  3
+Round:  0
+Error inside Profile
+ Part One
+Checking buttoArrow beeps 
+Buzzer Count Incorrect.
+Current buzzer count: 2
+Expected buzzer count:  3
+Desired cure profile: 10
+Current profile cure time: 10
+############ END #############
+############ INIT #############
+Date:  2019-07-24 23:23
+Iterarion:  3
+Round:  0
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 10
+Current profile cure time:  10
+Number of bipes expected:  3.0
+Number of bipes got:  2
+############ END #############
+############ INIT #############
+Date:  2019-07-25 02:21
+Iterarion:  4
+Round:  0
+Error inside Profile
+ Part One
+Checking buttoArrow beeps 
+Buzzer Count Incorrect.
+Current buzzer count: 2
+Expected buzzer count:  3
+Desired cure profile: 10
+Current profile cure time: 10
+############ END #############
+############ INIT #############
+Date:  2019-07-25 02:22
+Iterarion:  4
+Round:  0
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 10
+Current profile cure time:  10
+Number of bipes expected:  3.0
+Number of bipes got:  2
+############ END #############
+############ INIT #############
+Date:  2019-07-25 03:40
+Iterarion:  4
+Round:  26
+Desired cure profile: 10
+Error inside Profile
+Part One
+First power press failed.
+Current returnSet b'\x99'
+############ END #############
+############ INIT #############
+Date:  2019-07-25 09:27
+Iterarion:  0
+Round:  20
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 60
+Current profile cure time:  60
+Number of bipes expected:  8.0
+Number of bipes got:  25
+############ END #############

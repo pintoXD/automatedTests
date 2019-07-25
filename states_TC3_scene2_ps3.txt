@@ -38,3 +38,42 @@ Cannot read the led pannel properly.
  PS 3 from Scenario two failed.
 Current control: 70
 ############ END #############
+############ INIT #############
+Date:  2019-07-24 19:58
+Iterarion:  1
+Round:  2
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+current returSet: b'\x99\x01\xff'
+Current variation counter: 0
+Current ledInfoOld [0, 1, 0, 0]
+Current ledInfo [0, 1, 0, 0]
+############ END #############
+############ INIT #############
+Date:  2019-07-24 23:07
+Iterarion:  2
+Round:  20
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+current returSet: b'\x99\x01\xff'
+Current variation counter: 0
+Current ledInfoOld [0, 1, 0, 0]
+Current ledInfo [0, 1, 0, 0]
+############ END #############
+############ INIT #############
+Date:  2019-07-25 02:15
+Iterarion:  3
+Round:  38
+PS 3 from Scene 2 get an error.
+Cannot read the led pannel properly.
+ While enters in a deadlock
+ PS 3 from Scenario two failed.
+current returSet: b'\x99\x01\xff'
+Current variation counter: 0
+Current ledInfoOld [0, 1, 0, 0]
+Current ledInfo [0, 1, 0, 0]
+############ END #############

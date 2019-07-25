@@ -1,12 +1,12 @@
 Successful tests percentage:  100.0
 Unsuccessful tests percentage:  0.0
-Elapsed time:  291.778192281723
+Elapsed time:  286.92847967147827
 ############# END ###########
 
 
 Successful tests percentage:  100.0
 Unsuccessful tests percentage:  0.0
-Elapsed time:  478.9986400604248
+Elapsed time:  478.1206114292145
 ############# END ###########
 
 

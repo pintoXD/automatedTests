@@ -675,8 +675,8 @@ def main():
 
     now = datetime.datetime.now()
     with open('output_TC7.txt', 'a') as f:
-                index = 3
-        # for index in range(4):
+                # index = 3
+        for index in range(4):
 
                 cont = 0
                 initialTime = time.time()

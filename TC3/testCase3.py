@@ -62,6 +62,7 @@ def profile(desiredCureProfile):
     buzzerInfo = []
     ledInfo = []
     pressTime = '02'  # Valor inteiro '10'
+    profileCureTime = 0
 
     VBAT_MIN = 2420
 
@@ -790,7 +791,7 @@ def main():
     global iteration
 
 
-    totalRound = 5
+    totalRound = 50
     totalIteration = 1
 
 #   sceneOne()
@@ -809,7 +810,8 @@ def main():
 
     now = datetime.datetime.now()
     for iterationIndex in range(totalIteration):
-                # for index in range(2):
+                        # index = 0
+            # for index in range(2):
                 with open('output_TC3.txt', 'a') as f: 
                         iteration = iterationIndex
                         index = 0

@@ -40,3 +40,39 @@ Elapsed time:  337.0454115867615
 ############# END ###########
 
 
+Round Errors: []
+############# INIT ###########
+
+
+Date:  2019-07-25 07:28
+Scene  1 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  478.1859667301178
+############# END ###########
+
+
+Round Errors: []
+############# INIT ###########
+
+
+Date:  2019-07-25 07:33
+Scene  2 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  332.1773684024811
+############# END ###########
+
+
+Round Errors: []
+############# INIT ###########
+
+
+Date:  2019-07-25 07:41
+Scene  3 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  473.5106225013733
+############# END ###########
+
+

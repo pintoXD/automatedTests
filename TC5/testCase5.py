@@ -6,6 +6,10 @@ import random
 import os
 import datetime
 
+
+round = 0
+
+
 #teste commnet
 
 # def validateLED(ledInfo, ledToken):
@@ -292,6 +296,8 @@ def main():
 
   print("Hello World!")
 
+  totalRound = 50
+
 #   sceneOne()
   #sceneTwo()
 #   sceneThree()
@@ -307,7 +313,7 @@ def main():
         for index in range(2):
             cont = 0
             initialTime = time.time()
-            for i in range(50):
+            for i in range(totalRound):
                     print("Round ", i)
                     if(index == 0):
                         print("Scene One choosen")
@@ -323,14 +329,15 @@ def main():
 
                     if(aux):
                         cont = cont + 1
+
                     
                     time.sleep(1)
 
 
+            print("Successful tests percentage: ", (cont/totalRound)*100)
 
-            print("Successful tests percentage: ", (cont/50)*100)
-
-            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+            print("Unsuccessful tests percentage: ",
+                  ((totalRound - cont)/totalRound) * 100)
 
             print("Elapsed time: ", time.time() - initialTime)
 
@@ -338,9 +345,11 @@ def main():
     
             print("Scene ", index + 1, ":")
 
-            print("Successful tests percentage: ", (cont/50)*100, file=f)
+            print("Successful tests percentage: ",
+                  (cont/totalRound)*100, file=f)
 
-            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+            print("Unsuccessful tests percentage: ",
+                  ((totalRound - cont)/totalRound) * 100, file=f)
 
             print("Elapsed time: ", time.time() - initialTime, file = f)
 
