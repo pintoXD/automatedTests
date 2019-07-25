@@ -92,6 +92,8 @@ def profile(desiredCureProfile):
                 ##que o perfil de cura vai realmente ser ativado, pra bypassar o bug que há atulamente.
 
                 indexer = 0
+                auxPotLum = 0
+                auxMeanPotLum = []
 
                 while(indexer < 3):
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -125,6 +127,8 @@ def profile(desiredCureProfile):
                     # placa de aquisição que há atulamente.
 
                     indexer = 0
+                    auxPotLum = 0
+                    auxMeanPotLum = []
 
                     while(indexer < 3):
                         auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -274,7 +278,10 @@ def profile(desiredCureProfile):
             returnSet = set_config(command, buttonPower, pressTime)
             if (returnSet == bytes.fromhex('99' + command + 'FF')):
                 time.sleep(0.5)
+                ######### INIT #############
                 indexer = 0
+                auxPotLum = 0
+                auxMeanPotLum = []
 
                 while(indexer < 3):
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -288,7 +295,7 @@ def profile(desiredCureProfile):
                     time.sleep(0.3)
                     auxPotLum = getPotLum()
 
-
+                ######### INIT #############
                 if(auxPotLum != 0):
 
                     time.sleep(profileCureTime + 5)
