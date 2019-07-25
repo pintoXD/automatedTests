@@ -767,6 +767,147 @@ def psThreeSceneTwo():
 
 
 
+def sceneThree():
+
+     ####################### Botão Power Pressionado < ON_OFF_TIME segundos #############################
+    #ON_OFF_TIME é de 2 segundos
+    pressTime = '02'  # Vai multiplicar por 100mS #Menor que ON_OFF_TIME
+    command = '01'
+    buttonPower = '12'
+    # ON_OFF_TIME_LOCAL = '01'
+
+    auxPotLum = ''
+    auxMeanPotLum = []
+
+    # auxPotLum = int(auxPotLum, 16)
+
+    if(getPotLum() > 0):
+        #SE o led de cura tiver ligado, desligar ele antes
+        print("########### CURE ON ###############")
+        print("Cure on. Shutting down.")
+        set_config(command, buttonPower, pressTime)
+        time.sleep(0.8)
+
+    returnSet = set_config(command, buttonPower, pressTime)
+
+    if (returnSet == bytes.fromhex('99' + command + 'FF')):
+
+        time.sleep(0.8)
+        ### Momento de captar as respostas da placa
+        #tratar o vetor de tuplas do buzzer
+        # Nesse caso, só vai ter uma tupla por ser o primeiro perfil
+
+        print("Button configured")
+
+        indexer = 0
+
+        auxTime = time.time()
+
+        while(indexer < 5):
+            auxMeanPotLum = auxMeanPotLum + [getPotLum()]
+            # time.sleep(0.05)
+            indexer = indexer + 1
+
+        print("Elapsed inside while", time.time() - auxTime)
+
+        auxPotLum = statistics.mean(auxMeanPotLum)
+
+        print("Aux pot lum: ", auxPotLum)
+
+        # auxPotLum = int(auxPotLum, 16)
+
+        if(auxPotLum > 0):
+            print("OK. Half of the test is nice.")
+
+            set_config(command, buttonPower, pressTime)
+        else:
+            print("######## ERROR ###############")
+            print("Shutdown was pressed but cure led didn't turned on")
+            print("Current getPotLum: ", getPotLum())
+
+            now = datetime.datetime.now()
+            with open('states_TC3_scene3.txt', 'a') as f:
+
+                print("############ INIT #############", file=f)
+                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                print("Iterarion: ", iteration, file=f)
+                print("Round: ", rodada, file=f)
+
+                print("PS 3 from Scene 2 get an error.", file=f)
+                # print("Error on inside if statement\n", file=f)
+                print("Shutdown was pressed but cure led didn't turned on", file=f)
+                print("Current getPotLum: ", getPotLum(), file=f)
+                # print("Current control:", control, file=f)
+                # print("Current ledInfoOld", ledInfoOld, file=f)
+                # print("Current ledInfo", ledInfo, file=f)
+
+                print("############ END #############", file=f)
+
+            f.close()
+
+
+
+            return False
+
+        
+
+        if (returnSet == bytes.fromhex('99' + command + 'FF')):
+            time.sleep(0.7)
+            if(getPotLum() == 0):
+                print("Test is ok")
+                return True
+            else:
+                print("######## ERROR ###############")
+                print("Shutdown was pressed but cure led didn't shutdown")
+                print("Current getPotLum: ", getPotLum())
+
+                now = datetime.datetime.now()
+                with open('states_TC3_scene3.txt', 'a') as f:
+
+                    print("############ INIT #############", file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                    print("Iterarion: ", iteration, file=f)
+                    print("Round: ", rodada, file=f)
+
+                    print("PS 3 from Scene 2 get an error.", file=f)
+                    # print("Error on inside if statement\n", file=f)
+                    print("Shutdown was pressed but cure led didn't shutdown", file=f)
+                    print("Current getPotLum: ", getPotLum(), file=f)
+                    # print("Current control:", control, file=f)
+                    # print("Current ledInfoOld", ledInfoOld, file=f)
+                    # print("Current ledInfo", ledInfo, file=f)
+
+                    print("############ END #############", file=f)
+
+                f.close()
+
+
+
+
+
+
+                return False
+
+
+
+
+
+
+
+
+            # return True
+
+
+
+
+
+    
+
+
+
+
+
+
 def main():
     '''
     print("Hello World!")
@@ -792,7 +933,7 @@ def main():
 
 
     totalRound = 50
-    totalIteration = 1
+    totalIteration = 10
 
 #   sceneOne()
     # sceneTwo()
@@ -809,12 +950,13 @@ def main():
 
 
     now = datetime.datetime.now()
+    # aux = ''
     for iterationIndex in range(totalIteration):
                         # index = 0
             # for index in range(2):
                 with open('output_TC3.txt', 'a') as f: 
                         iteration = iterationIndex
-                        index = 0
+                        index = 2
 
                         cont = 0
                         initialTime = time.time()
@@ -825,13 +967,19 @@ def main():
                                 if(index == 0):
                                     print("Scene One choosen")
                                     aux = sceneOne()
+                                    time.sleep(1)
                                 elif(index == 1):
                                     print("Scene Two choosen")
                                     aux = sceneTwo()
+                                    time.sleep(1)
+                                elif(index == 2):
+                                    print("Scene Three choosen")
+                                    aux = sceneThree()    
+                                
                                 if(aux):
                                     cont = cont + 1
                                 
-                                time.sleep(1)
+                                # time.sleep(1)
 
                         print("############# INIT #############\n\n", file=f)
 

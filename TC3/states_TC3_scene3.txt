@@ -1,0 +1,40 @@
+############ INIT #############
+Date:  2019-07-25 12:15
+Iterarion:  0
+Round:  36
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:18
+Iterarion:  1
+Round:  21
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:21
+Iterarion:  2
+Round:  6
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:24
+Iterarion:  2
+Round:  41
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 12:27
+Iterarion:  3
+Round:  26
+PS 3 from Scene 2 get an error.
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
