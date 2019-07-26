@@ -377,3 +377,18 @@ Elapsed time:  1610.893892288208
 ############# END #############
 
 
+############# INIT #############
+
+
+Date:  2019-07-25 18:25
+Iteration No.: 5
+Round No.: 50
+Scene 1 :
+Successful tests percentage:  64.0
+Unsuccessful tests percentage:  36.0
+Elapsed time:  10027.240395784378
+
+
+############# END #############
+
+
