@@ -96,21 +96,23 @@ def profile(desiredCureProfile):
                 auxMeanPotLum = []
                 auxContTimes = 0
 
-                while(indexer < 3):
+                while(indexer < 5):
                     print("Inside first while")
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                     # time.sleep(0.05)
                     indexer = indexer + 1
 
                 auxPotLum = statistics.mean(auxMeanPotLum)
-
+                
                 while(auxContTimes < 50):
                     print("Inside second while")
-                    set_config(command, buttonPower, pressTime)
-                    time.sleep(2)
-                    if(getPotLum() > 0):
+                    if(auxPotLum > 0):
                         break
-                    auxContTimes = auxContTimes + 1
+                    else:
+                        set_config(command, buttonPower, pressTime)
+                        auxContTimes = auxContTimes + 1
+                        time.sleep(2)
+                        auxPotLum = getPotLum()
 
                 if(auxContTimes > 0):
 
@@ -167,15 +169,16 @@ def profile(desiredCureProfile):
 
                     auxPotLum = statistics.mean(auxMeanPotLum)
 
-                    while(auxPotLum > 0):
+                    while(auxContTimes < 50):
                         print("Inside second while to turn off")
-                        set_config(command, buttonPower, pressTime)
-                        time.sleep(0.5)
-                        if(getPotLum == 0):
+                        if(auxPotLum == 0):
                             break
+                        else:
+                            set_config(command, buttonPower, pressTime)
+                            time.sleep(1)
+                            auxPotLum = getPotLum()
+                            auxContTimes = auxContTimes + 1
                         
-                        auxContTimes = auxContTimes + 1
-                    
                     if(auxContTimes > 0):
 
                         now = datetime.datetime.now()
@@ -340,7 +343,7 @@ def profile(desiredCureProfile):
                 auxMeanPotLum = []
                 auxContTimes = 0
 
-                while(indexer < 3):
+                while(indexer < 5):
                     print("Inside first while to turn on")
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                     # time.sleep(0.05)
@@ -350,11 +353,15 @@ def profile(desiredCureProfile):
 
                 while(auxContTimes < 50):
                     print("Inside second while to turn on")
-                    set_config(command, buttonPower, pressTime)
-                    time.sleep(2)
-                    if(getPotLum() > 0):
+                    if(auxPotLum > 0):
                         break
-                    auxContTimes = auxContTimes + 1
+                    else:
+                        set_config(command, buttonPower, pressTime)
+                        time.sleep(2)
+                        auxPotLum = getPotLum()
+                        auxContTimes = auxContTimes + 1
+                    
+                    
                     if(auxContTimes > 0):
 
                         now = datetime.datetime.now()
@@ -1237,7 +1244,7 @@ def main():
     global iteration
 
 
-    totalRound = 50
+    totalRound = 5
     totalIteration = 5
 
 #   sceneOne()
