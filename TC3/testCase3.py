@@ -97,6 +97,7 @@ def profile(desiredCureProfile):
                 auxContTimes = 0
 
                 while(indexer < 3):
+                    print("Inside first while")
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                     # time.sleep(0.05)
                     indexer = indexer + 1
@@ -104,6 +105,7 @@ def profile(desiredCureProfile):
                 auxPotLum = statistics.mean(auxMeanPotLum)
 
                 while(auxContTimes < 50):
+                    print("Inside second while")
                     set_config(command, buttonPower, pressTime)
                     time.sleep(0.3)
                     if(getPotLum() > 0):
@@ -158,6 +160,7 @@ def profile(desiredCureProfile):
                     auxContTimes = 0
 
                     while(indexer < 3):
+                        print("Inside first while to turn off")
                         auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                         # time.sleep(0.05)
                         indexer = indexer + 1
@@ -165,6 +168,7 @@ def profile(desiredCureProfile):
                     auxPotLum = statistics.mean(auxMeanPotLum)
 
                     while(auxPotLum > 0):
+                        print("Inside second while to turn off")
                         set_config(command, buttonPower, pressTime)
                         time.sleep(0.5)
                         if(getPotLum == 0):
@@ -337,6 +341,7 @@ def profile(desiredCureProfile):
                 auxContTimes = 0
 
                 while(indexer < 3):
+                    print("Inside first while to turn on")
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                     # time.sleep(0.05)
                     indexer = indexer + 1
@@ -344,6 +349,7 @@ def profile(desiredCureProfile):
                 auxPotLum = statistics.mean(auxMeanPotLum)
 
                 while(auxContTimes < 50):
+                    print("Inside second while to turn on")
                     set_config(command, buttonPower, pressTime)
                     time.sleep(0.3)
                     if(getPotLum > 0):
