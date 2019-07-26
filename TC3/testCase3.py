@@ -94,6 +94,7 @@ def profile(desiredCureProfile):
                 indexer = 0
                 auxPotLum = 0
                 auxMeanPotLum = []
+                auxContTimes = 0
 
                 while(indexer < 3):
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -102,11 +103,36 @@ def profile(desiredCureProfile):
 
                 auxPotLum = statistics.mean(auxMeanPotLum)
 
-                while(auxPotLum <= 0):
+                while(auxContTimes < 50):
                     set_config(command, buttonPower, pressTime)
                     time.sleep(0.3)
-                    auxPotLum = getPotLum()
+                    if(getPotLum() > 0):
+                        break
+                    auxContTimes = auxContTimes + 1
 
+                if(auxContTimes > 0):
+
+                    now = datetime.datetime.now()
+                    with open('states_TC3_scene_one.txt', 'a') as f:
+
+                        print("\n############ INIT #############\n", file=f)
+                        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                        print("Iterarion: ", iteration, file=f)
+                        print("Round: ", rodada, file=f)
+
+                        # print("Error on inside if statement\n", file=f)
+                        print(
+                            "Part One\nCure LED not turned on. Tried tu turn it on.", file=f)
+                        print(
+                            "Statement to turn on the LED was called", file=f)
+                        print("No. of times the needed to try turn on: ", auxContTimes, file=f)
+                        # print("Current control:", control, file=f)
+                        # print("Current ledInfoOld", ledInfoOld, file=f)
+                        # print("Current ledInfo", ledInfo, file=f)
+
+                        print("\n############ END #############\n", file=f)
+
+                    f.close()
 
                 ######### FIN #############
 
@@ -129,6 +155,7 @@ def profile(desiredCureProfile):
                     indexer = 0
                     auxPotLum = 0
                     auxMeanPotLum = []
+                    auxContTimes = 0
 
                     while(indexer < 3):
                         auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -140,7 +167,32 @@ def profile(desiredCureProfile):
                     while(auxPotLum > 0):
                         set_config(command, buttonPower, pressTime)
                         time.sleep(0.5)
-                        auxPotLum = getPotLum()
+                        if(getPotLum == 0):
+                            break
+                        
+                        auxContTimes = auxContTimes + 1
+                    
+                    if(auxContTimes > 0):
+
+                        now = datetime.datetime.now()
+                        with open('states_TC3_scene_one.txt', 'a') as f:
+
+                            print("\n############ INIT #############\n", file=f)
+                            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                            print("Iterarion: ", iteration, file=f)
+                            print("Round: ", rodada, file=f)
+
+                            
+                            print(
+                                "Part One\nCure LED not turned off. Tried tu turn it off.", file=f)
+                            print(
+                                "Statement to turn off the LED was called", file=f)
+                            print("No. of times needed to try turn off: ", auxContTimes, file=f)
+                            
+                            print("\n############ END #############\n", file=f)
+
+                        f.close()
+                    
 
                     ######### FIN #############
 
@@ -282,6 +334,7 @@ def profile(desiredCureProfile):
                 indexer = 0
                 auxPotLum = 0
                 auxMeanPotLum = []
+                auxContTimes = 0
 
                 while(indexer < 3):
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -290,12 +343,38 @@ def profile(desiredCureProfile):
 
                 auxPotLum = statistics.mean(auxMeanPotLum)
 
-                while(auxPotLum <= 0):
+                while(auxContTimes < 50):
                     set_config(command, buttonPower, pressTime)
                     time.sleep(0.3)
-                    auxPotLum = getPotLum()
+                    if(getPotLum > 0):
+                        break
+                    auxContTimes = auxContTimes + 1
+                    if(auxContTimes > 0):
 
-                ######### INIT #############
+                        now = datetime.datetime.now()
+                        with open('states_TC3_scene_one.txt', 'a') as f:
+
+                            print("\n############ INIT #############\n", file=f)
+                            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                            print("Iterarion: ", iteration, file=f)
+                            print("Round: ", rodada, file=f)
+
+                            # print("Error on inside if statement\n", file=f)
+                            print(
+                                "Part One\nCure LED not turned on. Tried tu turn it on.", file=f)
+                            print(
+                                "Statement to turn on the LED was called", file=f)
+                            print("No. of times the needed to try turn on: ", auxContTimes, file=f)
+                            # print("Current control:", control, file=f)
+                            # print("Current ledInfoOld", ledInfoOld, file=f)
+                            # print("Current ledInfo", ledInfo, file=f)
+
+                            print("\n############ END #############\n", file=f)
+
+                        f.close()
+            
+
+                ######### FIN #############
                 if(auxPotLum != 0):
 
                     time.sleep(profileCureTime + 5)
