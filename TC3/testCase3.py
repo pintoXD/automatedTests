@@ -103,16 +103,16 @@ def profile(desiredCureProfile):
                     indexer = indexer + 1
 
                 auxPotLum = statistics.mean(auxMeanPotLum)
-                
-                while(auxContTimes < 50):
-                    print("Inside second while")
-                    if(auxPotLum > 0):
-                        break
-                    else:
-                        set_config(command, buttonPower, pressTime)
-                        auxContTimes = auxContTimes + 1
-                        time.sleep(2)
-                        auxPotLum = getPotLum()
+                if(auxPotLum < 0):
+                    while(auxContTimes < 50):
+                        print("Inside second while")
+                        if(auxPotLum > 0):
+                            break
+                        else:
+                            set_config(command, buttonPower, pressTime)
+                            auxContTimes = auxContTimes + 1
+                            time.sleep(2)
+                            auxPotLum = getPotLum()
 
                 if(auxContTimes > 0):
 
@@ -168,17 +168,17 @@ def profile(desiredCureProfile):
                         indexer = indexer + 1
 
                     auxPotLum = statistics.mean(auxMeanPotLum)
-
-                    while(auxContTimes < 50):
-                        print("Inside second while to turn off")
-                        if(auxPotLum == 0):
-                            break
-                        else:
-                            set_config(command, buttonPower, pressTime)
-                            time.sleep(1)
-                            auxPotLum = getPotLum()
-                            auxContTimes = auxContTimes + 1
-                        
+                    if(auxPotLum > 0):
+                        while(auxContTimes < 50):
+                            print("Inside second while to turn off")
+                            if(auxPotLum == 0):
+                                break
+                            else:
+                                set_config(command, buttonPower, pressTime)
+                                time.sleep(1)
+                                auxPotLum = getPotLum()
+                                auxContTimes = auxContTimes + 1
+                            
                     if(auxContTimes > 0):
 
                         now = datetime.datetime.now()
@@ -337,6 +337,9 @@ def profile(desiredCureProfile):
             returnSet = set_config(command, buttonPower, pressTime)
             if (returnSet == bytes.fromhex('99' + command + 'FF')):
                 time.sleep(0.5)
+
+
+
                 ######### INIT #############
                 indexer = 0
                 auxPotLum = 0
@@ -351,43 +354,49 @@ def profile(desiredCureProfile):
 
                 auxPotLum = statistics.mean(auxMeanPotLum)
 
-                while(auxContTimes < 50):
-                    print("Inside second while to turn on")
-                    if(auxPotLum > 0):
-                        break
-                    else:
-                        set_config(command, buttonPower, pressTime)
-                        time.sleep(2)
-                        auxPotLum = getPotLum()
-                        auxContTimes = auxContTimes + 1
-                    
-                    
-                    if(auxContTimes > 0):
+                if(auxPotLum < 0):
+                    while(auxContTimes < 50):
+                        print("Inside second while to turn on")
+                        if(auxPotLum > 0):
+                            break
+                        else:
+                            set_config(command, buttonPower, pressTime)
+                            time.sleep(2)
+                            auxPotLum = getPotLum()
+                            auxContTimes = auxContTimes + 1
+                        
+                        
+                if(auxContTimes > 0):
 
-                        now = datetime.datetime.now()
-                        with open('states_TC3_scene_one.txt', 'a') as f:
+                    now = datetime.datetime.now()
+                    with open('states_TC3_scene_one.txt', 'a') as f:
 
-                            print("\n############ INIT #############\n", file=f)
-                            print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
-                            print("Iterarion: ", iteration, file=f)
-                            print("Round: ", rodada, file=f)
+                        print("\n############ INIT #############\n", file=f)
+                        print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                        print("Iterarion: ", iteration, file=f)
+                        print("Round: ", rodada, file=f)
 
-                            # print("Error on inside if statement\n", file=f)
-                            print(
-                                "Part One\nCure LED not turned on. Tried tu turn it on.", file=f)
-                            print(
-                                "Statement to turn on the LED was called", file=f)
-                            print("No. of times the needed to try turn on: ", auxContTimes, file=f)
-                            # print("Current control:", control, file=f)
-                            # print("Current ledInfoOld", ledInfoOld, file=f)
-                            # print("Current ledInfo", ledInfo, file=f)
+                        # print("Error on inside if statement\n", file=f)
+                        print(
+                            "Part One\nCure LED not turned on. Tried tu turn it on.", file=f)
+                        print(
+                            "Statement to turn on the LED was called", file=f)
+                        print("No. of times the needed to try turn on: ", auxContTimes, file=f)
+                        # print("Current control:", control, file=f)
+                        # print("Current ledInfoOld", ledInfoOld, file=f)
+                        # print("Current ledInfo", ledInfo, file=f)
 
-                            print("\n############ END #############\n", file=f)
+                        print("\n############ END #############\n", file=f)
 
-                        f.close()
+                    f.close()
             
 
                 ######### FIN #############
+
+
+
+
+                
                 if(auxPotLum != 0):
 
                     time.sleep(profileCureTime + 5)
