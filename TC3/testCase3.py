@@ -107,7 +107,7 @@ def profile(desiredCureProfile):
                 while(auxContTimes < 50):
                     print("Inside second while")
                     set_config(command, buttonPower, pressTime)
-                    time.sleep(0.3)
+                    time.sleep(0.5)
                     if(getPotLum() > 0):
                         break
                     auxContTimes = auxContTimes + 1
@@ -351,7 +351,7 @@ def profile(desiredCureProfile):
                 while(auxContTimes < 50):
                     print("Inside second while to turn on")
                     set_config(command, buttonPower, pressTime)
-                    time.sleep(0.3)
+                    time.sleep(0.5)
                     if(getPotLum > 0):
                         break
                     auxContTimes = auxContTimes + 1
