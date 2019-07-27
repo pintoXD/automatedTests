@@ -22,3 +22,13 @@ current auxPotLum: 0
 Current getPotLum:  362.7786358397362
 Current returSet: b'\x99\x01\xff'
 ############ END #############
+############ INIT #############
+PS 2 from Scene 2 get an error.
+
+Date:  2019-07-25 22:27
+Iterarion:  0
+Round:  49
+Error on pot Lum that checks if cure LED is alerady on.
+Error on buttonPower configuration.
+current auxPotLum: 
+############ END #############

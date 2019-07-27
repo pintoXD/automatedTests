@@ -1,287 +1,13 @@
 ############# INIT #############
 
 
-Date:  2019-07-09 13:05
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  8796.488133430481
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-09 17:29
-Successful tests percentage:  34.0
-Unsuccessful tests percentage:  66.0
-Elapsed time:  875.4007270336151
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-09 17:59
-Successful tests percentage:  6.0
-Unsuccessful tests percentage:  94.0
-Elapsed time:  129.4619858264923
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-10 12:13
-Successful tests percentage:  10.0
-Unsuccessful tests percentage:  90.0
-Elapsed time:  157.6745924949646
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-10 12:22
-Successful tests percentage:  96.0
-Unsuccessful tests percentage:  4.0
-Elapsed time:  1583.798882484436
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-10 13:56
-Scene 2 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  1676.3496720790863
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-12 12:52
-Scene 1 :
-Successful tests percentage:  82.0
-Unsuccessful tests percentage:  18.0
-Elapsed time:  8799.160959243774
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-12 12:52
-Scene 2 :
-Successful tests percentage:  96.0
-Unsuccessful tests percentage:  4.0
-Elapsed time:  1688.2476465702057
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-17 12:20
-Scene 1 :
-Successful tests percentage:  20.0
-Unsuccessful tests percentage:  80.0
-Elapsed time:  1753.3281362056732
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-17 12:20
-Scene 2 :
-Successful tests percentage:  20.0
-Unsuccessful tests percentage:  80.0
-Elapsed time:  337.5882239341736
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-18 14:01
-Scene 2 :
-Successful tests percentage:  20.0
-Unsuccessful tests percentage:  80.0
-Elapsed time:  337.84410285949707
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-18 14:08
-Scene 2 :
-Successful tests percentage:  20.0
-Unsuccessful tests percentage:  80.0
-Elapsed time:  349.3350865840912
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-22 11:16
-Scene 2 :
-Successful tests percentage:  90.0
-Unsuccessful tests percentage:  10.0
-Elapsed time:  338.24795150756836
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-22 11:16
-Scene 2 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  334.2001507282257
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-22 11:16
-Scene 2 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  334.2313961982727
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-22 11:16
-Scene 2 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  334.13274478912354
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-22 12:15
-Scene 2 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  1671.2160544395447
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-22 12:15
-Scene 2 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  1672.4443266391754
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-24 12:14
-Iteration No.: 1
-Round No.: 5
-Scene 1 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  912.9848744869232
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-24 13:25
-Iteration No.: 1
-Round No.: 5
-Scene 1 :
-Successful tests percentage:  100.0
-Unsuccessful tests percentage:  0.0
-Elapsed time:  912.5285201072693
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-24 14:26
+Date:  2019-07-26 20:39
 Iteration No.: 5
 Round No.: 50
 Scene 1 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  9125.689389944077
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-24 14:26
-Iteration No.: 5
-Round No.: 50
-Scene 2 :
 Successful tests percentage:  100.0
 Unsuccessful tests percentage:  0.0
-Elapsed time:  1602.3456540107727
+Elapsed time:  10447.320056438446
 
 
 ############# END #############
@@ -290,13 +16,13 @@ Elapsed time:  1602.3456540107727
 ############# INIT #############
 
 
-Date:  2019-07-24 14:26
+Date:  2019-07-26 20:39
 Iteration No.: 5
 Round No.: 50
 Scene 1 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  9125.328439712524
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  10445.899924516678
 
 
 ############# END #############
@@ -305,28 +31,13 @@ Elapsed time:  9125.328439712524
 ############# INIT #############
 
 
-Date:  2019-07-24 14:26
-Iteration No.: 5
-Round No.: 50
-Scene 2 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  1611.2288756370544
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-24 14:26
+Date:  2019-07-26 20:39
 Iteration No.: 5
 Round No.: 50
 Scene 1 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  9125.59251499176
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  10445.245211839676
 
 
 ############# END #############
@@ -335,28 +46,13 @@ Elapsed time:  9125.59251499176
 ############# INIT #############
 
 
-Date:  2019-07-24 14:26
-Iteration No.: 5
-Round No.: 50
-Scene 2 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  1610.8095495700836
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-24 14:26
+Date:  2019-07-26 20:39
 Iteration No.: 5
 Round No.: 50
 Scene 1 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  9124.689875125885
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  10444.685778856277
 
 
 ############# END #############
@@ -365,28 +61,28 @@ Elapsed time:  9124.689875125885
 ############# INIT #############
 
 
-Date:  2019-07-24 14:26
-Iteration No.: 5
-Round No.: 50
-Scene 2 :
-Successful tests percentage:  98.0
-Unsuccessful tests percentage:  2.0
-Elapsed time:  1610.893892288208
-
-
-############# END #############
-
-
-############# INIT #############
-
-
-Date:  2019-07-25 18:25
+Date:  2019-07-26 20:39
 Iteration No.: 5
 Round No.: 50
 Scene 1 :
-Successful tests percentage:  64.0
-Unsuccessful tests percentage:  36.0
-Elapsed time:  10027.240395784378
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  10444.385376691818
+
+
+############# END #############
+
+
+############# INIT #############
+
+
+Date:  2019-07-27 13:22
+Iteration No.: 5
+Round No.: 50
+Scene 1 :
+Successful tests percentage:  100.0
+Unsuccessful tests percentage:  0.0
+Elapsed time:  10444.419088840485
 
 
 ############# END #############

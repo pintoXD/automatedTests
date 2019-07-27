@@ -66,13 +66,15 @@ def profile(desiredCureProfile):
     auxPotLum = ''
     auxMeanPotLum = []
 
-    VBAT_MIN = 2420
+    VBAT_MIN = 2368
+
+    auxGetBatLvl = getBatLvl()
 
     ##Verifica se o sistema está com a carga mínima
     if(desiredCureProfile == 10 or desiredCureProfile == 20 or
        desiredCureProfile == 40 or desiredCureProfile == 60):
 
-        if(getBatLvl() > VBAT_MIN):
+        if(auxGetBatLvl > VBAT_MIN):
             ### Inicia o perfil de cura.
 
             returnSet = set_config(command, buttonPower, pressTime)
@@ -84,7 +86,7 @@ def profile(desiredCureProfile):
 
                 time.sleep(0.3)
 
-
+                
 
                 # auxPotLum = int(auxPotLum, 16)
                 ######### INIT #############
@@ -97,7 +99,7 @@ def profile(desiredCureProfile):
                 auxContTimes = 0
 
                 while(indexer < 5):
-                    print("Inside first while")
+                    print("Inside first first while")
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                     # time.sleep(0.05)
                     indexer = indexer + 1
@@ -105,7 +107,7 @@ def profile(desiredCureProfile):
                 auxPotLum = statistics.mean(auxMeanPotLum)
                 if(auxPotLum < 0):
                     while(auxContTimes < 50):
-                        print("Inside second while")
+                        print("Inside first second while")
                         if(auxPotLum > 0):
                             break
                         else:
@@ -139,7 +141,7 @@ def profile(desiredCureProfile):
                     f.close()
 
                 ######### FIN #############
-
+                
 
                 buzzerFirstPress = getBuzzer()
 
@@ -160,7 +162,7 @@ def profile(desiredCureProfile):
                     auxPotLum = 0
                     auxMeanPotLum = []
                     auxContTimes = 0
-
+                    print("Buzzer buffer before while turn off:", getBuzzer())
                     while(indexer < 3):
                         print("Inside first while to turn off")
                         auxMeanPotLum = auxMeanPotLum + [getPotLum()]
@@ -168,6 +170,9 @@ def profile(desiredCureProfile):
                         indexer = indexer + 1
 
                     auxPotLum = statistics.mean(auxMeanPotLum)
+                    
+                    print("Buzzer buffer after while turn off:", getBuzzer())
+
                     if(auxPotLum > 0):
                         while(auxContTimes < 50):
                             print("Inside second while to turn off")
@@ -215,6 +220,11 @@ def profile(desiredCureProfile):
                     #procura pelo perfil de cura desejado
                     #nesse caso, vai atrás do perfil de 10s
                     #A função de procura já valida o acendimento do led de 10s no painel de LEDs
+
+                    print("Buzzer buffer before profile cure while:", getBuzzer())
+
+
+
                     while(profileCureTime != desiredCureProfile):
                         profileCureTime = getCureProfileTime()
                         auxCont = auxCont + 1
@@ -347,7 +357,7 @@ def profile(desiredCureProfile):
                 auxContTimes = 0
 
                 while(indexer < 5):
-                    print("Inside first while to turn on")
+                    print("Inside second first while to turn on")
                     auxMeanPotLum = auxMeanPotLum + [getPotLum()]
                     # time.sleep(0.05)
                     indexer = indexer + 1
@@ -356,7 +366,7 @@ def profile(desiredCureProfile):
 
                 if(auxPotLum < 0):
                     while(auxContTimes < 50):
-                        print("Inside second while to turn on")
+                        print("Inside second second while to turn on")
                         if(auxPotLum > 0):
                             break
                         else:
@@ -494,11 +504,11 @@ def profile(desiredCureProfile):
                 print("Round: ", rodada, file=f)  
 
                 print(
-                    "Error inside Profile\n Part Two\n System in low-power consumption. Scenario cannot be tested.\n", file=f)
+                    "Error inside Profile\n General Part \n System in low-power consumption. Scenario cannot be tested.\n", file=f)
                 # print("Current returnSet",
                 #         returnSet, file=f)
-                print("Current bat level:", getBatLvl(), file=f)
-                print("Current rounded bat voltage:", round(getBatVoltage(), 3), file=f)
+                print("Current auxGetBatLvl:", auxGetBatLvl, file=f)
+                # print("Current rounded bat voltage:", round(getBatVoltage(), 3), file=f)
 
                 print("############ END #############", file=f)
 
@@ -1253,7 +1263,7 @@ def main():
     global iteration
 
 
-    totalRound = 5
+    totalRound = 50
     totalIteration = 5
 
 #   sceneOne()
