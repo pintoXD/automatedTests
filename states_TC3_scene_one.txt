@@ -11,3 +11,42 @@ Current profile cure time:  60
 Number of bipes expected:  8.0
 Number of bipes got:  25
 ############ END #############
+############ INIT #############
+Date:  2019-07-28 00:59
+Iterarion:  3
+Round:  49
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 60
+Current profile cure time:  60
+Number of bipes expected:  8.0
+Number of bipes got:  25
+############ END #############
+############ INIT #############
+Date:  2019-07-28 01:13
+Iterarion:  4
+Round:  3
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 60
+Current profile cure time:  60
+Number of bipes expected:  8.0
+Number of bipes got:  25
+############ END #############
+############ INIT #############
+Date:  2019-07-28 01:26
+Iterarion:  4
+Round:  7
+Error inside Profile
+ Part Two
+ Checking profile beeps
+Buzzer bips count in cure profile isn't ok
+Desired cure profile: 60
+Current profile cure time:  60
+Number of bipes expected:  8.0
+Number of bipes got:  25
+############ END #############

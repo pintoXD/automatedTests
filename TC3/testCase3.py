@@ -1280,11 +1280,11 @@ def main():
   #     time.sleep(1)
 
 
-    now = datetime.datetime.now()
     # aux = ''
     for iterationIndex in range(totalIteration):
                         # index = 0
             # for index in range(2):
+                now = datetime.datetime.now()
                 with open('output_TC3.txt', 'a') as f: 
                         iteration = iterationIndex
                         index = 0
