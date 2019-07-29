@@ -9,7 +9,7 @@ def getBatLvl():
         return 'error: message has no ACK'
     if(batlvl[0:2] == '05'):
         batlvl = batlvl[2:]
-        print('responding to command 0x04')
+        print('responding to command 0x05')
     else:
         return 'error: response to unrequired command'
 

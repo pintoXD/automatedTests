@@ -35,23 +35,9 @@ def getBuzzer():
 
     '''
     while(len(buz) != 0):
-     
-
-    #  print("Buz inside ", buz)
-    #  print("Buzinfo inside ", buz_info)
-
-
+    
      buz_info = buz_info + [(int(buz[:2], 16), int(buz[2:10], 16))]
      buz = buz[10:]
-     #Sugestão de correção se necessário
-     # if (x < 3):
-     #     buz_infoA = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
-        # else:
-        #     buz_infoB = buz_info + (int(buz[x], 16), int(buz[x+1], 16))
- 
-    # print("Buz outside ", buz)
-    # print("Buzinfo outside ", buz_info)
-
     
     return buz_info
     

@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from serialTeste import set_config, get_value
-from potMask import *
+from potMask import mask10, mask20, mask40, mask60, getCurve
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
@@ -9,121 +10,137 @@ import time
 
 def switchCase2(var):
     switcher = {
-        '[0, 0, 0, 1]': 10,
-        '[0, 0, 1, 0]': 20,
-        '[0, 1, 0, 0]': 40,
-        '[1, 0, 0, 0]': 60,
+        '[0, 0, 0, 1]': 60,
+        '[0, 0, 1, 0]': 40,
+        '[0, 1, 0, 0]': 20,
+        '[1, 0, 0, 0]': 10,
         '[0, 0, 0, 0]': 0
     }
     return switcher.get(var, 'invalid configuration')
 
 #Cenário SETA 1:
 def testscenario1():
-    seta = set_config('01', '11', '0a')
+    FILE = open('testscenario1.txt', 'a')
+    set_config('01', '12', '0a')
+    time.sleep(1)
+
+    set_config('01', '12', '0a')
     time.sleep(1)
     
-    seta = set_config('01', '11', '0a')
+    set_config('01', '11', '0a')
     time.sleep(1)
     panel_before = switchCase2(str(getPanel()))
 
-    seta = set_config('01', '11', '0a')
+    set_config('01', '11', '0a')
     time.sleep(1)
     panel_after = switchCase2(str(getPanel()))
 
     buz = getBuzzer()
     if(len(buz) == 0):
-        return 'teste falhou. não há beeps'
+        print(buz, file = FILE)
+        FILE.close()
+        return False
     else:
         if(panel_before == 10):
             if(panel_after == 20):
-                flag = True
+                return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
         elif(panel_before == 20):
             if(panel_after == 40):
-                flag = True
+               return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
         elif(panel_before == 40):
             if(panel_after == 60):
-                flag = True
+                return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
         elif(panel_before == 60):
             if(panel_after == 10):
-                flag = True
+                return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
-    return flag
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
+        else:
+            return False
 
 #Cenário SETA 2:
 def testscenario2():
-    seta = set_config('01', '11', '0a')
-    time.sleep(1)
+    FILE = open('testscenario2.txt', 'a')
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
     
-    seta = set_config('01', '11', '0a')
-    time.sleep(1)
+    set_config('01', '11', '02')
+    time.sleep(0.2)
     panel_before = switchCase2(str(getPanel()))
 
-    on_off = set_config('01', '12', '0a')
-    time.sleep(1)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
 
     time.sleep(5)
 
-    seta = set_config('01', '11', '0a')
-    time.sleep(1)
+    set_config('01', '11', '02')
+    time.sleep(0.2)
     panel_after = switchCase2(str(getPanel()))
 
     buz = getBuzzer()
     if(len(buz) == 0):
-        return 'teste falhou. não há beeps'
+        print(buz, file = FILE)
+        FILE.close()
+        return False
     else:
         if(panel_before == 10):
             if(panel_after == 20):
-                flag = True
+                return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
         elif(panel_before == 20):
             if(panel_after == 40):
-                flag = True
+               return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
         elif(panel_before == 40):
             if(panel_after == 60):
-                flag = True
+                return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
         elif(panel_before == 60):
             if(panel_after == 10):
-                flag = True
+                return True
             else:
-                print(panel_before, panel_after)
-                return 'teste falhou. ordem de transição incorreta'
-    return flag
+                print(panel_before, '\t', panel_after, file = FILE)
+                return False
+        else:
+            return False
 
 #Cenário ON/OFF 1:
 def testscenario3():
-    seta = set_config('01', '11', '0a')
-    time.sleep(1)
+    FILE = open('testscenario3.txt', 'a')
+    set_config('01', '11', '02')
+    time.sleep(0.2)
 
-    rtime = random.randint(2, 15)
+    rtime = random.randint(2, 9)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
-    
-    on_off = set_config('01', '12', rhex)
+
+    set_config('01', '12', rhex)
     time.sleep(rtime/10)
 
     buz = getBuzzer()
-    if(buz[0][0] == 0):
-        return 'erro: não houve beep'
+    if(len(buz) == 0):
+        print('erro: não houve beep:\t{}'.format(buz), file=FILE)
+        return False
 
     panel = getPanel()
     profile = switchCase2(str(panel))
@@ -132,27 +149,80 @@ def testscenario3():
     future = now + profile
     while(now <= future):
         if(panel != getPanel()):
-            return 'erro. led não corresponde ao perfil ativado'
+            print('erro. led não corresponde ao perfil ativado:\t{}\t{}\t{}'.format(profile, panel, getPanel()), file=FILE)
+            return False
         now = time.time()
-    return 'teste passou'
+    return True
 
 #Cenário ON/OFF 2:
 def testscenario4():
-    seta = set_config('01', '11', '0a')
-    time.sleep(1)
+    FILE = open('testscenario4.txt', 'a')
 
-    on_off = set_config('01', '12', '0a')
-    time.sleep(1)
+    set_config('01', '11', '02')
+    time.sleep(0.2)
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
 
     panel = getPanel()
     profile = switchCase2(str(panel))
 
-    rtime = random.randint(1, profile)
+    rtime = random.randint(1, profile-3)
     time.sleep(rtime)
 
-    on_off = set_config('01', '12', '02')
+    set_config('01', '12', '02')
+    time.sleep(0.2)
 
     if(getPotLum() != 0):
-        return 'erro: led de cura não desligou'
+        print('erro: led de cura nao desligou: {}\t{}\t{}'.format(profile, rtime, getPotLum()), file=FILE)
+        return False
     else:
-        return 'teste passou'
+        return True
+
+
+def main():
+    
+    #sceneOne()
+        # sceneTwo()
+    #   sceneThree()
+    
+    #   sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+    cont = 0
+    initialTime = time.time()
+    for i in range(50):
+            print("Round ", i)
+            # aux  = sceneOne()
+            # aux = sceneTwo()
+            # aux = sceneThree()
+
+            aux = testscenario4() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+        
+            if(aux):
+                cont = cont + 1
+            
+            time.sleep(1)
+
+    
+    
+    print("Successful tests percentage: ", (cont/50)*100)
+
+    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+    print("Elapsed time: ", time.time() - initialTime)
+
+
+    with open('output_TC2s.txt', 'a') as f:
+            print("Scene Four:")
+
+            print("Successful tests percentage: ", (cont/50)*100, file=f)
+
+            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+
+            print("Elapsed time: ", time.time() - initialTime, file = f)
+
+            print("############# END ###########\n\n", file=f)
+    
+    f.close()
+
+if __name__ == "__main__":
+  main()
