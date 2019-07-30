@@ -1,8 +1,0 @@
-############ INIT #############
-PS 1 from Scene 2 get an error.
-Date:  2019-07-22 10:13
-Iterarion:  0
-Round:  0
-current ledInfoBefore: 99
-Current ledInfoAfter: 99
-############ END #############

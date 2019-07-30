@@ -1,6 +1,0 @@
-############ INIT #############
-Return form profile 10s:  True
-Return form profile 20s:  True
-Return form profile 40s:  True
-Return form profile 60s:  True
-############ END #############

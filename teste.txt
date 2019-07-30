@@ -1,2 +1,0 @@
-Successful tests percentage:  80.0
-Unsuccessful tests percentage:  20.0

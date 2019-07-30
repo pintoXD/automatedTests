@@ -405,7 +405,6 @@ def profile(desiredCureProfile):
 
 
 
-
                 
                 if(auxPotLum != 0):
 
