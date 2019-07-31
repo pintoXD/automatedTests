@@ -189,9 +189,9 @@ def sceneTwo():
     buttonPower = '12'
     times = random.randint(1,4)
     limit = 15
-    pressTime = '02'  # 20 em hexadecimal. Botão será então presssionado por
+    pressTime = '02'  # 02s em hexadecimal. Botão será então presssionado por
     ## 20 * 100 milissegundos.
-    pressTimePower = '14'  # 40 em decimal. Botão power será pressionado
+    pressTimePower = '14'  # 20 em decimal. Botão power será pressionado
     ##por 40 * 100 milisseegundos
 
     ##Seleciona e ativa um perfil de cura, antes de tudo
@@ -303,8 +303,8 @@ def sceneThree():
 
     command = '01'
     buttonPower = '12'
-    pressTimePower = '14' #40 em hexadecimal
-                        ##Botão passará 40 * 100 milissegundos pressionado
+    pressTimePower = '14' #20 em hexadecimal
+                        ##Botão passará 20 * 100 milissegundos pressionado
 
            #Acionar o botão por exatamente ON_OFF_TIME segundos
     returnSet = set_config(command, buttonPower, pressTimePower)
@@ -664,6 +664,7 @@ def main():
 
     print("Hello World!")
     totalRound = 50
+    totalIteration = 5
         
     #sceneOne()
         # sceneTwo()
@@ -672,62 +673,62 @@ def main():
     #   sceneFour() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
     # sceneFive()
 
+    for indexer in range(totalIteration):
+        now = datetime.datetime.now()
+        with open('output_TC7.txt', 'a') as f:
+                    # index = 3
+            for index in range(4):
 
-    now = datetime.datetime.now()
-    with open('output_TC7.txt', 'a') as f:
-                # index = 3
-        for index in range(4):
+                    cont = 0
+                    initialTime = time.time()
+                    for i in range(totalRound):
+                            print("Round ", i)
+                            if(index == 0):
+                                print("Scene One choosen")
+                                aux = sceneOne()
+                            elif(index == 1):
+                                print("Scene Two choosen")
+                                aux = sceneTwo()
 
-                cont = 0
-                initialTime = time.time()
-                for i in range(totalRound):
-                        print("Round ", i)
-                        if(index == 0):
-                            print("Scene One choosen")
-                            aux = sceneOne()
-                        elif(index == 1):
-                            print("Scene Two choosen")
-                            aux = sceneTwo()
+                            elif(index == 2):
+                                print("Scene Three choosen")
+                                aux = sceneThree()
+                                
 
-                        elif(index == 2):
-                            print("Scene Three choosen")
-                            aux = sceneThree()
-                            
+                            elif(index == 3):
 
-                        elif(index == 3):
-
-                            print("Scene Four choosen")
-                            aux = sceneFour()
-                            
+                                print("Scene Four choosen")
+                                aux = sceneFour()
+                                
 
 
-                        if(aux):
-                            cont = cont + 1
+                            if(aux):
+                                cont = cont + 1
 
-                        time.sleep(1)
+                            time.sleep(1)
 
-                print("############# INIT #############\n\n", file=f)
+                    print("############# INIT #############\n\n", file=f)
 
-                print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
+                    print("Date: ", now.strftime("%Y-%m-%d %H:%M"), file=f)
 
-                print("Successful tests percentage: ", (cont/50)*100)
+                    print("Successful tests percentage: ", (cont/50)*100)
 
-                print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+                    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
 
-                print("Elapsed time: ", time.time() - initialTime)
+                    print("Elapsed time: ", time.time() - initialTime)
 
-                print("Scene", index + 1, ":", file=f)
+                    print("Scene", index + 1, ":", file=f)
 
-                print("Successful tests percentage: ", (cont/50)*100, file=f)
+                    print("Successful tests percentage: ", (cont/50)*100, file=f)
 
-                print("Unsuccessful tests percentage: ",
-                      ((50 - cont)/50) * 100, file=f)
+                    print("Unsuccessful tests percentage: ",
+                        ((50 - cont)/50) * 100, file=f)
 
-                print("Elapsed time: ", time.time() - initialTime, file=f)
+                    print("Elapsed time: ", time.time() - initialTime, file=f)
 
-                print("\n\n############# END #############\n\n", file=f)
+                    print("\n\n############# END #############\n\n", file=f)
 
-    f.close()
+        f.close()
 
 
 
