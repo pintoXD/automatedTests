@@ -679,7 +679,7 @@ def psOneSceneTwo():
 
         print("First PS from scenario 2 isn't ok")
         now = datetime.datetime.now()
-        with open('states_TC3_sceneTwo_PS1.txt', 'a') as f:
+        with open('states_TC3_scene2_ps1.txt', 'a') as f:
 
             print("############ INIT #############", file=f)
             print("PS 1 from Scene 2 get an error.", file=f)
