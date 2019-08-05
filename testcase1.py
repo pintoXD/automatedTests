@@ -1,5 +1,6 @@
-from serialTeste import set_config, get_value
-from potMask import *
+# -*- coding: utf-8 -*-
+from serialTeste import set_config, get_value, set_sampling
+from potMask import mask10, mask20, mask40, mask60, getCurve
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
@@ -32,8 +33,9 @@ def getIndex(var1 = [] ,var2 = []):
                 index2 = j
         return index1, index2
 
-def subcenseta1():
-    
+#Cenário SETA
+#Subcenário 1
+def testscenario1():
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
@@ -42,281 +44,567 @@ def subcenseta1():
         FILE.write('{}\n'.format(rtime))
         FILE.close()
     
-    seta = set_config('01', '11', '0A')
-    time.sleep(1)
+    set_config('01', '11', rhex)
+    time.sleep(rtime/10)
     panel_before = getPanel()
 
-    seta = set_config('01', '11', rhex)
+    set_config('01', '11', rhex)
     time.sleep((rtime/10))
-
-
     panel_after = getPanel()
+
+    if(panel_before == 'invalid configuration' or panel_after == 'invalid configuration'):
+        FILE = open('TC1_SETA1_SUB_1.txt', 'a')
+        print('{}\n'.format(rtime), file = FILE)
+        FILE.close()
+        return False
+    
     i, j = getIndex(panel_before, panel_after)
 
     if((j - i) == 1 or (i - j) == 3):
-        print("teste ok")
-        print(j , i)
+        print("indices ok")
     else:
+        FILE = open('TC1_SETA1_SUB_1.txt', 'a')
         print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
-        print(j, i)
-    return j
+        print(j, i, file = FILE)
+        FILE.close()
+        return False
 
-def subcenseta2():
+    profile = switchCase2(str(panel_after))
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+
+    curve = getCurve(profile)
+    flag = []
+    if(profile == 10):
+        for c in curve:
+            if(mask10(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 20):
+        for c in curve:
+            if(mask20(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 40):
+        for c in curve:
+            if(mask40(c[1], c[0])):
+             flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    else:
+        for c in curve:
+            if(mask60(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    if(min(flag) == 1):
+        return True
+    else:
+        return False
+        
+    
+#subcenário 2
+def testscenario2():
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
-    panel_before = getPanel()
-    on_off = set_config('01', '12', '0A')
-    time.sleep(1)
-    print('ON/OFF: ',on_off)
+    
+    set_config('01', '12', '02')
+    time.sleep(0.3)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
 
+    panel_before = getPanel()
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    
     time.sleep(5)
 
-    seta = set_config('01', '11', rhex)
-    print('Seta: ',seta)
+    set_config('01', '11', rhex)
     time.sleep(rtime/10)
+
     panel_after = getPanel()
-    
+
+    if(panel_after == 'invalid configuration' or panel_before == 'invalid configuration'):
+        FILE = open('TC1_SETA1_SUB_2.txt', 'a')
+        print('{}\n'.format(rtime), file = FILE)
+        FILE.close()
+        return False
+
     i, j = getIndex(panel_before, panel_after)
-    x = 2.6
-    case = switchCase2(str(panel_after))
-    time.sleep(2.6)
-    while(x < case):
-        x = x + 1
-        if(getPotLum() == 0):
-            print('teste falhou. led azul nao parece estar ligado')
-        else:
-            time.sleep(1)
+    profile = switchCase2(str(panel_after))
+    
+    curve = getCurve(profile)
+    # zero = time.time()
+    # future = zero + profile
+    # time.sleep(3)
+    # now = time.time()
+    
+    # while(now <= future - 1):
+    #     p = getPotLum()
+    #     now = time.time()
+    #     if(p == 0):
+    #         FILE = open('TC1_SETA1_SUB_2.txt', 'a')
+    #         FILE.write('teste falhou. led azul nao parece estar ligado\n')
+    #         FILE.write('{}\t'.format(p))
+    #         FILE.write('{}\t'.format(profile))
+    #         FILE.write('{}\t'.format(rtime))
+    #         FILE.write('{}\t'.format(panel_before))
+    #         FILE.write('{}\n\n'.format(panel_after))
+    #         FILE.close()
+    #         return False
     
     if((j - i) == 1 or (i - j) == 3):
         print("teste ok")
         print(j , i)
+        return True
     else:
+        FILE = open('TC1_SETA1_SUB_2.txt', 'a')
         print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
+        FILE.write('{}\t'.format(panel_before))
+        FILE.write('{}\n'.format(panel_after))
+        FILE.close()
+        return False
 
-def subcenseta3():
+    flag = []
+    if(profile == 10):
+        for c in curve:
+            if(mask10(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 20):
+        for c in curve:
+            if(mask20(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 40):
+        for c in curve:
+            if(mask40(c[1], c[0])):
+             flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    else:
+        for c in curve:
+            if(mask60(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    if(min(flag) == 1):
+        return True
+    else:
+        return False
+
+#Subcenário 3
+def testscenario3():
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
     
-    on_off = set_config('01', '12', '0A')
+    set_config('01', '12', '0A')
     time.sleep(1)
     panel_before = getPanel()
 
     time.sleep(5)
 
-    seta = set_config('01', '11', rhex)
+    set_config('01', '11', rhex)
     time.sleep(rtime/10)
-    print('Seta: ',seta)
-
+    
     buz = getBuzzer()
 
-    if(buz[0] == 0): #mudar depois para um teste com o período correto do buzzer
-        print('erro no teste. nao houve beep')
+    if(len(buz) == 0): #mudar depois para um teste com o período correto do buzzer
+        FILE = open('TC1_SETA1_SUB_3.txt', 'a')
+        print('erro no teste. nao houve beep', file = FILE)
+        print('{}\n'.format(rtime), file = FILE)
+        return False
     else:
         vbat = getBatLvl()
         print(vbat)
-        if(vbat < 3.8):
-            print('teste falhou. perfil de cura executado alem da restricao de bateria')
-        else:
+        if(vbat < 3.8 and getPotLum() > 0):
+            FILE = open('TC1_SETA1_SUB_3.txt', 'a')
+            print('teste falhou. perfil de cura executado alem da restricao de bateria', file = FILE)
+            print('{}\n'.format(vbat), file=FILE)
+            FILE.close()
+            return False
+        elif(vbat < 3.8 and getPotLum() == 0):
             panel_after = getPanel()
             i, j = getIndex(panel_before, panel_after)
             if((j - i) == 1 or (i - j) == 3):
                 print("teste ok")
-                print(j , i)
+                return True
             else:
-                print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
-                print(j, i)
-            print(j)
+                FILE = open('TC1_SETA1_SUB_3.txt', 'a')
+                print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida', file = FILE)
+                print('{}\t {}'.format(panel_before, panel_after))
+                return False
+        else:
+            FILE = open('TC1_SETA1_SUB_3.txt', 'a')
+            print('evento inesperado\n{}\t{}\t{}\t{}'.format(vbat, getPotLum(), panel_after, panel_before), file = FILE)
+            FILE.close()
+            return False
 
-def censeta2():
+#CENÁRIO SETA 2
+#Subcenário 1
+def testscenario4():
     if(getPotLum() != 0):
+        FILE = open('TC1_SETA2_SUB_1.txt', 'a')
         print('led de cura ainda esta ativado')
+        FILE.write('{}\n'.format(getPotLum()))
+        FILE.close()
+        return False
     else:
-        seta = set_config('01', '11', '02')
+        set_config('01', '11', '02')
         time.sleep(0.2)
         panel_before = getPanel()
 
-        on_off = set_config('01', '12', '32')
-        time.sleep(5)        
+        set_config('01', '12', '15')
+        time.sleep(1.5)        
 
         rtime = random.randint(10, 15)
         rhex = hex(rtime)[2:]
         if(len(rhex) < 2):
             rhex = '0' + rhex
         
-
-        seta = set_config('01', '11', rhex)
+        set_config('01', '11', rhex)
         time.sleep(rtime/10)
-        
+        time.sleep(3)
+
+        set_config('01', '12', '0a')
+        time.sleep(2)
+
+        set_config('01', '12', '0a')
+        time.sleep(1)
+
         panel_after = getPanel()
 
         if(panel_before != panel_after):
+            FILE = open('TC1_SETA2_SUB_1.txt', 'a')
             print('teste falhou. seta interfere no mosotrador de bateria')
+            FILE.write('{}\t {} \t {}\n'.format(panel_before, panel_after, rtime))
+            FILE.close()
+            return False
         else:
             print('teste passou')
+            return True
 
-
-def subcenonoff1():
+#CENÁRIO ON/OFF 1
+#Subcenário 1
+def testscenario5():
     if(getPotLum() != 0):
-        return 'led de cura ainda esta ativado'
+        FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+        FILE.write('{}\n'.format(getPotLum()))
+        FILE.close()
+        return False
     else:
-        rtime = random.randint(2, 15)
+        rtime = random.randint(2, 9)
         rhex = hex(rtime)[2:]
         if(len(rhex) < 2):
             rhex = '0' + rhex
 
-        on_off = set_config('01', '12', rhex)
+        set_config('01', '12', rhex)
         time.sleep(rtime/10)
         panel = getPanel()
         panel = str(panel)
         profile = switchCase2(panel)
-        print("Perfil ativo: ", profile)
-        
-        #print('ON/OFF: ', on_off)
+        if(profile == 'invalid configuration'):
+            FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+            print('{}\t{}'.format(profile, rtime), file= FILE)
+            FILE.close()
+            return False
 
         curve = getCurve(profile)
+
+        for i in range(len(curve)):
+            if(curve[i][1] == 0):
+                if(i > 0 and i < len(curve) - 1):
+                    curve[i][1] = (curve[i-1][1] + curve[i+1][1])/2
+        
+
+        set_config('01', '11', '02')
+        time.sleep(0.2)
+        flag = []
+        
         if(profile == 10):
             for c in curve:
                 if(mask10(c[1], c[0])):
-                    return 'teste passou'
+                    flag.append(1)
                 else:
-                    print(c)
-                    return 'teste falhou'
+                    FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                    print(c, '\t', profile, file = FILE)
+                    FILE.close()
+                    flag.append(0)
         elif(profile == 20):
             for c in curve:
                 if(mask20(c[1], c[0])):
-                    return 'teste passou'
+                    flag.append(1)
                 else:
-                    print(c)
-                    return 'teste falhou'
+                    FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                    print(c, '\t', profile, file = FILE)
+                    FILE.close()
+                    flag.append(0)
         elif(profile == 40):
             for c in curve:
                 if(mask40(c[1], c[0])):
-                    return 'teste passou'
+                 flag.append(1)
                 else:
-                    print(c)
-                    return 'teste falhou'
+                    FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                    print(c, '\t', profile, file = FILE)
+                    FILE.close()
+                    flag.append(0)
         else:
             for c in curve:
                 if(mask60(c[1], c[0])):
-                    return 'teste passou'
+                    flag.append(1)
                 else:
-                    print(c)
-                    return 'teste falhou'
+                    FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                    print(c, '\t', profile, file = FILE)
+                    FILE.close()
+                    flag.append(0)
+        if(min(flag) == 1):
+            return True
+        else:
+            return False
 
-def subcenonoff2():
+#Subcenário 2
+def testscenario6():
     if(getPotLum() != 0):
-        return 'led de cura ainda esta ativado'
+        FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+        FILE.write('{}\n'.format(getPotLum()))
+        print('led de cura ainda esta ativado')
+        return False
     else:
         if(getBatLvl() < 3.8):
-            rtime = random.randint(2, 14)
+            rtime = random.randint(2, 9)
             rhex = hex(rtime)[2:]
             if(len(rhex) < 2):
                 rhex = '0' + rhex
-            on_off = set_config('01', '12', rhex)
+            set_config('01', '12', rhex)
             time.sleep(rtime/10)
-            print('ON/OFF: ', on_off)
+            
             time.sleep(1)
             buz = getBuzzer()
             if(len(buz) == 0):
-                return 'teste falhou. nao houve beep'
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print('teste falhou. nao houve beep\t{}'.format(rtime), file = FILE)
+                FILE.close()
+                return False
             else:
                 if(getPotLum() != 0):
-                    return 'teste falhou. foi iniciado um novo ciclo'
+                    FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                    print('{}\t{}'.format(getPotLum(), rtime), file = FILE)
+                    FILE.close()
+                    return False
                 else:
-                    return 'teste passou'
+                    return True
         else:
-            print('Bateria está acima de VBAT_MIN')
+            FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+            print('Bateria está acima de VBAT_MIN', file = FILE)
+            FILE.close()
+            return False
 
-def subcenonoff3():
-    rtime = random.randint(30, 50)
+#Subcenário 3
+def testscenario7():
+    rtime = random.randint(10, 50)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
 
-    on_off = set_config('01', '12', rhex)
+    set_config('01', '12', rhex)
     time.sleep(rtime/10)
-    print('ON/OFF: ', on_off)
-
-    panel_before = getPanel()
-    options = [[0,0,1,1], [0,0,0,1], [0,1,1,1], [1,1,1,1]]
-    if(panel_before not in options):
-        return 'falha. o mostrador de carga nao obedece as especificacoes'
-    else:
-        vbat = getBatLvl()
-        print(panel_before, vbat)
     
+    s = 0
+    r = 0
+    for i in range(5):
+        panel_before = getPanel()
+        r = sum(panel_before)
+        if(r > s):
+            s = r
+            soc = panel_before
+
+
+    options = [[0,0,0,0], [0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
+    if(soc not in options):
+        FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+        print(soc, '\t', getBatLvl(), file = FILE)
+        FILE.close()
+        return False
+    else:
+    
+    if(s == 4):
+        vbat = getBatLvl()
+        if(vbat <= 4.1):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+    elif(s == 3):
+        vbat = getBatLvl()
+        if(vbat <= 4 or vbat >= 4.1):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+    elif(s == 2):
+        vbat = getBatLvl()
+        if(vbat <= 3.9 or vbat >= 4):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+    elif(s == 1):
+        vbat = getBatLvl()
+        if(vbat >= 3.9):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+
     time.sleep(5)
 
     panel_after = getPanel()
     if(panel_after != [0,0,0,0]):
-        return 'falha. dispositivo nao entrou em baixo consumo'
+        FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+        print(panel_after, file = FILE)
+        FILE.close()
+        return False
     else:
-        return 'teste passou'
+        return True
 
-def subcenonoff4():
+#Subcenário 4
+def testscenario8():
     rtime = random.randint(30, 50)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
+
     panel_before = getPanel()
     if(panel_before != [0,0,0,0]):
-        return 'falha. dispositivo nao entrou em baixo consumo'
+        FILE = open('TC1_ONOFF1_SUB_4.txt', 'a')
+        print(panel_before, file = FILE)
+        FILE.close()
+        return False
     else:
-        on_off = set_config('01', '12', rhex)
+        set_config('01', '12', rhex)
         time.sleep(rtime/10)
-        print('ON/OFF: ', on_off)
+        
 
         panel_after = getPanel()
-        options = [[0,0,1,1], [0,0,0,1], [0,1,1,1], [1,1,1,1]]
+        options = [[0,0,1,1], [0,0,0,1], [0,1,1,1], [1,1,1,1], [0,0,0,0]]
         if(panel_after not in options):
-            return 'falha. o mostrador de carga nao obedece as especificacoes'
+            FILE = open('TC1_ONOFF1_SUB_4.txt', 'a')
+            print(panel_after, file = FILE)
+            FILE.close()
+            return False
         else:
-            vbat = getBatLvl()
-    
-        time.sleep(5)
+            time.sleep(6)
 
-        panel_after = getPanel()
-        if(panel_after != [0,0,0,0]):
-            return 'teste falhou. dispositivo nao entrou em baixo consumo'
-        else:
-            return 'teste passou'
-    
-def cen2subonoff1():
+            panel_after = getPanel()
+            if(panel_after != [0,0,0,0]):
+                FILE = open('TC1_ONOFF1_SUB_4.txt', 'a')
+                print(panel_after, file = FILE)
+                FILE.close()
+                return False
+            else:
+                return True
+
+#CENÁRIO ON/OFF 2
+#Subcenário 1
+def testscenario9():
     rtime = random.randint(2, 29)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
-    on_off = set_config('01', '12', '0A')
+    set_config('01', '12', '0A')
     time.sleep(1)
-    print(on_off)
+
     if(getPotLum() == 0):
-        return 'teste falhou. led de cura ligou'
+        FILE = open('TC1_ONOFF2_SUB_1.txt', 'a')
+        print('{}'.format(getPotLum()))
+        FILE.close()
+        return False
     else:
         time.sleep(5)
 
-        on_off = set_config('01', '12', rhex)
+        set_config('01', '12', rhex)
         time.sleep(rtime/10)
 
         if(getPotLum() != 0):
-            return 'teste falhou. led de cura nao desligou'
+            print(getPotLum(), file = FILE)
+            FILE.close()
+            return False
         else:
-            return 'teste passou'
+            return True
 
+#Subcenário 2
+def testscenario10():
+    set_config('01', '11', '02')
+    time.sleep(0.2)
 
-######---------------------------------------######
-#falta desenvolver caso on_off 2 subcenario 2
+    profile = switchCase2(str(getPanel()))
+    
+    #Escolha de um momento aleatório para começar a pressionar o botão ON/OFF
+    press = random.randint(2, profile)
+        
+    #Escolha do momento de soltar o botão ON/OFF
+    release = profile - press + random.randint(1, 2)
+    rhex = hex(release*10)[2:]
+    if(len(rhex)%2 != 0):
+        rhex = '0' + rhex
+    
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    time.sleep(press)
+    set_config('01', '12', rhex)
+    time.sleep(release)
+    
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    time.sleep(5)
+    if(getPotLum() == 0):
+        FILE = open('TC1_ONOFF2_SUB_2.txt', 'a')
+        print('{}\t{}\t{}'.format(profile, press, release))
+        FILE.close()
+        return False
+    else:
+        return True
 
-
-def cen2subonoff3():
+#Subcenário 3
+def testscenario11():
     rtime = random.randint(30, 60)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
-    on_off = set_config('01', '12', rhex)
+    set_config('01', '12', rhex)
     time.sleep(rtime/10)
 
     panel_before = getPanel()
@@ -326,17 +614,24 @@ def cen2subonoff3():
     panel_after = getPanel()
 
     possibilities = [[1,1,1,1], [0,1,1,1], [0,0,1,1], [0,0,0,1]]
-    if(panel_before in possibilities):
-        pass
+    if(panel_before not in possibilities):
+        FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
+        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+        FILE.close()
+        return False
     else:
-        return 'erro: carga da bateria nao esta sendo mostrada'
+        return True
 
     if(panel_after in possibilities):
-        return 'erro: dispositivo nao esta em baixo consumo'
+        FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
+        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+        FILE.close()
+        return False
     else:
-        return 'teste passou'
-    
-def cen2subonoff4():
+        return True
+
+#Subcenário 4 
+def testscenario12():
     rtime = random.randint(30, 60)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
@@ -344,7 +639,7 @@ def cen2subonoff4():
 
     panel_before = getPanel()
 
-    on_off = set_config('01', '12', rhex)
+    set_config('01', '12', rhex)
     time.sleep(rtime/10)
 
     time.sleep(5)
@@ -352,14 +647,57 @@ def cen2subonoff4():
     panel_after = getPanel()
 
     if(panel_before != [0,0,0,0]):
-        return 'erro: dispositivo nao esta em baixo consumo'
+        FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+        FILE.close()
+        return False
     else:
         pass
 
     if(panel_after != [0,0,0,0]):
-        return 'erro: dispositivo nao esta em baixo consumo'
+        FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+        FILE.close()
+        return False
     else:
-        return 'teste passou'
+        return True
 
-#for i in range(50):
-print(cen2subonoff4())
+def main():
+    # tests = [testscenario1, testscenario2, testscenario3, testscenario4, testscenario5, testscenario6,\
+    #         testscenario7, testscenario8, testscenario9, testscenario10, testscenario11, testscenario12]
+    cont = 0
+    initialTime = time.time()
+    for i in range(50):
+            print("Round ", i)
+            
+            aux = testscenario1() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+        
+            if(aux):
+                cont = cont + 1
+            
+            time.sleep(1)
+
+    
+    
+    print("Successful tests percentage: ", (cont/50)*100)
+
+    print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100)
+
+    print("Elapsed time: ", time.time() - initialTime)
+
+
+    with open('output_TC1s.txt', 'a') as f:
+            print("Scene Four:")
+
+            print("Successful tests percentage: ", (cont/50)*100, file=f)
+
+            print("Unsuccessful tests percentage: ", ((50 - cont)/50) * 100, file=f)
+
+            print("Elapsed time: ", time.time() - initialTime, file = f)
+
+            print("############# END ###########\n\n", file=f)
+    
+    f.close()
+
+if __name__ == "__main__":
+  main()

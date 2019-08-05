@@ -2,7 +2,7 @@
 * Como saber se o sistema está em baixo consumo ou não? (Entra quando o painel tá apagado) 
 *  __Rever a função de aquisição do painel de leds. Está sempre mandando 4 bytes e todos são 0.__
 * De onde que tá sendo pego o valor analógico de leitura da tensão na bateria?
-
+* Fazer limpeza do código no arquivo serialTeste.py. O código está muito poluído.
 
 ### __Funções de base testadas__ ###
 
