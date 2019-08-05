@@ -1,0 +1,91 @@
+############ INIT #############
+Date:  2019-07-25 15:36
+Iterarion:  1
+Round:  29
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:39
+Iterarion:  2
+Round:  14
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:42
+Iterarion:  2
+Round:  49
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:45
+Iterarion:  3
+Round:  34
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:48
+Iterarion:  4
+Round:  19
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:50
+Iterarion:  5
+Round:  4
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:53
+Iterarion:  5
+Round:  39
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:56
+Iterarion:  6
+Round:  24
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 15:59
+Iterarion:  7
+Round:  9
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 16:02
+Iterarion:  7
+Round:  44
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 16:05
+Iterarion:  8
+Round:  29
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 16:08
+Iterarion:  9
+Round:  14
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
+############ INIT #############
+Date:  2019-07-25 16:11
+Iterarion:  9
+Round:  49
+Shutdown was pressed but cure led didn't turned on
+Current getPotLum:  0
+############ END #############
