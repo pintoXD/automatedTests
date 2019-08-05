@@ -36,7 +36,6 @@ def getIndex(var1 = [] ,var2 = []):
 #Cenário SETA
 #Subcenário 1
 def testscenario1():
-    FILE = open('TC1_SETA1_SUB_1.txt', 'a')
     rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
@@ -45,30 +44,83 @@ def testscenario1():
         FILE.write('{}\n'.format(rtime))
         FILE.close()
     
-    set_config('01', '11', '0A')
-    time.sleep(1)
+    set_config('01', '11', rhex)
+    time.sleep(rtime/10)
     panel_before = getPanel()
 
     set_config('01', '11', rhex)
     time.sleep((rtime/10))
-
-
     panel_after = getPanel()
+
+    if(panel_before == 'invalid configuration' or panel_after == 'invalid configuration'):
+        FILE = open('TC1_SETA1_SUB_1.txt', 'a')
+        print('{}\n'.format(rtime), file = FILE)
+        FILE.close()
+        return False
+    
     i, j = getIndex(panel_before, panel_after)
 
     if((j - i) == 1 or (i - j) == 3):
-        print("teste ok")
-        print(j , i)
-        return True
+        print("indices ok")
     else:
+        FILE = open('TC1_SETA1_SUB_1.txt', 'a')
         print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
         print(j, i, file = FILE)
         FILE.close()
         return False
+
+    profile = switchCase2(str(panel_after))
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+
+    curve = getCurve(profile)
+    flag = []
+    if(profile == 10):
+        for c in curve:
+            if(mask10(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 20):
+        for c in curve:
+            if(mask20(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 40):
+        for c in curve:
+            if(mask40(c[1], c[0])):
+             flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    else:
+        for c in curve:
+            if(mask60(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    if(min(flag) == 1):
+        return True
+    else:
+        return False
+        
     
 #subcenário 2
 def testscenario2():
-    rtime = random.randint(2, 14)
+    rtime = random.randint(10, 30)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
@@ -88,28 +140,35 @@ def testscenario2():
     time.sleep(rtime/10)
 
     panel_after = getPanel()
-    
+
+    if(panel_after == 'invalid configuration' or panel_before == 'invalid configuration'):
+        FILE = open('TC1_SETA1_SUB_2.txt', 'a')
+        print('{}\n'.format(rtime), file = FILE)
+        FILE.close()
+        return False
+
     i, j = getIndex(panel_before, panel_after)
     profile = switchCase2(str(panel_after))
     
-    zero = time.time()
-    future = zero + profile
-    time.sleep(3)
-    now = time.time()
+    curve = getCurve(profile)
+    # zero = time.time()
+    # future = zero + profile
+    # time.sleep(3)
+    # now = time.time()
     
-    while(now <= future - 1):
-        p = getPotLum()
-        now = time.time()
-        if(p == 0):
-            FILE = open('TC1_SETA1_SUB_2.txt', 'a')
-            FILE.write('teste falhou. led azul nao parece estar ligado\n')
-            FILE.write('{}\t'.format(p))
-            FILE.write('{}\t'.format(profile))
-            FILE.write('{}\t'.format(rtime))
-            FILE.write('{}\t'.format(panel_before))
-            FILE.write('{}\n\n'.format(panel_after))
-            FILE.close()
-            return False
+    # while(now <= future - 1):
+    #     p = getPotLum()
+    #     now = time.time()
+    #     if(p == 0):
+    #         FILE = open('TC1_SETA1_SUB_2.txt', 'a')
+    #         FILE.write('teste falhou. led azul nao parece estar ligado\n')
+    #         FILE.write('{}\t'.format(p))
+    #         FILE.write('{}\t'.format(profile))
+    #         FILE.write('{}\t'.format(rtime))
+    #         FILE.write('{}\t'.format(panel_before))
+    #         FILE.write('{}\n\n'.format(panel_after))
+    #         FILE.close()
+    #         return False
     
     if((j - i) == 1 or (i - j) == 3):
         print("teste ok")
@@ -121,6 +180,48 @@ def testscenario2():
         FILE.write('{}\t'.format(panel_before))
         FILE.write('{}\n'.format(panel_after))
         FILE.close()
+        return False
+
+    flag = []
+    if(profile == 10):
+        for c in curve:
+            if(mask10(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 20):
+        for c in curve:
+            if(mask20(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 40):
+        for c in curve:
+            if(mask40(c[1], c[0])):
+             flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    else:
+        for c in curve:
+            if(mask60(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
+                print(c, '\t', profile, file = FILE)
+                FILE.close()
+                flag.append(0)
+    if(min(flag) == 1):
+        return True
+    else:
         return False
 
 #Subcenário 3
@@ -149,13 +250,13 @@ def testscenario3():
     else:
         vbat = getBatLvl()
         print(vbat)
-        if(vbat < 3.8):
+        if(vbat < 3.8 and getPotLum() > 0):
             FILE = open('TC1_SETA1_SUB_3.txt', 'a')
             print('teste falhou. perfil de cura executado alem da restricao de bateria', file = FILE)
             print('{}\n'.format(vbat), file=FILE)
             FILE.close()
             return False
-        else:
+        elif(vbat < 3.8 and getPotLum() == 0):
             panel_after = getPanel()
             i, j = getIndex(panel_before, panel_after)
             if((j - i) == 1 or (i - j) == 3):
@@ -166,6 +267,11 @@ def testscenario3():
                 print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida', file = FILE)
                 print('{}\t {}'.format(panel_before, panel_after))
                 return False
+        else:
+            FILE = open('TC1_SETA1_SUB_3.txt', 'a')
+            print('evento inesperado\n{}\t{}\t{}\t{}'.format(vbat, getPotLum(), panel_after, panel_before), file = FILE)
+            FILE.close()
+            return False
 
 #CENÁRIO SETA 2
 #Subcenário 1
@@ -181,8 +287,8 @@ def testscenario4():
         time.sleep(0.2)
         panel_before = getPanel()
 
-        set_config('01', '12', '32')
-        time.sleep(5)        
+        set_config('01', '12', '15')
+        time.sleep(1.5)        
 
         rtime = random.randint(10, 15)
         rhex = hex(rtime)[2:]
@@ -240,7 +346,7 @@ def testscenario5():
 
         for i in range(len(curve)):
             if(curve[i][1] == 0):
-                if(i < 0 and i < len(curve) - 1):
+                if(i > 0 and i < len(curve) - 1):
                     curve[i][1] = (curve[i-1][1] + curve[i+1][1])/2
         
 
@@ -298,7 +404,7 @@ def testscenario6():
         return False
     else:
         if(getBatLvl() < 3.8):
-            rtime = random.randint(2, 14)
+            rtime = random.randint(2, 9)
             rhex = hex(rtime)[2:]
             if(len(rhex) < 2):
                 rhex = '0' + rhex
@@ -309,14 +415,13 @@ def testscenario6():
             buz = getBuzzer()
             if(len(buz) == 0):
                 FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                FILE.write('{}\t{}\n'.format(buz[0], buz[1]))
-                print('teste falhou. nao houve beep')
+                print('teste falhou. nao houve beep\t{}'.format(rtime), file = FILE)
                 FILE.close()
                 return False
             else:
                 if(getPotLum() != 0):
                     FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                    print(getPotLum(), file = FILE)
+                    print('{}\t{}'.format(getPotLum(), rtime), file = FILE)
                     FILE.close()
                     return False
                 else:
@@ -329,7 +434,7 @@ def testscenario6():
 
 #Subcenário 3
 def testscenario7():
-    rtime = random.randint(30, 50)
+    rtime = random.randint(10, 50)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
@@ -337,17 +442,53 @@ def testscenario7():
     set_config('01', '12', rhex)
     time.sleep(rtime/10)
     
+    s = 0
+    r = 0
+    for i in range(5):
+        panel_before = getPanel()
+        r = sum(panel_before)
+        if(r > s):
+            s = r
+            soc = panel_before
 
-    panel_before = getPanel()
-    options = [[0,0,1,1], [0,0,0,1], [0,1,1,1], [1,1,1,1], [0,0,0,0]]
-    if(panel_before not in options):
+
+    options = [[0,0,0,0], [0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
+    if(soc not in options):
         FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-        print(panel_before, '\t', getBatLvl(), '\n', file = FILE)
+        print(soc, '\t', getBatLvl(), file = FILE)
         FILE.close()
         return False
     else:
-        pass
     
+    if(s == 4):
+        vbat = getBatLvl()
+        if(vbat <= 4.1):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+    elif(s == 3):
+        vbat = getBatLvl()
+        if(vbat <= 4 or vbat >= 4.1):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+    elif(s == 2):
+        vbat = getBatLvl()
+        if(vbat <= 3.9 or vbat >= 4):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+    elif(s == 1):
+        vbat = getBatLvl()
+        if(vbat >= 3.9):
+            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+            print('{}\t{}\t'.format(soc, vbat), file = FILE)
+            FILE.close()
+            return False
+
     time.sleep(5)
 
     panel_after = getPanel()
@@ -529,7 +670,7 @@ def main():
     for i in range(50):
             print("Round ", i)
             
-            aux = testscenario5() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+            aux = testscenario1() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
         
             if(aux):
                 cont = cont + 1
