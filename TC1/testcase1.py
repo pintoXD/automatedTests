@@ -4,7 +4,7 @@ from potMask import mask10, mask20, mask40, mask60, getCurve
 from get_panel import getPanel
 from get_buzzer import getBuzzer
 from get_led_voltage import getPotLum
-from get_batlvl import getBatLvl
+from get_batlvl import getBatLvl, getBatVoltage
 import random
 import time
 
@@ -434,7 +434,79 @@ def testscenario6():
 
 #Subcenário 3
 def testscenario7():
-    rtime = random.randint(10, 50)
+    rtime = random.randint(15, 50)
+    rhex = hex(rtime)[2:]
+    if(len(rhex) < 2):
+        rhex = '0' + rhex
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+
+    set_config('01', '12', rhex)
+    time.sleep(rtime/10)
+    
+    s = 0
+    r = 0
+    for i in range(5):
+        panel_before = getPanel()
+        r = sum(panel_before)
+        if(r > s):
+            s = r
+            soc = panel_before
+
+
+    options = [[0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
+    if(soc not in options):
+        FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+        print(soc, '\t', getBatVoltage(), file = FILE)
+        FILE.close()
+        return False
+    else:
+        if(s == 4):
+            vbat = getBatVoltage()
+            if(vbat <= 4.1):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+        elif(s == 3):
+            vbat = getBatVoltage()
+            if(vbat <= 4 or vbat >= 4.1):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+        elif(s == 2):
+            vbat = getBatVoltage()
+            if(vbat <= 3.9 or vbat >= 4):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+        elif(s == 1):
+            vbat = getBatVoltage()
+            if(vbat >= 3.9):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+
+    time.sleep(5)
+
+    panel_after = getPanel()
+    if(panel_after != [0,0,0,0]):
+        FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+        print(panel_after, file = FILE)
+        FILE.close()
+        return False
+    else:
+        return True
+
+#Subcenário 4
+def testscenario8():
+    rtime = random.randint(15, 50)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
@@ -452,42 +524,41 @@ def testscenario7():
             soc = panel_before
 
 
-    options = [[0,0,0,0], [0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
+    options = [[0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
     if(soc not in options):
         FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-        print(soc, '\t', getBatLvl(), file = FILE)
+        print(soc, '\t', getBatVoltage(), file = FILE)
         FILE.close()
         return False
     else:
-    
-    if(s == 4):
-        vbat = getBatLvl()
-        if(vbat <= 4.1):
-            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-            print('{}\t{}\t'.format(soc, vbat), file = FILE)
-            FILE.close()
-            return False
-    elif(s == 3):
-        vbat = getBatLvl()
-        if(vbat <= 4 or vbat >= 4.1):
-            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-            print('{}\t{}\t'.format(soc, vbat), file = FILE)
-            FILE.close()
-            return False
-    elif(s == 2):
-        vbat = getBatLvl()
-        if(vbat <= 3.9 or vbat >= 4):
-            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-            print('{}\t{}\t'.format(soc, vbat), file = FILE)
-            FILE.close()
-            return False
-    elif(s == 1):
-        vbat = getBatLvl()
-        if(vbat >= 3.9):
-            FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-            print('{}\t{}\t'.format(soc, vbat), file = FILE)
-            FILE.close()
-            return False
+        if(s == 4):
+            vbat = getBatVoltage()
+            if(vbat <= 4.1):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+        elif(s == 3):
+            vbat = getBatVoltage()
+            if(vbat <= 4 or vbat >= 4.1):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+        elif(s == 2):
+            vbat = getBatVoltage()
+            if(vbat <= 3.9 or vbat >= 4):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
+        elif(s == 1):
+            vbat = getBatVoltage()
+            if(vbat >= 3.9):
+                FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
+                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                FILE.close()
+                return False
 
     time.sleep(5)
 
@@ -500,56 +571,23 @@ def testscenario7():
     else:
         return True
 
-#Subcenário 4
-def testscenario8():
-    rtime = random.randint(30, 50)
-    rhex = hex(rtime)[2:]
-    if(len(rhex) < 2):
-        rhex = '0' + rhex
-
-    panel_before = getPanel()
-    if(panel_before != [0,0,0,0]):
-        FILE = open('TC1_ONOFF1_SUB_4.txt', 'a')
-        print(panel_before, file = FILE)
-        FILE.close()
-        return False
-    else:
-        set_config('01', '12', rhex)
-        time.sleep(rtime/10)
-        
-
-        panel_after = getPanel()
-        options = [[0,0,1,1], [0,0,0,1], [0,1,1,1], [1,1,1,1], [0,0,0,0]]
-        if(panel_after not in options):
-            FILE = open('TC1_ONOFF1_SUB_4.txt', 'a')
-            print(panel_after, file = FILE)
-            FILE.close()
-            return False
-        else:
-            time.sleep(6)
-
-            panel_after = getPanel()
-            if(panel_after != [0,0,0,0]):
-                FILE = open('TC1_ONOFF1_SUB_4.txt', 'a')
-                print(panel_after, file = FILE)
-                FILE.close()
-                return False
-            else:
-                return True
 
 #CENÁRIO ON/OFF 2
 #Subcenário 1
 def testscenario9():
-    rtime = random.randint(2, 29)
+    rtime = random.randint(2, 9)
     rhex = hex(rtime)[2:]
     if(len(rhex) < 2):
         rhex = '0' + rhex
-    set_config('01', '12', '0A')
-    time.sleep(1)
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+
+    time.sleep(0.55)
 
     if(getPotLum() == 0):
         FILE = open('TC1_ONOFF2_SUB_1.txt', 'a')
-        print('{}'.format(getPotLum()))
+        print('{}'.format(getPotLum()), file = FILE)
         FILE.close()
         return False
     else:
@@ -571,13 +609,18 @@ def testscenario10():
     time.sleep(0.2)
 
     profile = switchCase2(str(getPanel()))
+    if(profile == 'invalid configuration'):
+        FILE = open('TC1_ONOFF2_SUB_2.txt', 'a')
+        print(profile, file = FILE)
+        FILE.close()
+        return False
     
     #Escolha de um momento aleatório para começar a pressionar o botão ON/OFF
     press = random.randint(2, profile)
         
     #Escolha do momento de soltar o botão ON/OFF
-    release = profile - press + random.randint(1, 2)
-    rhex = hex(release*10)[2:]
+    release = profile - press
+    rhex = hex(release*10 + random.randint(2 , 9))[2:]
     if(len(rhex)%2 != 0):
         rhex = '0' + rhex
     
@@ -587,12 +630,16 @@ def testscenario10():
     set_config('01', '12', rhex)
     time.sleep(release)
     
+    # Desliga o LED de cura
     set_config('01', '12', '02')
     time.sleep(0.2)
     time.sleep(5)
+
     if(getPotLum() == 0):
+        set_config('01', '12', '02')
+        time.sleep(0.2)
         FILE = open('TC1_ONOFF2_SUB_2.txt', 'a')
-        print('{}\t{}\t{}'.format(profile, press, release))
+        print('{}\t{}\t{}'.format(profile, press, release), file = FILE)
         FILE.close()
         return False
     else:
@@ -600,35 +647,58 @@ def testscenario10():
 
 #Subcenário 3
 def testscenario11():
-    rtime = random.randint(30, 60)
-    rhex = hex(rtime)[2:]
-    if(len(rhex) < 2):
-        rhex = '0' + rhex
-    set_config('01', '12', rhex)
-    time.sleep(rtime/10)
+    set_config('01', '11', '02')
+    time.sleep(0.2)
 
-    panel_before = getPanel()
+    profile = switchCase2(str(getPanel()))
+    if(profile == 'invalid configuration'):
+        FILE = open('TC1_ONOFF2_SUB_2.txt', 'a')
+        print(profile, file = FILE)
+        FILE.close()
+        return False
+    
+    #Escolha de um momento aleatório para começar a pressionar o botão ON/OFF
+    press = random.randint(2, profile)
+        
+    #Escolha do momento de soltar o botão ON/OFF
+    release = profile - press + random.randint(1,3)
+    rhex = hex(release*10)[2:]
+    if(len(rhex)%2 != 0):
+        rhex = '0' + rhex
+    
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    time.sleep(press)
+    set_config('01', '12', rhex)
+    time.sleep(release)
+
+    s = 0
+    r = 0
+    for i in range(5):
+        panel_before = getPanel()
+        r = sum(panel_before)
+        if(r > s):
+            s = r
+            soc = panel_before
 
     time.sleep(5)
     
     panel_after = getPanel()
 
     possibilities = [[1,1,1,1], [0,1,1,1], [0,0,1,1], [0,0,0,1]]
-    if(panel_before not in possibilities):
+    if(soc not in possibilities):
         FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
-        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+        print('{}\t{}\t{}'.format(rtime, soc, panel_after), file = FILE)
         FILE.close()
         return False
     else:
-        return True
-
-    if(panel_after in possibilities):
-        FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
-        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
-        FILE.close()
-        return False
-    else:
-        return True
+        if(panel_after in possibilities):
+            FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
+            print('{}\t{}\t{}'.format(rtime, soc, panel_after), file = FILE)
+            FILE.close()
+            return False
+        else:
+            return True
 
 #Subcenário 4 
 def testscenario12():
@@ -670,7 +740,7 @@ def main():
     for i in range(50):
             print("Round ", i)
             
-            aux = testscenario1() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
+            aux = testscenario10() ##Cenário quatro precisa da bateria a 3.8 ou abaixo
         
             if(aux):
                 cont = cont + 1
