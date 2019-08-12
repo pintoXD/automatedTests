@@ -20,14 +20,17 @@ def testscenario1():
 
     set_config('01', '11', '05')
     time.sleep(0.5)
-    profile = switchCase(str(getPanel()))
+    
+    panel = getPanel()
+    profile = switchCase(str(panel))
     if(profile == 'invalid configuration'):
         FILE = open('TC4_CEN_1.txt', 'a')
-        print('{}\t{}'.format(getPanel(), profile), file = FILE)
+        print('Unexpected profile value. Panel read: {}'.format(panel), file = FILE)
         FILE.close()
         return False
-    set_config('01', '12', '05')
-    time.sleep(0.5)
+    
+    set_config('01', '12', '02')
+    time.sleep(0.2)
     
     curve = getCurve(profile)
 

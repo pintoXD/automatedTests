@@ -33,7 +33,7 @@ def getIndex(var1 = [] ,var2 = []):
                 index2 = j
         return index1, index2
 
-#Cenário SETA
+#Cenário 2: SETA
 #Subcenário 1
 def testscenario1():
     rtime = random.randint(10, 30)
@@ -54,7 +54,7 @@ def testscenario1():
 
     if(panel_before == 'invalid configuration' or panel_after == 'invalid configuration'):
         FILE = open('TC1_SETA1_SUB_1.txt', 'a')
-        print('{}\n'.format(rtime), file = FILE)
+        print('Invalid configuration for panel:\nRandom time:{}\t Panel before:{}\t Panel after:{}\n\n'.format(rtime, panel_before, panel_after), file = FILE)
         FILE.close()
         return False
     
@@ -64,8 +64,7 @@ def testscenario1():
         print("indices ok")
     else:
         FILE = open('TC1_SETA1_SUB_1.txt', 'a')
-        print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
-        print(j, i, file = FILE)
+        print('SETA activation do not provide valid transition.\nRandom time: {}\tPanel before: {}\tPanel after: {}'.format(rtime, panel_before, panel_after), file = FILE)
         FILE.close()
         return False
 
@@ -82,7 +81,8 @@ def testscenario1():
                 flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     elif(profile == 20):
@@ -91,7 +91,8 @@ def testscenario1():
                 flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     elif(profile == 40):
@@ -100,7 +101,8 @@ def testscenario1():
              flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     else:
@@ -109,7 +111,8 @@ def testscenario1():
                 flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     if(min(flag) == 1):
@@ -143,7 +146,7 @@ def testscenario2():
 
     if(panel_after == 'invalid configuration' or panel_before == 'invalid configuration'):
         FILE = open('TC1_SETA1_SUB_2.txt', 'a')
-        print('{}\n'.format(rtime), file = FILE)
+        print('Invalid configuration for panel.\nRandom time: {}\tPanel before: {}\tPanel after: {}\n\n'.format(rtime, panel_before, panel_after), file = FILE)
         FILE.close()
         return False
 
@@ -176,9 +179,7 @@ def testscenario2():
         return True
     else:
         FILE = open('TC1_SETA1_SUB_2.txt', 'a')
-        print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida')
-        FILE.write('{}\t'.format(panel_before))
-        FILE.write('{}\n'.format(panel_after))
+        print('SETA activation do not provide valid transition.\nRandom time: {}\tPanel before: {}\tPanel after: {}'.format(rtime, panel_before, panel_after), file = FILE)
         FILE.close()
         return False
 
@@ -189,7 +190,7 @@ def testscenario2():
                 flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     elif(profile == 20):
@@ -198,7 +199,7 @@ def testscenario2():
                 flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     elif(profile == 40):
@@ -207,7 +208,7 @@ def testscenario2():
              flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     else:
@@ -216,7 +217,7 @@ def testscenario2():
                 flag.append(1)
             else:
                 FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                print(c, '\t', profile, file = FILE)
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                 FILE.close()
                 flag.append(0)
     if(min(flag) == 1):
@@ -244,7 +245,7 @@ def testscenario3():
 
     if(len(buz) == 0): #mudar depois para um teste com o período correto do buzzer
         FILE = open('TC1_SETA1_SUB_3.txt', 'a')
-        print('erro no teste. nao houve beep', file = FILE)
+        print('No beeps', file = FILE)
         print('{}\n'.format(rtime), file = FILE)
         return False
     else:
@@ -252,7 +253,7 @@ def testscenario3():
         print(vbat)
         if(vbat < 3.8 and getPotLum() > 0):
             FILE = open('TC1_SETA1_SUB_3.txt', 'a')
-            print('teste falhou. perfil de cura executado alem da restricao de bateria', file = FILE)
+            print('Blue LED on although battery below 3.8V', file = FILE)
             print('{}\n'.format(vbat), file=FILE)
             FILE.close()
             return False
@@ -265,11 +266,11 @@ def testscenario3():
             else:
                 FILE = open('TC1_SETA1_SUB_3.txt', 'a')
                 print('falha. a ativacao de seta 1 vez nao mudou o perfil na ordem estabelecida', file = FILE)
-                print('{}\t {}'.format(panel_before, panel_after))
+                print('Random time: {}\tPanel before: {}\tPanel after: {}'.format(rtime, panel_before, panel_after))
                 return False
         else:
             FILE = open('TC1_SETA1_SUB_3.txt', 'a')
-            print('evento inesperado\n{}\t{}\t{}\t{}'.format(vbat, getPotLum(), panel_after, panel_before), file = FILE)
+            print('Unexpected behavior\nBattery: {}\t LED Power:{}\t Panel before: {}\tPanel after: {}'.format(vbat, getPotLum(), panel_after, panel_before), file = FILE)
             FILE.close()
             return False
 
@@ -278,7 +279,7 @@ def testscenario3():
 def testscenario4():
     if(getPotLum() != 0):
         FILE = open('TC1_SETA2_SUB_1.txt', 'a')
-        print('led de cura ainda esta ativado')
+        print('Blue LED not on yet', file = FILE)
         FILE.write('{}\n'.format(getPotLum()))
         FILE.close()
         return False
@@ -309,8 +310,8 @@ def testscenario4():
 
         if(panel_before != panel_after):
             FILE = open('TC1_SETA2_SUB_1.txt', 'a')
-            print('teste falhou. seta interfere no mosotrador de bateria')
-            FILE.write('{}\t {} \t {}\n'.format(panel_before, panel_after, rtime))
+            print('SETA caused change during battery monitoring', file = FILE)
+            FILE.write('Panel before: {}\tPanel after: {}\tRandom time:{}\n'.format(panel_before, panel_after, rtime))
             FILE.close()
             return False
         else:
@@ -322,7 +323,7 @@ def testscenario4():
 def testscenario5():
     if(getPotLum() != 0):
         FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-        FILE.write('{}\n'.format(getPotLum()))
+        FILE.write('Blue LED is not on yet;\nLED power: {}\n'.format(getPotLum()))
         FILE.close()
         return False
     else:
@@ -338,7 +339,7 @@ def testscenario5():
         profile = switchCase2(panel)
         if(profile == 'invalid configuration'):
             FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-            print('{}\t{}'.format(profile, rtime), file= FILE)
+            print('Invalid configuration for panel.\nPanel: {}\tRandom time: {}\n'.format(panel, rtime), file= FILE)
             FILE.close()
             return False
 
@@ -360,7 +361,7 @@ def testscenario5():
                     flag.append(1)
                 else:
                     FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                    print(c, '\t', profile, file = FILE)
+                    print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                     FILE.close()
                     flag.append(0)
         elif(profile == 20):
@@ -369,7 +370,7 @@ def testscenario5():
                     flag.append(1)
                 else:
                     FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                    print(c, '\t', profile, file = FILE)
+                    print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                     FILE.close()
                     flag.append(0)
         elif(profile == 40):
@@ -378,7 +379,7 @@ def testscenario5():
                  flag.append(1)
                 else:
                     FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                    print(c, '\t', profile, file = FILE)
+                    print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                     FILE.close()
                     flag.append(0)
         else:
@@ -387,7 +388,7 @@ def testscenario5():
                     flag.append(1)
                 else:
                     FILE = open('TC1_ONOFF1_SUB_1.txt', 'a')
-                    print(c, '\t', profile, file = FILE)
+                    print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
                     FILE.close()
                     flag.append(0)
         if(min(flag) == 1):
@@ -399,8 +400,7 @@ def testscenario5():
 def testscenario6():
     if(getPotLum() != 0):
         FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-        FILE.write('{}\n'.format(getPotLum()))
-        print('led de cura ainda esta ativado')
+        print('Blue LED still on.\nLED Power: {}'.format(getPotLum()), file = FILE)
         return False
     else:
         if(getBatLvl() < 3.8):
@@ -415,7 +415,7 @@ def testscenario6():
             buz = getBuzzer()
             if(len(buz) == 0):
                 FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-                print('teste falhou. nao houve beep\t{}'.format(rtime), file = FILE)
+                print('No beeps.\nRandom time: {}'.format(rtime), file = FILE)
                 FILE.close()
                 return False
             else:
@@ -428,7 +428,7 @@ def testscenario6():
                     return True
         else:
             FILE = open('TC1_ONOFF1_SUB_2.txt', 'a')
-            print('Bateria está acima de VBAT_MIN', file = FILE)
+            print('Battery above 3.8V', file = FILE)
             FILE.close()
             return False
 
@@ -460,7 +460,7 @@ def testscenario7():
     options = [[0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
     if(soc not in options):
         FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-        print(soc, '\t', getBatVoltage(), file = FILE)
+        print('Invalid state of charge.\nSOC: {}\tBattery: {}\n'.format(soc,  getBatVoltage()), file = FILE)
         FILE.close()
         return False
     else:
@@ -527,7 +527,7 @@ def testscenario8():
     options = [[0,0,0,1], [0,0,1,1], [0,1,1,1], [1,1,1,1]]
     if(soc not in options):
         FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-        print(soc, '\t', getBatVoltage(), file = FILE)
+        print('Invalid state of charge.\nSOC: {}\tBattery: {}\n'.format(soc,  getBatVoltage()), file = FILE)
         FILE.close()
         return False
     else:
@@ -535,28 +535,28 @@ def testscenario8():
             vbat = getBatVoltage()
             if(vbat <= 4.1):
                 FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                print('SOC should be [1,1,1,1]\nSOC: {}\tBattery: {}'.format(soc, vbat), file = FILE)
                 FILE.close()
                 return False
         elif(s == 3):
             vbat = getBatVoltage()
             if(vbat <= 4 or vbat >= 4.1):
                 FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                print('SOC should be [0,1,1,1]\nSOC: {}\tBattery: {}'.format(soc, vbat), file = FILE)
                 FILE.close()
                 return False
         elif(s == 2):
             vbat = getBatVoltage()
             if(vbat <= 3.9 or vbat >= 4):
                 FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                print('SOC should be [0,0,1,1]\nSOC: {}\tBattery: {}'.format(soc, vbat), file = FILE)
                 FILE.close()
                 return False
         elif(s == 1):
             vbat = getBatVoltage()
             if(vbat >= 3.9):
                 FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-                print('{}\t{}\t'.format(soc, vbat), file = FILE)
+                print('SOC should be [0,0,0,1]\nSOC: {}\tBattery: {}'.format(soc, vbat), file = FILE)
                 FILE.close()
                 return False
 
@@ -565,7 +565,7 @@ def testscenario8():
     panel_after = getPanel()
     if(panel_after != [0,0,0,0]):
         FILE = open('TC1_ONOFF1_SUB_3.txt', 'a')
-        print(panel_after, file = FILE)
+        print('Panel still on.\nPanel: {}\n'.format(panel_after), file = FILE)
         FILE.close()
         return False
     else:
@@ -688,13 +688,13 @@ def testscenario11():
     possibilities = [[1,1,1,1], [0,1,1,1], [0,0,1,1], [0,0,0,1]]
     if(soc not in possibilities):
         FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
-        print('{}\t{}\t{}'.format(rtime, soc, panel_after), file = FILE)
+        print('{}\t{}\t{}'.format(press, release, soc), file = FILE)
         FILE.close()
         return False
     else:
         if(panel_after in possibilities):
             FILE = open('TC1_ONOFF2_SUB_3.txt', 'a')
-            print('{}\t{}\t{}'.format(rtime, soc, panel_after), file = FILE)
+            print('{}\t{}\t{}\t{}'.format(press, release, soc, panel_after), file = FILE)
             FILE.close()
             return False
         else:
@@ -702,35 +702,97 @@ def testscenario11():
 
 #Subcenário 4 
 def testscenario12():
-    rtime = random.randint(30, 60)
-    rhex = hex(rtime)[2:]
-    if(len(rhex) < 2):
-        rhex = '0' + rhex
+    rtime = random.randint(1, 4)
+
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
 
     panel_before = getPanel()
-
-    set_config('01', '12', rhex)
-    time.sleep(rtime/10)
-
-    time.sleep(5)
+    if(panel_before == 'invalid configuration'):
+        FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+        print('invalid configuration for panel', file = FILE)
+        FILE. close()
+        return False
     
-    panel_after = getPanel()
-
-    if(panel_before != [0,0,0,0]):
+    profile = switchCase2(str(panel_before))
+    if(profile == 'invalid configuration'):
         FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
-        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
-        FILE.close()
+        print('invalid configuration for profile', file = FILE)
+        FILE. close()
         return False
-    else:
-        pass
 
-    if(panel_after != [0,0,0,0]):
-        FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
-        print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
-        FILE.close()
-        return False
+    set_config('01', '12', '11')
+    time.sleep(1.1)
+
+    time.sleep(rtime)
+    
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+
+    curve = getCurve(profile)
+
+    flag = []
+    
+    if(profile == 10):
+        for c in curve:
+            if(mask10(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 20):
+        for c in curve:
+            if(mask20(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
+                FILE.close()
+                flag.append(0)
+    elif(profile == 40):
+        for c in curve:
+            if(mask40(c[1], c[0])):
+             flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
+                FILE.close()
+                flag.append(0)
     else:
+        for c in curve:
+            if(mask60(c[1], c[0])):
+                flag.append(1)
+            else:
+                FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+                print('Power error.\nElapsed time: {}\tLED power: {}\t Profile: {}'.format(c[0], c[1], profile), file = FILE)
+                FILE.close()
+                flag.append(0)
+    if(min(flag) == 1):
         return True
+    else:
+        return False
+
+    # panel_after = getPanel()
+
+    # if(panel_before != [0,0,0,0]):
+    #     FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+    #     print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+    #     FILE.close()
+    #     return False
+    # else:
+    #     pass
+
+    # if(panel_after != [0,0,0,0]):
+    #     FILE = open('TC1_ONOFF2_SUB_4.txt', 'a')
+    #     print('{}\t{}\t{}'.format(rtime, panel_before, panel_after), file = FILE)
+    #     FILE.close()
+    #     return False
+    # else:
+    #     return True
 
 def main():
     # tests = [testscenario1, testscenario2, testscenario3, testscenario4, testscenario5, testscenario6,\
