@@ -20,24 +20,22 @@ def switchCase2(var):
 
 #Cenário SETA 1:
 def testscenario1():
-    FILE = open('testscenario1.txt', 'a')
-    set_config('01', '12', '0a')
-    time.sleep(1)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
 
-    set_config('01', '12', '0a')
-    time.sleep(1)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
     
-    set_config('01', '11', '0a')
-    time.sleep(1)
     panel_before = switchCase2(str(getPanel()))
-
-    set_config('01', '11', '0a')
-    time.sleep(1)
+    
+    set_config('01', '11', '02')
+    time.sleep(0.2)
     panel_after = switchCase2(str(getPanel()))
 
     buz = getBuzzer()
     if(len(buz) == 0):
-        print(buz, file = FILE)
+        FILE = open('TC2_SETA_1.txt', 'a')
+        print('No beeps', file = FILE)
         FILE.close()
         return False
     else:
@@ -45,40 +43,47 @@ def testscenario1():
             if(panel_after == 20):
                 return True
             else:
+                FILE = open('TC2_SETA_1.txt', 'a')
                 print(panel_before, '\t', panel_after, file = FILE)
+                FILE.close()
                 return False
         elif(panel_before == 20):
             if(panel_after == 40):
                return True
             else:
+                FILE = open('TC2_SETA_1.txt', 'a')
                 print(panel_before, '\t', panel_after, file = FILE)
+                FILE.close()
                 return False
         elif(panel_before == 40):
             if(panel_after == 60):
                 return True
             else:
+                FILE = open('TC2_SETA_1.txt', 'a')
                 print(panel_before, '\t', panel_after, file = FILE)
+                FILE.close()
                 return False
         elif(panel_before == 60):
             if(panel_after == 10):
                 return True
             else:
-                print(panel_before, '\t', panel_after, file = FILE)
+                FILE = open('TC2_SETA_1.txt', 'a')
+                print('unexpecteed behavior\t{}\t{}'.format(panel_before, panel_after), file = FILE)
+                FILE.close()
                 return False
         else:
+            FILE = open('TC2_SETA_1.txt', 'a')
+            print('unexpecteed behavior\t{}\t{}'.format(panel_before, panel_after), file = FILE)
+            FILE.close()
             return False
 
 #Cenário SETA 2:
 def testscenario2():
-    FILE = open('testscenario2.txt', 'a')
-
     set_config('01', '12', '02')
     time.sleep(0.2)
     set_config('01', '12', '02')
     time.sleep(0.2)
     
-    set_config('01', '11', '02')
-    time.sleep(0.2)
     panel_before = switchCase2(str(getPanel()))
 
     set_config('01', '12', '02')
@@ -90,44 +95,61 @@ def testscenario2():
     time.sleep(0.2)
     panel_after = switchCase2(str(getPanel()))
 
-    buz = getBuzzer()
-    if(len(buz) == 0):
-        print(buz, file = FILE)
+    if(getPotLum() == 0):
+        FILE = open('TC2_SETA_2.txt', 'a')
+        print('Panel before: {}\tPanel after: {}'.format(panel_before, panel_after), file = FILE)
+        FILE.close()
+        return False
+    if(panel_after == 'invalid configuration' or panel_before == 'invalid configuration'):
+        FILE = open('TC2_SETA_2.txt', 'a')
+        print('Panel before: {}\tPanel after: {}'.format(panel_before, panel_after), file = FILE)
         FILE.close()
         return False
     else:
-        if(panel_before == 10):
-            if(panel_after == 20):
-                return True
-            else:
-                print(panel_before, '\t', panel_after, file = FILE)
-                return False
-        elif(panel_before == 20):
-            if(panel_after == 40):
-               return True
-            else:
-                print(panel_before, '\t', panel_after, file = FILE)
-                return False
-        elif(panel_before == 40):
-            if(panel_after == 60):
-                return True
-            else:
-                print(panel_before, '\t', panel_after, file = FILE)
-                return False
-        elif(panel_before == 60):
-            if(panel_after == 10):
-                return True
-            else:
-                print(panel_before, '\t', panel_after, file = FILE)
-                return False
-        else:
+        buz = getBuzzer()
+        if(len(buz) == 0):
+            print('No beeps', file = FILE)
+            FILE.close()
             return False
+        else:
+            if(panel_before == 10):
+                if(panel_after == 20):
+                    return True
+                else:
+                    print(panel_before, '\t', panel_after, file = FILE)
+                    return False
+            elif(panel_before == 20):
+                if(panel_after == 40):
+                    return True
+                else:
+                    print(panel_before, '\t', panel_after, file = FILE)
+                    return False
+            elif(panel_before == 40):
+                if(panel_after == 60):
+                    return True
+                else:
+                    print(panel_before, '\t', panel_after, file = FILE)
+                    return False
+            elif(panel_before == 60):
+                if(panel_after == 10):
+                    return True
+                else:
+                    print(panel_before, '\t', panel_after, file = FILE)
+                    return False
+            else:
+                return False
 
 #Cenário ON/OFF 1:
 def testscenario3():
-    FILE = open('testscenario3.txt', 'a')
     set_config('01', '11', '02')
     time.sleep(0.2)
+    panel = getPanel()
+    profile = switchCase2(str(panel))
+    if(profile == 'invalid configuration'):
+        FILE = open('TC2_ONOFF_1.txt', 'a')
+        print('Unexpected profile value. Random time', file=FILE)
+        FILE.close()
+        return False
 
     rtime = random.randint(2, 9)
     rhex = hex(rtime)[2:]
@@ -139,42 +161,46 @@ def testscenario3():
 
     buz = getBuzzer()
     if(len(buz) == 0):
-        print('erro: não houve beep:\t{}'.format(buz), file=FILE)
+        FILE = open('TC2_ONOFF_1.txt', 'a')
+        print('No beeps.', file=FILE)
+        FILE.close()
         return False
-
-    panel = getPanel()
-    profile = switchCase2(str(panel))
     
     now = time.time()
     future = now + profile
     while(now <= future):
         if(panel != getPanel()):
-            print('erro. led não corresponde ao perfil ativado:\t{}\t{}\t{}'.format(profile, panel, getPanel()), file=FILE)
+            print('Panel value not assigned to profile:\nProfile: {}\tExpected Panel: {}\t Panel Now: {}'.format(profile, panel, getPanel()), file=FILE)
             return False
         now = time.time()
     return True
 
 #Cenário ON/OFF 2:
 def testscenario4():
-    FILE = open('testscenario4.txt', 'a')
-
     set_config('01', '11', '02')
-    time.sleep(0.2)
-
-    set_config('01', '12', '02')
     time.sleep(0.2)
 
     panel = getPanel()
     profile = switchCase2(str(panel))
+    if(profile == 'invalid configuration'):
+        FILE = open('TC2_ONOFF_1.txt', 'a')
+        print('Unexpected profile value', file=FILE)
+        FILE.close()
+        return False
 
-    rtime = random.randint(1, profile-3)
+    set_config('01', '12', '02')
+    time.sleep(0.2)
+    
+    rtime = random.randint(1, profile-2)
     time.sleep(rtime)
 
     set_config('01', '12', '02')
     time.sleep(0.2)
 
     if(getPotLum() != 0):
-        print('erro: led de cura nao desligou: {}\t{}\t{}'.format(profile, rtime, getPotLum()), file=FILE)
+        FILE = open('TC2_ONOFF_2.txt', 'a')
+        print('Blue LED is on: {}\t{}\t{}'.format(profile, rtime, getPotLum()), file=FILE)
+        FILE.close()
         return False
     else:
         return True
